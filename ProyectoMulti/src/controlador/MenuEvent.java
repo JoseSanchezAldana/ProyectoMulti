@@ -16,7 +16,7 @@ public class MenuEvent implements ActionListener{
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent e) {	
 		if (e.getSource() == menu.getBtnFTP()) {
 			VentanaFTP vtnFtp = new VentanaFTP();
 			vtnFtp.frame.setVisible(true);
