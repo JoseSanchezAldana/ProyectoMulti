@@ -2,12 +2,8 @@ package controlador;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ClassNotFoundException {
 		Controlador c = new Controlador();
-
-		System.out.println("holaaaaa");
-		System.out.println("hola ke tal");
-
 	}
 
 }

@@ -30,7 +30,7 @@ public class Login {
 	 * Initialize the contents of the frame.
 	 */
 	public void initialize() {
-		frame = new JFrame();
+		frame = new JFrame(); 
 		frame.getContentPane().setBackground(new Color(0, 64, 128));
 		frame.setBounds(100, 100, 800, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -74,11 +74,6 @@ public class Login {
 		btnNewButton.setBorderPainted(false);
 		btnNewButton.setForeground(new Color(0, 64, 128));
 		btnNewButton.setBackground(new Color(255, 255, 255));
-//		btnNewButton.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				
-//			}
-//		});
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 15));
 		btnNewButton.setBounds(333, 370, 125, 40);
 		frame.getContentPane().add(btnNewButton);
