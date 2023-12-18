@@ -12,5 +12,6 @@ public class Controlador {
 		Login login = new Login();
 		login.frame.setVisible(true);
 		login.getBtnNewButton().addActionListener(new LoginEvent(login, conexion));
+		
 	}
 }
