@@ -25,6 +25,7 @@ public class VentanaEmail {
 		frame.getContentPane().setBackground(new Color(0, 64, 128));
 		frame.setBounds(100, 100, 800, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setResizable(false);
 		frame.getContentPane().setLayout(null);
 	}
 

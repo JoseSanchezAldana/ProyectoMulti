@@ -16,7 +16,7 @@ public class Login {
 
 	public JFrame frame;
 	private JPasswordField passwordField;
-	private JButton btnNewButton;
+	private JButton btnLogin;
 	private JTextArea txtrUsuario;
 
 	/**
@@ -32,7 +32,7 @@ public class Login {
 	public void initialize() {
 		frame = new JFrame(); 
 		frame.getContentPane().setBackground(new Color(0, 64, 128));
-		frame.setBounds(100, 100, 800, 600);
+		frame.setBounds(100, 100, 400, 500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
 		frame.getContentPane().setLayout(null);
@@ -40,43 +40,51 @@ public class Login {
 		JLabel lblNewLabel = new JLabel("Login");
 		lblNewLabel.setForeground(new Color(255, 255, 255));
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 30));
-		lblNewLabel.setBounds(342, 43, 97, 73);
+		lblNewLabel.setBounds(133, 51, 97, 53);
 		frame.getContentPane().add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("USUARIO");
 		lblNewLabel_1.setForeground(new Color(255, 255, 255));
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblNewLabel_1.setBounds(123, 148, 136, 28);
+		lblNewLabel_1.setBounds(64, 114, 136, 28);
 		frame.getContentPane().add(lblNewLabel_1);
 		
 		txtrUsuario = new JTextArea();
-		txtrUsuario.setFont(new Font("Monospaced", Font.PLAIN, 21));
+		txtrUsuario.setFont(new Font("Monospaced", Font.BOLD, 15));
 		txtrUsuario.setBackground(new Color(255, 255, 255));
 		txtrUsuario.setToolTipText("");
 		txtrUsuario.setWrapStyleWord(true);
-		txtrUsuario.setBounds(123, 190, 500, 40);
+		txtrUsuario.setBounds(64, 156, 250, 30);
 		frame.getContentPane().add(txtrUsuario);
 		
 		JLabel lblNewLabel_2 = new JLabel("CONTRASEÑA");
 		lblNewLabel_2.setForeground(new Color(255, 255, 255));
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblNewLabel_2.setBounds(123, 240, 136, 28);
+		lblNewLabel_2.setBounds(64, 206, 136, 28);
 		frame.getContentPane().add(lblNewLabel_2);
 		
 		passwordField = new JPasswordField();
-		passwordField.setFont(new Font("Tahoma", Font.PLAIN, 21));
+		passwordField.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		passwordField.setHorizontalAlignment(SwingConstants.LEFT);
 		passwordField.setBackground(new Color(255, 255, 255));
-		passwordField.setBounds(123, 278, 500, 40);
+		passwordField.setBounds(64, 244, 250, 30);
 		frame.getContentPane().add(passwordField);
 		
-		btnNewButton = new JButton("Login");
-		btnNewButton.setBorderPainted(false);
-		btnNewButton.setForeground(new Color(0, 64, 128));
-		btnNewButton.setBackground(new Color(255, 255, 255));
-		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 15));
-		btnNewButton.setBounds(333, 370, 125, 40);
-		frame.getContentPane().add(btnNewButton);
+		btnLogin = new JButton("Login");
+		btnLogin.setBorderPainted(false);
+		btnLogin.setForeground(new Color(0, 64, 128));
+		btnLogin.setBackground(new Color(255, 255, 255));
+		btnLogin.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnLogin.setBounds(124, 298, 125, 40);
+		frame.getContentPane().add(btnLogin);
+		
+		JButton btnSalir = new JButton("Salir");
+		btnSalir.setForeground(new Color(0, 64, 128));
+		btnSalir.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnSalir.setBorderPainted(false);
+		btnSalir.setBackground(Color.WHITE);
+		btnSalir.setBounds(124, 363, 125, 40);
+		frame.getContentPane().add(btnSalir);
 	}
 
 	public JFrame getFrame() {
@@ -96,11 +104,11 @@ public class Login {
 	}
 
 	public JButton getBtnNewButton() {
-		return btnNewButton;
+		return btnLogin;
 	}
 
 	public void setBtnNewButton(JButton btnNewButton) {
-		this.btnNewButton = btnNewButton;
+		this.btnLogin = btnNewButton;
 	}
 
 	public JTextArea getTxtrUsuario() {
@@ -110,6 +118,4 @@ public class Login {
 	public void setTxtrUsuario(JTextArea txtrUsuario) {
 		this.txtrUsuario = txtrUsuario;
 	}
-	
-	
 }

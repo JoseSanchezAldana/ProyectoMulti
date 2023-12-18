@@ -11,6 +11,8 @@ import javax.swing.JScrollBar;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 public class VentanaFTP {
 
@@ -36,11 +38,9 @@ public class VentanaFTP {
 		frame.getContentPane().setBackground(new Color(0, 64, 128));
 		frame.setBounds(100, 100, 800, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setResizable(false);
 		frame.getContentPane().setLayout(null);
 		
-		JTree tree = new JTree();
-		tree.setBounds(86, 86, 287, 298);
-		frame.getContentPane().add(tree);
 		
 		JLabel lblNewLabel = new JLabel("Ip server: ");
 		lblNewLabel.setForeground(new Color(255, 255, 255));
@@ -107,6 +107,10 @@ public class VentanaFTP {
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblNewLabel_2.setBounds(86, 469, 527, 19);
 		frame.getContentPane().add(lblNewLabel_2);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(72, 86, 287, 298);
+		frame.getContentPane().add(scrollPane);
 	}
 
 	public JButton getBtnSubirArchivo() {
@@ -148,6 +152,4 @@ public class VentanaFTP {
 	public void setBtnCrearCarpeta(JButton btnCrearCarpeta) {
 		this.btnCrearCarpeta = btnCrearCarpeta;
 	}
-	
-	
 }
