@@ -10,8 +10,8 @@ public class Modelo {
 	
 	//Datos conexion FTP
 	private String servFTP ="127.0.0.1";
-	private String usuario = null;
-	private String pasword = null;
+	private String usuarioFTP = null;
+	private String passwordFTP = null;
 	private final String directorioInicial = "/";
 	private String rutaSelec = null;
 	
@@ -41,16 +41,16 @@ public class Modelo {
 		this.servFTP = servFTP;
 	}
 	public String getUsuario() {
-		return usuario;
+		return usuarioFTP;
 	}
 	public void setUsuario(String usuario) {
-		this.usuario = usuario;
+		this.usuarioFTP = usuario;
 	}
 	public String getPasword() {
-		return pasword;
+		return passwordFTP;
 	}
 	public void setPasword(String pasword) {
-		this.pasword = pasword;
+		this.passwordFTP = pasword;
 	}
 	public String getRutaSelec() {
 		return rutaSelec;

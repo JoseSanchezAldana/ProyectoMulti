@@ -57,7 +57,7 @@ public class LoginEvent implements ActionListener {
             	login.frame.dispose();
                 menu.frame.setVisible(true);
                 System.out.println("Login correcto");
-                MenuEvent mEvent = new MenuEvent(menu);
+                MenuEvent mEvent = new MenuEvent(menu,modelo);
                 menu.getBtnCorreoElectronico().addActionListener(mEvent);
                 menu.getBtnFTP().addActionListener(mEvent);
                 
