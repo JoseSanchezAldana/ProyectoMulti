@@ -23,7 +23,7 @@ public class MenuEvent implements ActionListener{
 	public void actionPerformed(ActionEvent e) {	
 		if (e.getSource() == menu.getBtnFTP()) {
 			ConexionFTP conexionFTP = new ConexionFTP(modelo);
-			VentanaFTP vtnFtp = new VentanaFTP();
+			VentanaFTP vtnFtp = new VentanaFTP(conexionFTP,modelo);
 			vtnFtp.frame.setVisible(true);
 			menu.frame.dispose();
 			vtnFtp.getBtnSalir().addActionListener(new SalirFTPEvent(vtnFtp, menu));
