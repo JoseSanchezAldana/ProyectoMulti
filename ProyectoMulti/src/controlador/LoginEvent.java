@@ -50,7 +50,7 @@ public class LoginEvent implements ActionListener {
         realizarConsulta(credenciales);
 
         try {
-        	String encryptedText = encrypt(login.getBtnNewButton().getText(), "afghklkhghkln");
+        	String encryptedText = encrypt(login.getPasswordField().getText(), "afghklkhghkln");
             System.out.println("Texto cifrado: " + encryptedText);
 
             if (modelo.getUsuario().equals(login.getTxtrUsuario().getText()) && modelo.getPasword().equals(encryptedText)) {
