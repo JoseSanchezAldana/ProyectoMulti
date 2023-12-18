@@ -6,19 +6,23 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import modelo.Modelo;
+
 //Conexion
 public class Conexion {
 	
 	private java.sql.Statement s;
 	private ResultSet rs;
-	Connection conexion;
+	private Connection conexion;
+	private Modelo modelo;
 	
-	public Conexion() throws ClassNotFoundException {
+	
+	public Conexion(Modelo modelo) throws ClassNotFoundException {
 		
 		Class.forName("com.mysql.jdbc.Driver");
 
 		try {
-			conexion = DriverManager.getConnection("jdbc:mysql://localhost/localproyecto", "root", "");
+			conexion = DriverManager.getConnection(modelo.getDireccionBd(), modelo.getUsuarioBd(), modelo.getPasswordBd());
 			s = conexion.createStatement(); 
 			
 		} catch (SQLException e) {

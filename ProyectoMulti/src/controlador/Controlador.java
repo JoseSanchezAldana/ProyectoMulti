@@ -1,6 +1,7 @@
 package controlador;
 
 import conexion.Conexion;
+import modelo.Modelo;
 import vista.Login;
 
 public class Controlador {
@@ -8,10 +9,11 @@ public class Controlador {
 	Conexion conexion;
 	
 	public Controlador() throws ClassNotFoundException {
-		Conexion conexion = new Conexion();
+		Modelo modelo = new Modelo();
+		Conexion conexion = new Conexion(modelo);
 		Login login = new Login();
 		login.frame.setVisible(true);
-		login.getBtnNewButton().addActionListener(new LoginEvent(login, conexion));
+		login.getBtnNewButton().addActionListener(new LoginEvent(login, conexion,modelo));
 		
 	}
 }

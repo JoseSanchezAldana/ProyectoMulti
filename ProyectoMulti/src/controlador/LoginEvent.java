@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 import conexion.Conexion;
+import modelo.Modelo;
 import vista.Login;
 import vista.Menu;
 
@@ -18,19 +19,21 @@ public class LoginEvent implements ActionListener {
 
     private Login login;
     private Conexion conexion;
+    private Modelo modelo;
 
-    public LoginEvent(Login login, Conexion conexion) {
+    public LoginEvent(Login login, Conexion conexion,Modelo modelo) {
         this.login = login;
         this.conexion = conexion;
+        this.modelo= modelo;
     }
 
     private void realizarConsulta(ArrayList<String> credenciales) {
         conexion.query("SELECT Usuario, password FROM usuarios WHERE Usuario = '" + login.getTxtrUsuario().getText() + "';");
         try {
             if (conexion.getRs().next()) {
-                credenciales.add(conexion.getRs().getString(1));
-                credenciales.add(conexion.getRs().getString(2));
-                System.out.println("USUARIObd: " + credenciales.get(0) + "\nCONTRASEÑAbd: " + credenciales.get(1));
+                modelo.setUsuario(conexion.getRs().getString(1));
+                modelo.setPasword(conexion.getRs().getString(2));
+                System.out.println("USUARIObd: " + modelo.getUsuario() + "\nCONTRASEÑAbd: " + modelo.getPasword());
             } else {
                 System.out.println("No se encontraron resultados en la consulta.");
             }
@@ -50,7 +53,7 @@ public class LoginEvent implements ActionListener {
         	String encryptedText = encrypt(login.getBtnNewButton().getText(), "afghklkhghkln");
             System.out.println("Texto cifrado: " + encryptedText);
 
-            if (credenciales.get(0).equals(login.getTxtrUsuario().getText()) && credenciales.get(1).equals(encryptedText)) {
+            if (modelo.getUsuario().equals(login.getTxtrUsuario().getText()) && modelo.getPasword().equals(encryptedText)) {
             	login.frame.dispose();
                 menu.frame.setVisible(true);
                 System.out.println("Login correcto");
