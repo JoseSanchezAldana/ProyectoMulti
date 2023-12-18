@@ -15,6 +15,11 @@ import java.awt.event.ActionEvent;
 public class VentanaFTP {
 
 	public JFrame frame;
+	private JButton btnSubirArchivo;
+	private JButton btnDescargarArchivo;
+	private JButton btnSalir;
+	private JButton btnBorrarCarpeta;
+	private JButton btnCrearCarpeta;
 
 	/**
 	 * Create the application.
@@ -49,15 +54,15 @@ public class VentanaFTP {
 		lblNewLabel_1.setBounds(456, 43, 250, 19);
 		frame.getContentPane().add(lblNewLabel_1);
 		
-		JButton btnNewButton = new JButton("Subir archivo");
-		btnNewButton.setForeground(new Color(0, 64, 128));
-		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 13));
-		btnNewButton.setBorderPainted(false);
-		btnNewButton.setBackground(new Color(255, 255, 255));
-		btnNewButton.setBounds(456, 86, 150, 30);
-		frame.getContentPane().add(btnNewButton);
+		btnSubirArchivo = new JButton("Subir archivo");
+		btnSubirArchivo.setForeground(new Color(0, 64, 128));
+		btnSubirArchivo.setFont(new Font("Tahoma", Font.BOLD, 13));
+		btnSubirArchivo.setBorderPainted(false);
+		btnSubirArchivo.setBackground(new Color(255, 255, 255));
+		btnSubirArchivo.setBounds(456, 86, 150, 30);
+		frame.getContentPane().add(btnSubirArchivo);
 		
-		JButton btnDescargarArchivo = new JButton("Descargar archivo");
+		btnDescargarArchivo = new JButton("Descargar archivo");
 		btnDescargarArchivo.setForeground(new Color(0, 64, 128));
 		btnDescargarArchivo.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnDescargarArchivo.setBorderPainted(false);
@@ -65,7 +70,7 @@ public class VentanaFTP {
 		btnDescargarArchivo.setBounds(456, 155, 150, 30);
 		frame.getContentPane().add(btnDescargarArchivo);
 		
-		JButton btnSalir = new JButton("Salir");
+		btnSalir = new JButton("Salir");
 		btnSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -77,7 +82,7 @@ public class VentanaFTP {
 		btnSalir.setBounds(456, 354, 150, 30);
 		frame.getContentPane().add(btnSalir);
 		
-		JButton btnBorrarCarpeta = new JButton("Borrar carpeta");
+		btnBorrarCarpeta = new JButton("Borrar carpeta");
 		btnBorrarCarpeta.setForeground(new Color(0, 64, 128));
 		btnBorrarCarpeta.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnBorrarCarpeta.setBorderPainted(false);
@@ -85,7 +90,7 @@ public class VentanaFTP {
 		btnBorrarCarpeta.setBounds(456, 287, 150, 30);
 		frame.getContentPane().add(btnBorrarCarpeta);
 		
-		JButton btnCrearCarpeta = new JButton("Crear carpeta");
+		btnCrearCarpeta = new JButton("Crear carpeta");
 		btnCrearCarpeta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -103,4 +108,46 @@ public class VentanaFTP {
 		lblNewLabel_2.setBounds(86, 469, 527, 19);
 		frame.getContentPane().add(lblNewLabel_2);
 	}
+
+	public JButton getBtnSubirArchivo() {
+		return btnSubirArchivo;
+	}
+
+	public void setBtnSubirArchivo(JButton btnSubirArchivo) {
+		this.btnSubirArchivo = btnSubirArchivo;
+	}
+
+	public JButton getBtnDescargarArchivo() {
+		return btnDescargarArchivo;
+	}
+
+	public void setBtnDescargarArchivo(JButton btnDescargarArchivo) {
+		this.btnDescargarArchivo = btnDescargarArchivo;
+	}
+
+	public JButton getBtnSalir() {
+		return btnSalir;
+	}
+
+	public void setBtnSalir(JButton btnSalir) {
+		this.btnSalir = btnSalir;
+	}
+
+	public JButton getBtnBorrarCarpeta() {
+		return btnBorrarCarpeta;
+	}
+
+	public void setBtnBorrarCarpeta(JButton btnBorrarCarpeta) {
+		this.btnBorrarCarpeta = btnBorrarCarpeta;
+	}
+
+	public JButton getBtnCrearCarpeta() {
+		return btnCrearCarpeta;
+	}
+
+	public void setBtnCrearCarpeta(JButton btnCrearCarpeta) {
+		this.btnCrearCarpeta = btnCrearCarpeta;
+	}
+	
+	
 }

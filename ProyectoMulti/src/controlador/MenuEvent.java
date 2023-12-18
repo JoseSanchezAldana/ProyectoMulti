@@ -21,8 +21,13 @@ public class MenuEvent implements ActionListener{
 			VentanaFTP vtnFtp = new VentanaFTP();
 			vtnFtp.frame.setVisible(true);
 			menu.frame.dispose();
+			vtnFtp.getBtnSalir().addActionListener(new SalirFTPEvent());
+			vtnFtp.getBtnBorrarCarpeta().addActionListener(new BorrarArchivoFTP());
+			vtnFtp.getBtnCrearCarpeta().addActionListener(new crearCarpetaFTP());
+			vtnFtp.getBtnDescargarArchivo().addActionListener(new descargarArchivoFTP());
+			vtnFtp.getBtnSubirArchivo().addActionListener(new subirArchivoFTP());
+			
 		}else {
-			System.out.println("Boton email");
 			VentanaEmail vtnEmail = new VentanaEmail();
 			vtnEmail.frame.setVisible(true);
 			menu.frame.dispose();
