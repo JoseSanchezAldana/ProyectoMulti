@@ -21,7 +21,7 @@ public class MenuEvent implements ActionListener{
 			VentanaFTP vtnFtp = new VentanaFTP();
 			vtnFtp.frame.setVisible(true);
 			menu.frame.dispose();
-			vtnFtp.getBtnSalir().addActionListener(new SalirFTPEvent());
+			vtnFtp.getBtnSalir().addActionListener(new SalirFTPEvent(vtnFtp, menu));
 			vtnFtp.getBtnBorrarCarpeta().addActionListener(new BorrarArchivoFTP());
 			vtnFtp.getBtnCrearCarpeta().addActionListener(new crearCarpetaFTP());
 			vtnFtp.getBtnDescargarArchivo().addActionListener(new descargarArchivoFTP());

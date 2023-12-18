@@ -3,15 +3,22 @@ package controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class SalirFTPEvent implements ActionListener{
+import vista.Menu;
+import vista.VentanaFTP;
 
-	public	SalirFTPEvent() {
-		
+public class SalirFTPEvent implements ActionListener{
+	
+	VentanaFTP vtnFtp;
+	Menu menu;
+
+	public	SalirFTPEvent(VentanaFTP vtnFtp, Menu menu) {
+		this.vtnFtp = vtnFtp;
+		this.menu = menu;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
+		vtnFtp.frame.dispose();
+		menu.frame.setVisible(true);
 	}
 }
