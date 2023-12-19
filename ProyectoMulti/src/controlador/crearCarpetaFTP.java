@@ -19,7 +19,7 @@ private FTPClient cliente;
 		// TODO Auto-generated method
 		
 		try {
-			OperacionesFTP.crearCarpeta(cliente, null, null);
+			OperacionesFTP.crearCarpeta(cliente, null, null); //pasar directorio y nombre de la carpeta
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

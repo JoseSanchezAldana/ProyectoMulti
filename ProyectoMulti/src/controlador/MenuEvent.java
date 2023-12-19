@@ -3,8 +3,6 @@ package controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.event.TreeSelectionListener;
-
 import conexion.ConexionFTP;
 import modelo.Modelo;
 import vista.Menu;
@@ -38,11 +36,11 @@ public class MenuEvent implements ActionListener {
 				vtnFtp.getBtnDescargarArchivo().addActionListener(new descargarArchivoFTP(conexionFTP.getCliente()));
 
 				vtnFtp.getBtnSubirArchivo().addActionListener(new subirArchivoFTP(conexionFTP.getCliente()));
-			} else {
-				VentanaEmail vtnEmail = new VentanaEmail();
-				vtnEmail.frame.setVisible(true);
-				menu.frame.dispose();
 			}
+		} else {
+			VentanaEmail vtnEmail = new VentanaEmail();
+			vtnEmail.frame.setVisible(true);
+			menu.frame.dispose();
 		}
 	}
 }
