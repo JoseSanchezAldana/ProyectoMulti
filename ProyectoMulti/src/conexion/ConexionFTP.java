@@ -8,7 +8,7 @@ import org.apache.commons.net.ftp.FTPClient;
 import modelo.Modelo;
 
 public class ConexionFTP {
-
+//	conexion
 	private FTPClient cliente = new FTPClient();
 	private Modelo modelo;
 	private boolean login;
