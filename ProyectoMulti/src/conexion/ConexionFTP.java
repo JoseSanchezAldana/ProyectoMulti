@@ -28,7 +28,7 @@ public class ConexionFTP {
 		}
 	}
 
-	public FTPClient getCliente() {
+	public  FTPClient getCliente() {
 		return cliente;
 	}
 
