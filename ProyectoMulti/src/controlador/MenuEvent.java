@@ -29,7 +29,7 @@ public class MenuEvent implements ActionListener {
 				VentanaFTP vtnFtp = new VentanaFTP(conexionFTP, modelo);
 				vtnFtp.frame.setVisible(true);
 				menu.frame.dispose();
-				vtnFtp.getTree().addTreeSelectionListener(new SeleccionTree());
+				vtnFtp.getTree().addTreeSelectionListener(new SeleccionTree(vtnFtp));
 				vtnFtp.getBtnSalir().addActionListener(new SalirFTPEvent(vtnFtp, menu));
 				vtnFtp.getBtnBorrarCarpeta().addActionListener(new BorrarArchivoFTP());
 				vtnFtp.getBtnCrearCarpeta().addActionListener(new crearCarpetaFTP(conexionFTP.getCliente()));
@@ -42,5 +42,13 @@ public class MenuEvent implements ActionListener {
 			vtnEmail.frame.setVisible(true);
 			menu.frame.dispose();
 		}
+	}
+	
+	public static boolean comprobarRuta (VentanaFTP vtnFtp) {
+		boolean estaVacio = false;
+		if(vtnFtp.getRutaSeleccionada().getText().equalsIgnoreCase("")) {
+			estaVacio = true;
+		}
+		return estaVacio;
 	}
 }
