@@ -16,10 +16,6 @@ public class subirArchivoFTP implements ActionListener {
 		this.cliente = cliente;
 	}
 	
-	
-	
-
-
 
 	@Override
 	public void actionPerformed(ActionEvent e) {

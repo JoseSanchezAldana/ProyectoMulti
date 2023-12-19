@@ -13,7 +13,6 @@ public class Modelo {
 	private String usuarioFTP = null;
 	private String passwordFTP = null;
 	private final String directorioInicial = "/";
-	private String rutaSelec = null;
 	
 	
 	public String getDireccionBd() {
@@ -51,12 +50,6 @@ public class Modelo {
 	}
 	public void setPasword(String pasword) {
 		this.passwordFTP = pasword;
-	}
-	public String getRutaSelec() {
-		return rutaSelec;
-	}
-	public void setRutaSelec(String rutaSelec) {
-		this.rutaSelec = rutaSelec;
 	}
 	public String getDirectorioInicial() {
 		return directorioInicial;

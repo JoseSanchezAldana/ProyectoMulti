@@ -5,8 +5,16 @@ import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreePath;
 
+import vista.VentanaFTP;
+
 public class SeleccionTree implements TreeSelectionListener {
 
+	VentanaFTP frame;
+	
+	public SeleccionTree(VentanaFTP frame) {
+		this.frame=frame;
+	}
+	
 	@Override
 	public void valueChanged(TreeSelectionEvent e) {
 		TreePath path = e.getNewLeadSelectionPath();
@@ -14,6 +22,7 @@ public class SeleccionTree implements TreeSelectionListener {
 			// Obtener la ruta como una cadena
 			String ruta = obtenerRutaDesdeTreePath(path);
 			System.out.println("Ruta seleccionada: " + ruta);
+			frame.getRutaSeleccionada().setText(ruta);
 		}
 		
 	}
