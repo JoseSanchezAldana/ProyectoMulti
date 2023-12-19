@@ -17,6 +17,7 @@ private FTPClient cliente;
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+		//Comentario 
 		
 		try {
 			OperacionesFTP.crearCarpeta(cliente, null, null);
