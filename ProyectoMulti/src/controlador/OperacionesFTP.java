@@ -15,7 +15,7 @@ import org.apache.commons.net.ftp.FTPClient;
 
 public class OperacionesFTP {
 	
-	 public String seleccionarDirectorioConJFileChooser(){
+	 public static String seleccionarDirectorioConJFileChooser(){
 	        String dir;
 	        JFileChooser seleccionadorDirectorio = new JFileChooser();
 	     
@@ -40,7 +40,7 @@ public class OperacionesFTP {
 	    }
 
 
-	    public void descargarFichero(FTPClient cliente, String directorioFTP, String directorioDondeGuardar, String nombreArchivo) throws IOException {
+	    public static void descargarFichero(FTPClient cliente, String directorioFTP, String directorioDondeGuardar, String nombreArchivo) throws IOException {
 	        cliente.changeWorkingDirectory(directorioFTP);
 
 	        BufferedOutputStream out = new BufferedOutputStream( new FileOutputStream(directorioDondeGuardar) );
@@ -53,7 +53,17 @@ public class OperacionesFTP {
 	        }
 	    }
 
-	    public void crearCarpeta(){
+	    public static void crearCarpeta(FTPClient cliente, String directorioFTP, String nombreCarpeta)throws IOException{
+	    	
+	    	 cliente.changeWorkingDirectory(directorioFTP);
+	    	String rutaDondeSECreaDir = directorioFTP.concat(nombreCarpeta); 
+
+		        if (cliente.makeDirectory(rutaDondeSECreaDir)){
+		           JOptionPane.showMessageDialog(null,"Se ha creado la carpeta ".concat(nombreCarpeta)); 
+		        }
+		        else {
+		            JOptionPane.showMessageDialog(null,"NO se ha creado la carpeta ".concat(nombreCarpeta));
+		        }
 
 	    }
 	
