@@ -43,6 +43,7 @@ public class VentanaFTP {
 	private static DefaultMutableTreeNode root;
 	private static DefaultTreeModel modeloTree;
 	private JTree tree;
+	private JLabel rutaSeleccionada;
 
 	/**
 	 * Create the application.
@@ -52,6 +53,7 @@ public class VentanaFTP {
 		this.modelo = modelo;
 		initialize(conexionFTP, modelo);
 	}
+	
 
 	/**
 	 * Initialize the contents of the frame.
@@ -136,11 +138,11 @@ public class VentanaFTP {
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		frame.getContentPane().add(scrollPane);
 		
-		JLabel dirSelected = new JLabel("");
-		dirSelected.setForeground(new Color(255, 255, 255));
-		dirSelected.setFont(new Font("Tahoma", Font.BOLD, 18));
-		dirSelected.setBounds(296, 469, 392, 19);
-		frame.getContentPane().add(dirSelected);
+		rutaSeleccionada = new JLabel("");
+		rutaSeleccionada.setForeground(new Color(255, 255, 255));
+		rutaSeleccionada.setFont(new Font("Tahoma", Font.BOLD, 18));
+		rutaSeleccionada.setBounds(296, 469, 392, 19);
+		frame.getContentPane().add(rutaSeleccionada);
 	}
 
 	private JScrollPane crearRaiz(FTPClient cliente, Modelo modelo) {
@@ -188,6 +190,15 @@ public class VentanaFTP {
 	}
 	
 	
+	public JLabel getRutaSeleccionada() {
+		return rutaSeleccionada;
+	}
+
+	public void setRutaSeleccionada(JLabel rutaSeleccionada) {
+		this.rutaSeleccionada = rutaSeleccionada;
+	}
+
+
 	public JTree getTree() {
 		return tree;
 	}
