@@ -15,6 +15,10 @@ import org.apache.commons.net.ftp.FTPClient;
 
 public class OperacionesFTP {
 	
+	public OperacionesFTP() {
+		
+	}
+	
 	 public static String seleccionarDirectorioConJFileChooser(){
 	        String dir;
 	        JFileChooser seleccionadorDirectorio = new JFileChooser();
