@@ -135,6 +135,12 @@ public class VentanaFTP {
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		frame.getContentPane().add(scrollPane);
+		
+		JLabel dirSelected = new JLabel("");
+		dirSelected.setForeground(new Color(255, 255, 255));
+		dirSelected.setFont(new Font("Tahoma", Font.BOLD, 18));
+		dirSelected.setBounds(296, 469, 392, 19);
+		frame.getContentPane().add(dirSelected);
 	}
 
 	private JScrollPane crearRaiz(FTPClient cliente, Modelo modelo) {
@@ -229,5 +235,4 @@ public class VentanaFTP {
 	public void setBtnCrearCarpeta(JButton btnCrearCarpeta) {
 		this.btnCrearCarpeta = btnCrearCarpeta;
 	}
-
 }
