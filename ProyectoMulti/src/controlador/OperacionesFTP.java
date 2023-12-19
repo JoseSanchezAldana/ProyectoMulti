@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
+import org.apache.commons.net.ftp.FTPFile;
 
 public class OperacionesFTP {
 
@@ -43,31 +44,38 @@ public class OperacionesFTP {
 	}
 
 	public static void descargarFichero(FTPClient cliente, String directorioFTP, String directorioDondeGuardar)
-			throws IOException,FileNotFoundException {
+			throws IOException {
+		// Change the working directory on the FTP server
 		cliente.changeWorkingDirectory(directorioFTP);
+		// Extract the file name from the directory path
+		String nombreArchivo = new File(directorioFTP).getName();
+		// Build the full path of the local file
+		String localFilePath = directorioDondeGuardar + File.separator + nombreArchivo;
 
-		BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(directorioDondeGuardar));
-
-		if (cliente.retrieveFile(directorioDondeGuardar, out)) {
-			JOptionPane.showMessageDialog(null, "Se ha descargado correctamente");
-		} else {
-			JOptionPane.showMessageDialog(null, "No se ha descargado correctamente");
+		try (BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(localFilePath))) {
+			// Download the specified file from the FTP server and write it to the local
+			// file
+			if (!cliente.retrieveFile(nombreArchivo, out)) {
+				JOptionPane.showMessageDialog(null, "Se ha descargado correctamente");
+			} else {
+				JOptionPane.showMessageDialog(null, "No se ha descargado correctamente");
+			}
+		} catch (IOException e) {
+			// Handle the exception appropriately
+			e.printStackTrace();
 		}
-		
-		out.close();
 	}
 
 	public static void crearCarpeta(FTPClient cliente, String directorioFTP, String nombreCarpeta) throws IOException {
-	    cliente.changeWorkingDirectory(directorioFTP);
+		cliente.changeWorkingDirectory(directorioFTP);
 
-	    // Attempt to create the directory on the FTP server using only the folder name
-	    if (cliente.makeDirectory(nombreCarpeta)) {
-	        JOptionPane.showMessageDialog(null, "Se ha creado la carpeta ".concat(nombreCarpeta));
-	    } else {
-	        JOptionPane.showMessageDialog(null, "NO se ha creado la carpeta ".concat(nombreCarpeta));
-	    }
+		// Attempt to create the directory on the FTP server using only the folder name
+		if (cliente.makeDirectory(nombreCarpeta)) {
+			JOptionPane.showMessageDialog(null, "Se ha creado la carpeta ".concat(nombreCarpeta));
+		} else {
+			JOptionPane.showMessageDialog(null, "NO se ha creado la carpeta ".concat(nombreCarpeta));
+		}
 	}
-
 
 	public static boolean subirFichero(FTPClient cliente, String directorio) throws IOException {
 		File fichero;
