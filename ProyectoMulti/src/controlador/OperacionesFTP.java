@@ -4,6 +4,7 @@ import java.awt.Component;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -42,7 +43,7 @@ public class OperacionesFTP {
 	}
 
 	public static void descargarFichero(FTPClient cliente, String directorioFTP, String directorioDondeGuardar)
-			throws IOException {
+			throws IOException,FileNotFoundException {
 		cliente.changeWorkingDirectory(directorioFTP);
 
 		BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(directorioDondeGuardar));
@@ -52,6 +53,8 @@ public class OperacionesFTP {
 		} else {
 			JOptionPane.showMessageDialog(null, "No se ha descargado correctamente");
 		}
+		
+		out.close();
 	}
 
 	public static void crearCarpeta(FTPClient cliente, String directorioFTP, String nombreCarpeta) throws IOException {

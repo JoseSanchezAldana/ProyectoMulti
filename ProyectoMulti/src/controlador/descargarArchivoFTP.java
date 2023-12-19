@@ -2,6 +2,8 @@ package controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 import org.apache.commons.net.ftp.FTPClient;
@@ -24,8 +26,12 @@ private VentanaFTP vtnFtp;
 		
 				
 		try {
-			String directorioDondeGuardar = OperacionesFTP.seleccionarDirectorioConJFileChooser(); 
-			OperacionesFTP.descargarFichero(cliente, vtnFtp.getRutaSeleccionada().getText(), directorioDondeGuardar);
+//			String directorioDondeGuardar = OperacionesFTP.seleccionarDirectorioConJFileChooser(); 
+//			OperacionesFTP.descargarFichero(cliente, vtnFtp.getRutaSeleccionada().getText(), directorioDondeGuardar);
+			if(cliente.changeWorkingDirectory("//JoseAlumno")) {
+			//	BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(null))
+				cliente.retrieveFile("D:\\accesoDatos\\prueba_FTP", null);
+			}
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
