@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
+import org.apache.commons.net.ftp.FTPFile;
 
 public class OperacionesFTP {
 
@@ -42,17 +43,29 @@ public class OperacionesFTP {
 	}
 
 	public static void descargarFichero(FTPClient cliente, String directorioFTP, String directorioDondeGuardar)
-			throws IOException {
-		cliente.changeWorkingDirectory(directorioFTP);
+            throws IOException {
+        // Change the working directory on the FTP server
+        cliente.changeWorkingDirectory(directorioFTP);
 
-		BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(directorioDondeGuardar));
+        // Extract the file name from the directory path
+        String nombreArchivo = new File(directorioFTP).getName();
 
-		if (cliente.retrieveFile(directorioDondeGuardar, out)) {
-			JOptionPane.showMessageDialog(null, "Se ha descargado correctamente");
-		} else {
-			JOptionPane.showMessageDialog(null, "No se ha descargado correctamente");
-		}
-	}
+        // Build the full path of the local file
+        String localFilePath = directorioDondeGuardar + File.separator + nombreArchivo;
+
+        try (BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(localFilePath))) {
+            // Download the specified file from the FTP server and write it to the local file
+            if (!cliente.retrieveFile(nombreArchivo, out)) {
+                JOptionPane.showMessageDialog(null, "Se ha descargado correctamente");
+            } else {
+                JOptionPane.showMessageDialog(null, "No se ha descargado correctamente");
+            }
+        } catch (IOException e) {
+            // Handle the exception appropriately
+            e.printStackTrace();
+        }
+    }
+
 
 	public static void crearCarpeta(FTPClient cliente, String directorioFTP, String nombreCarpeta) throws IOException {
 	    cliente.changeWorkingDirectory(directorioFTP);

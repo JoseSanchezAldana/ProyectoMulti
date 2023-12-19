@@ -25,9 +25,9 @@ private VentanaFTP vtnFtp;
 				
 		try {
 			String directorioDondeGuardar = OperacionesFTP.seleccionarDirectorioConJFileChooser(); 
+			System.out.println(directorioDondeGuardar);
 			OperacionesFTP.descargarFichero(cliente, vtnFtp.getRutaSeleccionada().getText(), directorioDondeGuardar);
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 
