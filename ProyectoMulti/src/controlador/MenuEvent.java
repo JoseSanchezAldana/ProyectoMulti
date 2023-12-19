@@ -31,6 +31,7 @@ public class MenuEvent implements ActionListener {
 				vtnFtp.frame.setVisible(true);
 				menu.frame.dispose();
 				vtnFtp.getTree().addTreeSelectionListener(new SeleccionTree());
+				
 				vtnFtp.getBtnSalir().addActionListener(new SalirFTPEvent(vtnFtp, menu));
 				vtnFtp.getBtnBorrarCarpeta().addActionListener(new BorrarArchivoFTP());
 				vtnFtp.getBtnCrearCarpeta().addActionListener(new crearCarpetaFTP());
