@@ -6,6 +6,7 @@ import java.awt.FlowLayout;
 import javax.swing.JFrame;
 import java.awt.Color;
 import javax.swing.JTree;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
@@ -41,6 +42,7 @@ public class VentanaFTP {
 	private Modelo modelo;
 	private static DefaultMutableTreeNode root;
 	private static DefaultTreeModel modeloTree;
+	private JTree tree;
 
 	/**
 	 * Create the application.
@@ -127,31 +129,23 @@ public class VentanaFTP {
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblNewLabel_2.setBounds(86, 469, 527, 19);
 		frame.getContentPane().add(lblNewLabel_2);
-		
-		JScrollPane scrollPane = new JScrollPane();
+
+		JScrollPane scrollPane = crearRaiz(conexionFTP.getCliente(), modelo);
 		scrollPane.setBounds(72, 86, 287, 298);
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		frame.getContentPane().add(scrollPane);
 	}
 
 	private JScrollPane crearRaiz(FTPClient cliente, Modelo modelo) {
 		JScrollPane scroll;
-		// final String directorioInicial = "/";
 
 		root = new DefaultMutableTreeNode(modelo.getDirectorioInicial());
 		modeloTree = new DefaultTreeModel(root);
 		crear(root, cliente, modelo.getDirectorioInicial());
-		JTree tree = new JTree();
+		tree = new JTree();
 		tree.setModel(modeloTree);
-		//DefaultTreeCellRenderer render = (DefaultTreeCellRenderer) tree.getCellRenderer();
-
-		// render.setLeafIcon(new ImageIcon("D:\\Descargas\\MasterBallV3.gif"));
-		// render.setOpenIcon(new ImageIcon("D:\\Descargas\\MasterBallV3.gif"));
-		// render.setClosedIcon(new ImageIcon("D:\\Descargas\\MasterBallV3.gif"));
 		scroll = new JScrollPane(tree);
-//		frame.setSize(300, 200);
-//		frame.setLocationRelativeTo(null);
-//		frame.setVisible(true);
-		
 		return scroll;
 
 	}
@@ -185,6 +179,15 @@ public class VentanaFTP {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	
+	public JTree getTree() {
+		return tree;
+	}
+
+	public void setTree(JTree tree) {
+		this.tree = tree;
 	}
 
 	public JButton getBtnSubirArchivo() {

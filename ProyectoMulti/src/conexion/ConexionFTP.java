@@ -9,7 +9,7 @@ import modelo.Modelo;
 
 public class ConexionFTP {
 
-	private FTPClient cliente;
+	private FTPClient cliente = new FTPClient();
 	private Modelo modelo;
 	private boolean login;
 	

@@ -3,6 +3,8 @@ package controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.event.TreeSelectionListener;
+
 import conexion.ConexionFTP;
 import modelo.Modelo;
 import vista.Menu;
@@ -22,16 +24,20 @@ public class MenuEvent implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {	
 		if (e.getSource() == menu.getBtnFTP()) {
+			System.out.println(modelo.getPasword()+  "    " + modelo.getUsuario());
 			ConexionFTP conexionFTP = new ConexionFTP(modelo);
-			VentanaFTP vtnFtp = new VentanaFTP(conexionFTP,modelo);
-			vtnFtp.frame.setVisible(true);
-			menu.frame.dispose();
-			vtnFtp.getBtnSalir().addActionListener(new SalirFTPEvent(vtnFtp, menu));
-			vtnFtp.getBtnBorrarCarpeta().addActionListener(new BorrarArchivoFTP());
-			vtnFtp.getBtnCrearCarpeta().addActionListener(new crearCarpetaFTP());
-			vtnFtp.getBtnDescargarArchivo().addActionListener(new descargarArchivoFTP());
-			vtnFtp.getBtnSubirArchivo().addActionListener(new subirArchivoFTP());
-			
+			if(conexionFTP.isLogin()) {
+				VentanaFTP vtnFtp = new VentanaFTP(conexionFTP,modelo);
+				vtnFtp.frame.setVisible(true);
+				menu.frame.dispose();
+				vtnFtp.getTree().addTreeSelectionListener(new SeleccionTree());
+				vtnFtp.getBtnSalir().addActionListener(new SalirFTPEvent(vtnFtp, menu));
+				vtnFtp.getBtnBorrarCarpeta().addActionListener(new BorrarArchivoFTP());
+				vtnFtp.getBtnCrearCarpeta().addActionListener(new crearCarpetaFTP());
+				vtnFtp.getBtnDescargarArchivo().addActionListener(new descargarArchivoFTP());
+				vtnFtp.getBtnSubirArchivo().addActionListener(new subirArchivoFTP());
+				
+			}	
 		}else {
 			VentanaEmail vtnEmail = new VentanaEmail();
 			vtnEmail.frame.setVisible(true);
