@@ -53,9 +53,17 @@ public class OperacionesFTP {
 	        }
 	    }
 
-	    public void crearCarpeta(){
+	    public static void crearCarpeta(FTPClient cliente, String directorioFTP, String nombreCarpeta)throws IOException{
 	    	
-	    	
+	    	 cliente.changeWorkingDirectory(directorioFTP);
+	    	String rutaDondeSECreaDir = directorioFTP.concat(nombreCarpeta); 
+
+		        if (cliente.makeDirectory(rutaDondeSECreaDir)){
+		           JOptionPane.showMessageDialog(null,"Se ha creado la carpeta ".concat(nombreCarpeta)); 
+		        }
+		        else {
+		            JOptionPane.showMessageDialog(null,"NO se ha creado la carpeta ".concat(nombreCarpeta));
+		        }
 
 	    }
 	
