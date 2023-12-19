@@ -29,7 +29,7 @@ public class MenuEvent implements ActionListener{
 			vtnFtp.getBtnSalir().addActionListener(new SalirFTPEvent(vtnFtp, menu));
 			vtnFtp.getBtnBorrarCarpeta().addActionListener(new BorrarArchivoFTP());
 			vtnFtp.getBtnCrearCarpeta().addActionListener(new crearCarpetaFTP());
-			vtnFtp.getBtnDescargarArchivo().addActionListener(new descargarArchivoFTP());
+			vtnFtp.getBtnDescargarArchivo().addActionListener(new descargarArchivoFTP(conexionFTP.getCliente()));
 			vtnFtp.getBtnSubirArchivo().addActionListener(new subirArchivoFTP(conexionFTP.getCliente()));
 			
 		}else {
