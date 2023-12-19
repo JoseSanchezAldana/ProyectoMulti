@@ -55,17 +55,16 @@ public class OperacionesFTP {
 	}
 
 	public static void crearCarpeta(FTPClient cliente, String directorioFTP, String nombreCarpeta) throws IOException {
+	    cliente.changeWorkingDirectory(directorioFTP);
 
-		cliente.changeWorkingDirectory(directorioFTP);
-		String rutaDondeSECreaDir = directorioFTP.concat(nombreCarpeta);
-
-		if (cliente.makeDirectory(rutaDondeSECreaDir)) {
-			JOptionPane.showMessageDialog(null, "Se ha creado la carpeta ".concat(nombreCarpeta));
-		} else {
-			JOptionPane.showMessageDialog(null, "NO se ha creado la carpeta ".concat(nombreCarpeta));
-		}
-
+	    // Attempt to create the directory on the FTP server using only the folder name
+	    if (cliente.makeDirectory(nombreCarpeta)) {
+	        JOptionPane.showMessageDialog(null, "Se ha creado la carpeta ".concat(nombreCarpeta));
+	    } else {
+	        JOptionPane.showMessageDialog(null, "NO se ha creado la carpeta ".concat(nombreCarpeta));
+	    }
 	}
+
 
 	public static boolean subirFichero(FTPClient cliente, String directorio) throws IOException {
 		File fichero;
