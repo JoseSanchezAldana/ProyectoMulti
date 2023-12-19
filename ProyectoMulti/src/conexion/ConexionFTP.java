@@ -9,7 +9,7 @@ import modelo.Modelo;
 
 public class ConexionFTP {
 
-	private FTPClient cliente;
+	private  FTPClient cliente;
 	private Modelo modelo;
 	private boolean login;
 	
@@ -28,7 +28,7 @@ public class ConexionFTP {
 		}
 	}
 
-	public FTPClient getCliente() {
+	public  FTPClient getCliente() {
 		return cliente;
 	}
 
