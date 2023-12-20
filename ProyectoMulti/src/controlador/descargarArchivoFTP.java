@@ -22,11 +22,8 @@ private VentanaFTP vtnFtp;
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		String directorioDondeGuardar = OperacionesFTP.seleccionarDirectorioConJFileChooser(); 
-		System.out.println(directorioDondeGuardar);
 		try {
-			OperacionesFTP.descargarFichero(cliente, vtnFtp.getRutaSeleccionada().getText(), directorioDondeGuardar);
+			OperacionesFTP.descargarFichero(cliente, vtnFtp.getRutaSeleccionada().getText());
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

@@ -44,26 +44,29 @@ public class OperacionesFTP {
 		return dir;
 	}
 
-	public static void descargarFichero(FTPClient cliente, String directorioFTP, String directorioDondeGuardar)
+	public static void descargarFichero(FTPClient cliente, String directorioFTP)
 			throws IOException {
-		// Change the working directory on the FTP server
-		cliente.changeWorkingDirectory(directorioFTP);
-		// Extract the file name from the directory path
-		String nombreArchivo = new File(directorioFTP).getName();
-		// Build the full path of the local file
-		String localFilePath = directorioDondeGuardar + File.separator + nombreArchivo;
+		if (!isCarpeta(directorioFTP, cliente)) {
+			String directorioDondeGuardar = seleccionarDirectorioConJFileChooser();
+			cliente.changeWorkingDirectory(directorioFTP);
 
-		try (BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(localFilePath))) {
-			// Download the specified file from the FTP server and write it to the local
-			// file
-			if (!cliente.retrieveFile(nombreArchivo, out)) {
-				JOptionPane.showMessageDialog(null, "Se ha descargado correctamente");
-			} else {
-				JOptionPane.showMessageDialog(null, "No se ha descargado correctamente");
+			String nombreArchivo = new File(directorioFTP).getName();
+
+			String localFilePath = directorioDondeGuardar + File.separator + nombreArchivo;
+
+			try (BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(localFilePath))) {
+
+				if (!cliente.retrieveFile(nombreArchivo, out)) {
+					JOptionPane.showMessageDialog(null, "Se ha descargado correctamente");
+				} else {
+					JOptionPane.showMessageDialog(null, "No se ha descargado correctamente");
+				}
+			} catch (IOException e) {
+
+				e.printStackTrace();
 			}
-		} catch (IOException e) {
-			// Handle the exception appropriately
-			e.printStackTrace();
+		} else {
+			JOptionPane.showMessageDialog(null, "No se pueden descargar carpetas");
 		}
 	}
 
@@ -128,19 +131,21 @@ public class OperacionesFTP {
 			int seleccion = JOptionPane.showConfirmDialog(null, "¿Desea borrar el archivo " + nombreArchivo + "?");
 			if (seleccion == JOptionPane.OK_OPTION) {
 				try {
-					
+
 					if (isCarpeta(ruta, cliente)) {
 						FTPFile[] archivosEnDirectorio = cliente.listFiles(ruta);
 						if (archivosEnDirectorio.length == 0) {
 							if (cliente.removeDirectory(ruta)) {
 								JOptionPane.showMessageDialog(null, nombreArchivo + " =>Eliminado correctamente...");
-							}else {
-								JOptionPane.showMessageDialog(null, nombreArchivo + " =>No se ha podido borrar por algun error");
+							} else {
+								JOptionPane.showMessageDialog(null,
+										nombreArchivo + " =>No se ha podido borrar por algun error");
 							}
 						} else {
-							JOptionPane.showMessageDialog(null,nombreArchivo + " =>Debe estar vacio para poder borrarse");
+							JOptionPane.showMessageDialog(null,
+									nombreArchivo + " =>Debe estar vacio para poder borrarse");
 						}
-					} else{
+					} else {
 						if (cliente.deleteFile(ruta)) {
 							JOptionPane.showMessageDialog(null, nombreArchivo + " =>Eliminado correctamente...");
 						}
@@ -154,8 +159,8 @@ public class OperacionesFTP {
 		}
 
 	}
-	
-	public static boolean isCarpeta(String ruta,FTPClient cliente) {
+
+	public static boolean isCarpeta(String ruta, FTPClient cliente) {
 		boolean isCarpeta = false;
 		try {
 			FTPFile archivoFTP = cliente.mlistFile(ruta);
@@ -166,7 +171,7 @@ public class OperacionesFTP {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return isCarpeta;
 	}
 
