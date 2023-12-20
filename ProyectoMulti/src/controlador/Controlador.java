@@ -13,7 +13,9 @@ public class Controlador {
 		Conexion conexion = new Conexion(modelo);
 		Login login = new Login();
 		login.frame.setVisible(true);
-		login.getBtnNewButton().addActionListener(new LoginEvent(login, conexion,modelo));
+		LoginEvent loginevt = new LoginEvent(login, conexion,modelo);
+		login.getBtnLogin().addActionListener(loginevt);
+		login.getBtnSalir().addActionListener(loginevt);
 		
 	}
 }

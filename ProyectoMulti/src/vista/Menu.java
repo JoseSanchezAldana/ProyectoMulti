@@ -51,6 +51,8 @@ public class Menu {
 		btnFTP.setFont(new Font("Tahoma", Font.BOLD, 24));
 		btnFTP.setForeground(new Color(255, 255, 255));
 		btnFTP.setBounds(-14, 128, 430, 80);
+		btnFTP.setFocusPainted(false);
+		btnFTP.setContentAreaFilled(false);
 		frame.getContentPane().add(btnFTP);
 		
 		btnCorreoElectronico = new JButton("Correo electronico");
@@ -60,6 +62,8 @@ public class Menu {
 		btnCorreoElectronico.setFont(new Font("Tahoma", Font.BOLD, 24));
 		btnCorreoElectronico.setBorderPainted(false);
 		btnCorreoElectronico.setBounds(26, 218, 430, 80);
+		btnCorreoElectronico.setFocusPainted(false);
+		btnCorreoElectronico.setContentAreaFilled(false);
 		frame.getContentPane().add(btnCorreoElectronico);
 		
 		btnSalir = new JButton("Salir");
@@ -69,6 +73,8 @@ public class Menu {
 		btnSalir.setFont(new Font("Tahoma", Font.BOLD, 24));
 		btnSalir.setBounds(128, 327, 200, 80);
 		btnSalir.setBorderPainted(false);
+		btnSalir.setFocusPainted(false);
+		btnSalir.setContentAreaFilled(false);
 		frame.getContentPane().add(btnSalir);
 	}
 

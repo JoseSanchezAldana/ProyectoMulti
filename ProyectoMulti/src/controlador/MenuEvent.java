@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import conexion.ConexionFTP;
 import modelo.Modelo;
+import vista.Login;
 import vista.Menu;
 import vista.VentanaEmail;
 import vista.VentanaFTP;
@@ -13,10 +14,12 @@ public class MenuEvent implements ActionListener {
 
 	private Menu menu;
 	private Modelo modelo;
+	private Login login;
 
-	public MenuEvent(Menu menu, Modelo modelo) {
+	public MenuEvent(Menu menu, Modelo modelo, Login login) {
 		this.menu = menu;
 		this.modelo = modelo;
+		this.login = login;
 	}
 
 	@Override
@@ -36,10 +39,13 @@ public class MenuEvent implements ActionListener {
 				vtnFtp.getBtnDescargarArchivo().addActionListener(new descargarArchivoFTP(conexionFTP.getCliente(), vtnFtp));
 				vtnFtp.getBtnSubirArchivo().addActionListener(new subirArchivoFTP(conexionFTP.getCliente(), vtnFtp));
 			}
-		} else {
+		} else if(e.getSource() == menu.getBtnCorreoElectronico()){
 			VentanaEmail vtnEmail = new VentanaEmail();
 			vtnEmail.frame.setVisible(true);
 			menu.frame.dispose();
+		}else if(e.getSource() == menu.getBtnSalir()) {
+			menu.frame.dispose();
+			login.frame.setVisible(true);
 		}
 	}
 	
