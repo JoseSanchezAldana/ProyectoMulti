@@ -10,12 +10,12 @@ import conexion.ConexionFTP;
 import modelo.Modelo;
 import vista.VentanaFTP;
 
-public class subirArchivoFTP implements ActionListener {
+public class SubirArchivoFTP implements ActionListener {
 	
 	VentanaFTP vtnFTP;
 	FTPClient cliente;
 	
-	public subirArchivoFTP(VentanaFTP vtnFTP, FTPClient cliente) {
+	public SubirArchivoFTP(VentanaFTP vtnFTP, FTPClient cliente) {
 		this.vtnFTP=vtnFTP;
 		this.cliente=cliente;
 	}

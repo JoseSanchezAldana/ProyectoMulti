@@ -35,9 +35,9 @@ public class MenuEvent implements ActionListener {
 				vtnFtp.getTree().addTreeSelectionListener(new SeleccionTree(vtnFtp));
 				vtnFtp.getBtnSalir().addActionListener(new SalirFTPEvent(vtnFtp, menu));
 				vtnFtp.getBtnBorrarCarpeta().addActionListener(new BorrarArchivoFTP(vtnFtp, conexionFTP.getCliente()));
-				vtnFtp.getBtnCrearCarpeta().addActionListener(new crearCarpetaFTP(vtnFtp, conexionFTP.getCliente()));
-				vtnFtp.getBtnDescargarArchivo().addActionListener(new descargarArchivoFTP(vtnFtp, conexionFTP.getCliente()));
-				vtnFtp.getBtnSubirArchivo().addActionListener(new subirArchivoFTP(vtnFtp, conexionFTP.getCliente()));
+				vtnFtp.getBtnCrearCarpeta().addActionListener(new CrearCarpetaFTP(vtnFtp, conexionFTP.getCliente()));
+				vtnFtp.getBtnDescargarArchivo().addActionListener(new DescargarArchivoFTP(vtnFtp, conexionFTP.getCliente()));
+				vtnFtp.getBtnSubirArchivo().addActionListener(new SubirArchivoFTP(vtnFtp, conexionFTP.getCliente()));
 			}
 		} else if(e.getSource() == menu.getBtnCorreoElectronico()){
 			VentanaEmail vtnEmail = new VentanaEmail();
