@@ -119,17 +119,32 @@ public class OperacionesFTP {
 
 	public static void borrarArchivoFTP(String ruta, FTPClient cliente) {
 
-		//String nombreArchivo = extraerNombreArchivo(ruta, cliente);
+		// String nombreArchivo = extraerNombreArchivo(ruta, cliente);
 		String nombreArchivo = obtenerNombreArchivo(ruta);
 		if (nombreArchivo.equals("")) {
 			JOptionPane.showMessageDialog(null, ">>>>>>No ha seleccionado ninguna ruta");
 		} else {
 			int seleccion = JOptionPane.showConfirmDialog(null, "¿Desea borrar el archivo " + nombreArchivo + "?");
-			if(seleccion == JOptionPane.OK_OPTION) {
+			if (seleccion == JOptionPane.OK_OPTION) {
 				try {
-					if(cliente.deleteFile(ruta)) {
-						JOptionPane.showMessageDialog(null, nombreArchivo + " =>Eliminado correctamente...");
+					FTPFile archivoFTP = cliente.mlistFile(ruta);
+					if (archivoFTP.isDirectory()) {
+						FTPFile[] archivosEnDirectorio = cliente.listFiles(ruta);
+						if (archivosEnDirectorio.length == 0) {
+							if (cliente.removeDirectory(ruta)) {
+								JOptionPane.showMessageDialog(null, nombreArchivo + " =>Eliminado correctamente...");
+							}else {
+								JOptionPane.showMessageDialog(null, nombreArchivo + " =>No se ha podido borrar por algun error");
+							}
+						} else {
+							JOptionPane.showMessageDialog(null,nombreArchivo + " =>Debe estar vacio para poder borrarse");
+						}
+					} else if (archivoFTP.isFile()) {
+						if (cliente.deleteFile(ruta)) {
+							JOptionPane.showMessageDialog(null, nombreArchivo + " =>Eliminado correctamente...");
+						}
 					}
+
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -138,10 +153,10 @@ public class OperacionesFTP {
 		}
 
 	}
-	private static String obtenerNombreArchivo(String rutaFTP) {
-       
-        String[] segmentosRuta = rutaFTP.split("/");
 
-        return segmentosRuta[segmentosRuta.length - 1];
-    }
+	private static String obtenerNombreArchivo(String rutaFTP) {
+
+		String[] segmentosRuta = rutaFTP.split("/");
+		return segmentosRuta[segmentosRuta.length - 1];
+	}
 }
