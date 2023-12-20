@@ -85,44 +85,47 @@ public class OperacionesFTP {
 		}
 	}
 
-	public static boolean subirFichero(FTPClient cliente, String directorio) throws IOException {
-		File fichero;
-		FileInputStream fis = null;
-		boolean ok = false;
+	public static void subirFichero(FTPClient cliente, String directorio) throws IOException {
+		if(isCarpeta(directorio, cliente)) {
+			File fichero;
+			FileInputStream fis = null;
+			boolean ok = false;
 
-		JFileChooser fileChooser = new JFileChooser();
-		fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-		fileChooser.setDialogTitle("Seleccione el archivo para subir");
-		int seleccion = fileChooser.showSaveDialog(new Component() {
+			JFileChooser fileChooser = new JFileChooser();
+			fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+			fileChooser.setDialogTitle("Seleccione el archivo para subir");
+			int seleccion = fileChooser.showSaveDialog(new Component() {
 
-			public String getName() {
-				return super.getName();
+				public String getName() {
+					return super.getName();
+				}
+			});
+			if (seleccion == JFileChooser.APPROVE_OPTION) {
+				fichero = fileChooser.getSelectedFile();
+				System.out.println(fichero.getAbsolutePath());
+				String ficheroASubir = fichero.getAbsolutePath();
+				fis = new FileInputStream(ficheroASubir);
+
+				cliente.enterLocalPassiveMode();
+
+				cliente.setFileType(FTP.BINARY_FILE_TYPE);
+
+				String cadenaSalida;
+				cliente.changeWorkingDirectory(directorio);
+				System.out.println(fichero.getName());
+				if (cliente.storeFile(fichero.getName(), fis)) {
+					cadenaSalida = fichero.getName().concat(" >>> Subido Correctamente al server");
+					JOptionPane.showMessageDialog(null, cadenaSalida);
+
+					ok = true;
+				} else {
+					cadenaSalida = fichero.getName().concat(" >>> NO Subido Correctamente al server");
+					JOptionPane.showMessageDialog(null, cadenaSalida);
+				}
 			}
-		});
-		if (seleccion == JFileChooser.APPROVE_OPTION) {
-			fichero = fileChooser.getSelectedFile();
-			System.out.println(fichero.getAbsolutePath());
-			String ficheroASubir = fichero.getAbsolutePath();
-			fis = new FileInputStream(ficheroASubir);
-
-			cliente.enterLocalPassiveMode();
-
-			cliente.setFileType(FTP.BINARY_FILE_TYPE);
-
-			String cadenaSalida;
-			cliente.changeWorkingDirectory(directorio);
-			System.out.println(fichero.getName());
-			if (cliente.storeFile(fichero.getName(), fis)) {
-				cadenaSalida = fichero.getName().concat(" >>> Subido Correctamente al server");
-				JOptionPane.showMessageDialog(null, cadenaSalida);
-
-				ok = true;
-			} else {
-				cadenaSalida = fichero.getName().concat(" >>> NO Subido Correctamente al server");
-				JOptionPane.showMessageDialog(null, cadenaSalida);
-			}
+		} else {
+			JOptionPane.showMessageDialog(null, "Debe de ser una carpeta");
 		}
-		return ok;
 	}
 
 	public static void borrarArchivoFTP(String ruta, FTPClient cliente) throws HeadlessException {
