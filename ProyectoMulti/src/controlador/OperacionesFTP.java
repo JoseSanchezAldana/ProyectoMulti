@@ -128,7 +128,7 @@ public class OperacionesFTP {
 			int seleccion = JOptionPane.showConfirmDialog(null, "¿Desea borrar el archivo " + nombreArchivo + "?");
 			if (seleccion == JOptionPane.OK_OPTION) {
 				try {
-					//FTPFile archivoFTP = cliente.mlistFile(ruta);
+					
 					if (isCarpeta(ruta, cliente)) {
 						FTPFile[] archivosEnDirectorio = cliente.listFiles(ruta);
 						if (archivosEnDirectorio.length == 0) {
