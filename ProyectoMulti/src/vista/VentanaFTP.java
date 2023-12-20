@@ -157,34 +157,32 @@ public class VentanaFTP {
 	}
 
 	private void crear(DefaultMutableTreeNode nodo, FTPClient cliente, String directorioInicial) {
-		try {
-			// cambiamos de posicion el directorio
-			if (cliente.changeWorkingDirectory(directorioInicial)) {
+	    try {
+	        if (cliente.changeWorkingDirectory(directorioInicial)) {
+	            FTPFile[] files = cliente.listFiles();
+	            
+	            if (files != null) {
 
-				// Obtenemos los hijos para ir creando los nodos
-				FTPFile[] files = cliente.listFiles();
-
-				if (files != null) {
-
-					int contador = 0;
-					for (FTPFile f : files) {// recorremos los ficheros y las carpetas hijas
-						DefaultMutableTreeNode hijo = new DefaultMutableTreeNode(f.getName()); // creamos un nodo con su
-																								// nombre
-						hijo.setAllowsChildren(true);
-						modeloTree.insertNodeInto(hijo, nodo, contador);// lo insertamos en su padre
-						contador++;// para cambiar la posicion de los hijos
-						if (f.isDirectory()) {// si es directorio llamada recursiva
-							crear(hijo, cliente, "./" + f.getName());
-						}
-					}
-				} else {
-					System.out.println("pepe");
-				}
-			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	                int contador = 0;
+	                for (FTPFile f : files) {
+	                    DefaultMutableTreeNode hijo = new DefaultMutableTreeNode(f.getName());
+	                    hijo.setAllowsChildren(true);
+	                    modeloTree.insertNodeInto(hijo, nodo, contador);
+	                    contador++;
+	                    
+	                    if (f.isDirectory()) {
+	                        crear(hijo, cliente, directorioInicial + "/" + f.getName());
+	                    }
+	                }
+	            } else {
+	                System.out.println("Error: Unable to retrieve file list.");
+	            }
+	        } else {
+	            System.out.println("Error: Unable to change working directory to " + directorioInicial);
+	        }
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
 	}
 	
 	public void actualizarArbol() {
