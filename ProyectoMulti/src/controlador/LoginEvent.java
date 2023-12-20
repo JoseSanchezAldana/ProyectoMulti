@@ -44,29 +44,37 @@ public class LoginEvent implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        Menu menu = new Menu();
-        ArrayList<String> credenciales = new ArrayList<>();
+    	Menu menu = new Menu();
+    	if (e.getSource() == login.getBtnLogin()) {
+    		ArrayList<String> credenciales = new ArrayList<>();
 
-        realizarConsulta(credenciales);
+            realizarConsulta(credenciales);
 
-        try {
-        	String encryptedText = encrypt(login.getPasswordField().getText(), "afghklkhghkln");
-            System.out.println("Texto cifrado: " + encryptedText);
+            try {
+            	String encryptedText = encrypt(login.getPasswordField().getText(), "afghklkhghkln");
+                System.out.println("Texto cifrado: " + encryptedText);
 
-            if (modelo.getUsuario().equals(login.getTxtrUsuario().getText()) && modelo.getPasword().equals(encryptedText)) {
-            	login.frame.dispose();
-                menu.frame.setVisible(true);
-                System.out.println("Login correcto");
-                MenuEvent mEvent = new MenuEvent(menu,modelo);
-                menu.getBtnCorreoElectronico().addActionListener(mEvent);
-                menu.getBtnFTP().addActionListener(mEvent);
-                
-            } else {
+                if (modelo.getUsuario().equals(login.getTxtrUsuario().getText()) && modelo.getPasword().equals(encryptedText)) {
+                	login.frame.dispose();
+                    menu.frame.setVisible(true);
+                    System.out.println("Login correcto");
+                    MenuEvent mEvent = new MenuEvent(menu, modelo, login);
+                    menu.getBtnCorreoElectronico().addActionListener(mEvent);
+                    menu.getBtnFTP().addActionListener(mEvent);
+                    menu.getBtnSalir().addActionListener(mEvent);
+                    
+                } else {
+                	 JOptionPane.showMessageDialog(null, "USUARIO O CONTRASEÑA INCORRECTO", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+                }
+            } catch (Exception ex) {
             	 JOptionPane.showMessageDialog(null, "USUARIO O CONTRASEÑA INCORRECTO", "ERROR", JOptionPane.INFORMATION_MESSAGE);
             }
-        } catch (Exception ex) {
-        	 JOptionPane.showMessageDialog(null, "USUARIO O CONTRASEÑA INCORRECTO", "ERROR", JOptionPane.INFORMATION_MESSAGE);
-        }
+    	}else if(e.getSource() == login.getBtnSalir()) {
+    		login.frame.dispose();
+            System.exit(0); 
+    	}
+        
+        
     }
 
     public static String encrypt(String plaintext, String key) {

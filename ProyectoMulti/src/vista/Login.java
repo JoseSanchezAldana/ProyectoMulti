@@ -18,6 +18,7 @@ public class Login {
 	private JPasswordField passwordField;
 	private JButton btnLogin;
 	private JTextArea txtrUsuario;
+	private JButton btnSalir;
 
 	/**
 	 * Create the application.
@@ -78,13 +79,29 @@ public class Login {
 		btnLogin.setBounds(124, 298, 125, 40);
 		frame.getContentPane().add(btnLogin);
 		
-		JButton btnSalir = new JButton("Salir");
+		btnSalir = new JButton("Salir");
 		btnSalir.setForeground(new Color(0, 64, 128));
 		btnSalir.setFont(new Font("Tahoma", Font.BOLD, 15));
 		btnSalir.setBorderPainted(false);
 		btnSalir.setBackground(Color.WHITE);
 		btnSalir.setBounds(124, 363, 125, 40);
 		frame.getContentPane().add(btnSalir);
+	}
+
+	public JButton getBtnSalir() {
+		return btnSalir;
+	}
+
+	public void setBtnSalir(JButton btnSalir) {
+		this.btnSalir = btnSalir;
+	}
+
+	public JButton getBtnLogin() {
+		return btnLogin;
+	}
+
+	public void setBtnLogin(JButton btnLogin) {
+		this.btnLogin = btnLogin;
 	}
 
 	public JFrame getFrame() {
@@ -101,14 +118,6 @@ public class Login {
 
 	public void setPasswordField(JPasswordField passwordField) {
 		this.passwordField = passwordField;
-	}
-
-	public JButton getBtnNewButton() {
-		return btnLogin;
-	}
-
-	public void setBtnNewButton(JButton btnNewButton) {
-		this.btnLogin = btnNewButton;
 	}
 
 	public JTextArea getTxtrUsuario() {
