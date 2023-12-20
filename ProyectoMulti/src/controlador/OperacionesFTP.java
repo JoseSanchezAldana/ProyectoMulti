@@ -117,4 +117,31 @@ public class OperacionesFTP {
 		return ok;
 	}
 
+	public static void borrarArchivoFTP(String ruta, FTPClient cliente) {
+
+		//String nombreArchivo = extraerNombreArchivo(ruta, cliente);
+		String nombreArchivo = obtenerNombreArchivo(ruta);
+		if (nombreArchivo.equals("")) {
+			JOptionPane.showMessageDialog(null, ">>>>>>No ha seleccionado ninguna ruta");
+		} else {
+			int seleccion = JOptionPane.showConfirmDialog(null, "¿Desea borrar el archivo " + nombreArchivo + "?");
+			if(seleccion == JOptionPane.OK_OPTION) {
+				try {
+					if(cliente.deleteFile(ruta)) {
+						JOptionPane.showMessageDialog(null, nombreArchivo + " =>Eliminado correctamente...");
+					}
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+
+	}
+	private static String obtenerNombreArchivo(String rutaFTP) {
+       
+        String[] segmentosRuta = rutaFTP.split("/");
+
+        return segmentosRuta[segmentosRuta.length - 1];
+    }
 }
