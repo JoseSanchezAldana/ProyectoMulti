@@ -29,8 +29,6 @@ public class OperacionesFTP {
 
 	public OperacionesFTP(VentanaFTP vtnFtp) {
 		this.vtnFtp = vtnFtp;
-		this.modelo = modelo;
-		this.cliente = cliente;
 	}	
 
 	public String seleccionarDirectorioConJFileChooser() {
@@ -49,9 +47,7 @@ public class OperacionesFTP {
 
 		if (seleccion == JFileChooser.APPROVE_OPTION) {
 			dir = seleccionadorDirectorio.getSelectedFile().getAbsolutePath();
-		} else {
-			//dir = "..\\Downloads";
-		}
+		} 
 		return dir;
 	}
 
@@ -72,8 +68,7 @@ public class OperacionesFTP {
 					JOptionPane.showMessageDialog(null, "No se ha descargado correctamente");
 				}
 			} catch (IOException e) {
-
-				e.printStackTrace();
+				
 			}
 		} else {
 			JOptionPane.showMessageDialog(null, "No se pueden descargar carpetas");
@@ -82,10 +77,9 @@ public class OperacionesFTP {
 	}
 
 	public void crearCarpeta(FTPClient cliente, String directorioFTP) throws IOException {
-		if (isCarpeta(directorioFTP, cliente)) {
+		if (isCarpeta(directorioFTP, cliente) && !directorioFTP.isEmpty()) {
 			String nombreCarpeta = JOptionPane.showInputDialog("Introduzca el nombre de la carpeta");
 			cliente.changeWorkingDirectory(directorioFTP);
-			// Attempt to create the directory on the FTP server using only the folder name
 			if (cliente.makeDirectory(nombreCarpeta)) {
 				JOptionPane.showMessageDialog(null, "Se ha creado la carpeta ".concat(nombreCarpeta));
 			} else {
@@ -98,7 +92,7 @@ public class OperacionesFTP {
 	}
 
 	public void subirFichero(FTPClient cliente, String directorio) throws IOException {
-		if (isCarpeta(directorio, cliente)) {
+		if (isCarpeta(directorio, cliente) && !directorio.isEmpty()) {
 			File fichero;
 			FileInputStream fis = null;
 			boolean ok = false;
@@ -172,8 +166,6 @@ public class OperacionesFTP {
 					}
 
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
 				}
 			}
 		}
@@ -203,6 +195,7 @@ public class OperacionesFTP {
 	
 	public void recargarVentana() {
 		vtnFtp.actualizarArbol();
+		vtnFtp.getRutaSeleccionada().setText("");
 	}
 
 }

@@ -66,13 +66,13 @@ public class VentanaFTP {
 		frame.setResizable(false);
 		frame.getContentPane().setLayout(null);
 
-		JLabel lblNewLabel = new JLabel("Ip server: ");
+		JLabel lblNewLabel = new JLabel("Ip server: " + modelo.getServFTP());
 		lblNewLabel.setForeground(new Color(255, 255, 255));
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblNewLabel.setBounds(86, 38, 287, 29);
 		frame.getContentPane().add(lblNewLabel);
 
-		JLabel lblNewLabel_1 = new JLabel("Usuario: ");
+		JLabel lblNewLabel_1 = new JLabel("Usuario: " + modelo.getUsuario());
 		lblNewLabel_1.setForeground(new Color(255, 255, 255));
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblNewLabel_1.setBounds(456, 43, 250, 19);
