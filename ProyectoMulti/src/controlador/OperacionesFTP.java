@@ -156,7 +156,6 @@ public class OperacionesFTP {
 						FTPFile[] archivosEnDirectorio = cliente.listFiles(ruta);
 						if (archivosEnDirectorio.length == 0) {
 							if (cliente.removeDirectory(ruta)) {
-								recargarVentana();
 								JOptionPane.showMessageDialog(null, nombreArchivo + " =>Eliminado correctamente...");
 							} else {
 								JOptionPane.showMessageDialog(null,
@@ -178,6 +177,7 @@ public class OperacionesFTP {
 				}
 			}
 		}
+		recargarVentana();
 	}
 
 	public boolean isCarpeta(String ruta, FTPClient cliente) {
