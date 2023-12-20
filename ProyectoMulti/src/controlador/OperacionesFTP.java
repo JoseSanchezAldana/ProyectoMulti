@@ -70,14 +70,18 @@ public class OperacionesFTP {
 		}
 	}
 
-	public static void crearCarpeta(FTPClient cliente, String directorioFTP, String nombreCarpeta) throws IOException {
-		cliente.changeWorkingDirectory(directorioFTP);
-
-		// Attempt to create the directory on the FTP server using only the folder name
-		if (cliente.makeDirectory(nombreCarpeta)) {
-			JOptionPane.showMessageDialog(null, "Se ha creado la carpeta ".concat(nombreCarpeta));
-		} else {
-			JOptionPane.showMessageDialog(null, "NO se ha creado la carpeta ".concat(nombreCarpeta));
+	public static void crearCarpeta(FTPClient cliente, String directorioFTP) throws IOException {
+		if(isCarpeta(directorioFTP, cliente)) {
+			String nombreCarpeta = JOptionPane.showInputDialog("Introduzca el nombre de la carpeta");
+			cliente.changeWorkingDirectory(directorioFTP);
+			// Attempt to create the directory on the FTP server using only the folder name
+			if (cliente.makeDirectory(nombreCarpeta)) {
+				JOptionPane.showMessageDialog(null, "Se ha creado la carpeta ".concat(nombreCarpeta));
+			} else {
+				JOptionPane.showMessageDialog(null, "NO se ha creado la carpeta ".concat(nombreCarpeta));
+			}
+		}else {
+			JOptionPane.showMessageDialog(null, "Solo puedes crear carpetas dentro de directorios");
 		}
 	}
 

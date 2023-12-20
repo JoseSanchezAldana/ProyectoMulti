@@ -25,8 +25,8 @@ private VentanaFTP vtnFtp;
 		// TODO Auto-generated method
 		
 		try {
-			String nombreCarpeta = JOptionPane.showInputDialog("Introduzca el nombre de la carpeta");
-			OperacionesFTP.crearCarpeta(cliente, vtnFtp.getRutaSeleccionada().getText(), nombreCarpeta);
+			
+			OperacionesFTP.crearCarpeta(cliente, vtnFtp.getRutaSeleccionada().getText());
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
