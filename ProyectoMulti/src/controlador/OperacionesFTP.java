@@ -31,10 +31,10 @@ public class OperacionesFTP {
 		this.vtnFtp = vtnFtp;
 		this.modelo = modelo;
 		this.cliente = cliente;
-	}
+	}	
 
 	public String seleccionarDirectorioConJFileChooser() {
-		String dir;
+		String dir="..\\Downloads";
 		JFileChooser seleccionadorDirectorio = new JFileChooser();
 
 		seleccionadorDirectorio.setDialogTitle("Guardar en...");
@@ -50,7 +50,7 @@ public class OperacionesFTP {
 		if (seleccion == JFileChooser.APPROVE_OPTION) {
 			dir = seleccionadorDirectorio.getSelectedFile().getAbsolutePath();
 		} else {
-			dir = "..\\Downloads";
+			//dir = "..\\Downloads";
 		}
 		return dir;
 	}
