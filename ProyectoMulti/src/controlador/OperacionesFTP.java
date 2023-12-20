@@ -1,6 +1,7 @@
 package controlador;
 
 import java.awt.Component;
+import java.awt.HeadlessException;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -117,7 +118,7 @@ public class OperacionesFTP {
 		return ok;
 	}
 
-	public static void borrarArchivoFTP(String ruta, FTPClient cliente) {
+	public static void borrarArchivoFTP(String ruta, FTPClient cliente) throws HeadlessException {
 
 		// String nombreArchivo = extraerNombreArchivo(ruta, cliente);
 		String nombreArchivo = obtenerNombreArchivo(ruta);
@@ -127,8 +128,8 @@ public class OperacionesFTP {
 			int seleccion = JOptionPane.showConfirmDialog(null, "¿Desea borrar el archivo " + nombreArchivo + "?");
 			if (seleccion == JOptionPane.OK_OPTION) {
 				try {
-					FTPFile archivoFTP = cliente.mlistFile(ruta);
-					if (archivoFTP.isDirectory()) {
+					//FTPFile archivoFTP = cliente.mlistFile(ruta);
+					if (isCarpeta(ruta, cliente)) {
 						FTPFile[] archivosEnDirectorio = cliente.listFiles(ruta);
 						if (archivosEnDirectorio.length == 0) {
 							if (cliente.removeDirectory(ruta)) {
@@ -139,7 +140,7 @@ public class OperacionesFTP {
 						} else {
 							JOptionPane.showMessageDialog(null,nombreArchivo + " =>Debe estar vacio para poder borrarse");
 						}
-					} else if (archivoFTP.isFile()) {
+					} else{
 						if (cliente.deleteFile(ruta)) {
 							JOptionPane.showMessageDialog(null, nombreArchivo + " =>Eliminado correctamente...");
 						}
@@ -152,6 +153,21 @@ public class OperacionesFTP {
 			}
 		}
 
+	}
+	
+	public static boolean isCarpeta(String ruta,FTPClient cliente) {
+		boolean isCarpeta = false;
+		try {
+			FTPFile archivoFTP = cliente.mlistFile(ruta);
+			if (archivoFTP.isDirectory()) {
+				isCarpeta = true;
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return isCarpeta;
 	}
 
 	private static String obtenerNombreArchivo(String rutaFTP) {
