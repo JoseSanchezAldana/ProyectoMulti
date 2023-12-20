@@ -7,16 +7,17 @@ import java.io.IOException;
 import org.apache.commons.net.ftp.FTPClient;
 
 import conexion.ConexionFTP;
+import modelo.Modelo;
 import vista.VentanaFTP;
 
 public class subirArchivoFTP implements ActionListener {
 	
-	private FTPClient cliente; 
-	private VentanaFTP vtnFtp;
+	VentanaFTP vtnFTP;
+	FTPClient cliente;
 	
-	public subirArchivoFTP(FTPClient cliente, VentanaFTP vtnFtp) {
-		this.cliente = cliente;
-		this.vtnFtp = vtnFtp;
+	public subirArchivoFTP(VentanaFTP vtnFTP, FTPClient cliente) {
+		this.vtnFTP=vtnFTP;
+		this.cliente=cliente;
 	}
 	
 
@@ -27,7 +28,8 @@ public class subirArchivoFTP implements ActionListener {
 		//cliente = ConexionFTP.getCliente();
 		
 		try {
-			OperacionesFTP.subirFichero(this.cliente, vtnFtp.getRutaSeleccionada().getText());
+			OperacionesFTP operacionesFTP = new OperacionesFTP(vtnFTP);
+			operacionesFTP.subirFichero(this.cliente, vtnFTP.getRutaSeleccionada().getText());
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

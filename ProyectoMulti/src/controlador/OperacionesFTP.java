@@ -11,18 +11,29 @@ import java.io.IOException;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 
+import conexion.ConexionFTP;
+import modelo.Modelo;
+import vista.VentanaFTP;
+
 public class OperacionesFTP {
 
-	public OperacionesFTP() {
+	VentanaFTP vtnFtp;
+	FTPClient cliente;
+	Modelo modelo;
 
+	public OperacionesFTP(VentanaFTP vtnFtp) {
+		this.vtnFtp = vtnFtp;
+		this.modelo = modelo;
+		this.cliente = cliente;
 	}
 
-	public static String seleccionarDirectorioConJFileChooser() {
+	public String seleccionarDirectorioConJFileChooser() {
 		String dir;
 		JFileChooser seleccionadorDirectorio = new JFileChooser();
 
@@ -44,8 +55,7 @@ public class OperacionesFTP {
 		return dir;
 	}
 
-	public static void descargarFichero(FTPClient cliente, String directorioFTP)
-			throws IOException {
+	public void descargarFichero(FTPClient cliente, String directorioFTP) throws IOException {
 		if (!isCarpeta(directorioFTP, cliente)) {
 			String directorioDondeGuardar = seleccionarDirectorioConJFileChooser();
 			cliente.changeWorkingDirectory(directorioFTP);
@@ -68,10 +78,11 @@ public class OperacionesFTP {
 		} else {
 			JOptionPane.showMessageDialog(null, "No se pueden descargar carpetas");
 		}
+		recargarVentana();
 	}
 
-	public static void crearCarpeta(FTPClient cliente, String directorioFTP) throws IOException {
-		if(isCarpeta(directorioFTP, cliente)) {
+	public void crearCarpeta(FTPClient cliente, String directorioFTP) throws IOException {
+		if (isCarpeta(directorioFTP, cliente)) {
 			String nombreCarpeta = JOptionPane.showInputDialog("Introduzca el nombre de la carpeta");
 			cliente.changeWorkingDirectory(directorioFTP);
 			// Attempt to create the directory on the FTP server using only the folder name
@@ -80,13 +91,14 @@ public class OperacionesFTP {
 			} else {
 				JOptionPane.showMessageDialog(null, "NO se ha creado la carpeta ".concat(nombreCarpeta));
 			}
-		}else {
+		} else {
 			JOptionPane.showMessageDialog(null, "Solo puedes crear carpetas dentro de directorios");
 		}
+		recargarVentana();
 	}
 
-	public static void subirFichero(FTPClient cliente, String directorio) throws IOException {
-		if(isCarpeta(directorio, cliente)) {
+	public void subirFichero(FTPClient cliente, String directorio) throws IOException {
+		if (isCarpeta(directorio, cliente)) {
 			File fichero;
 			FileInputStream fis = null;
 			boolean ok = false;
@@ -126,9 +138,10 @@ public class OperacionesFTP {
 		} else {
 			JOptionPane.showMessageDialog(null, "Debe de ser una carpeta");
 		}
+		recargarVentana();
 	}
 
-	public static void borrarArchivoFTP(String ruta, FTPClient cliente) throws HeadlessException {
+	public void borrarArchivoFTP(String ruta, FTPClient cliente) throws HeadlessException {
 
 		// String nombreArchivo = extraerNombreArchivo(ruta, cliente);
 		String nombreArchivo = obtenerNombreArchivo(ruta);
@@ -143,6 +156,7 @@ public class OperacionesFTP {
 						FTPFile[] archivosEnDirectorio = cliente.listFiles(ruta);
 						if (archivosEnDirectorio.length == 0) {
 							if (cliente.removeDirectory(ruta)) {
+								recargarVentana();
 								JOptionPane.showMessageDialog(null, nombreArchivo + " =>Eliminado correctamente...");
 							} else {
 								JOptionPane.showMessageDialog(null,
@@ -164,10 +178,9 @@ public class OperacionesFTP {
 				}
 			}
 		}
-
 	}
 
-	public static boolean isCarpeta(String ruta, FTPClient cliente) {
+	public boolean isCarpeta(String ruta, FTPClient cliente) {
 		boolean isCarpeta = false;
 		try {
 			FTPFile archivoFTP = cliente.mlistFile(ruta);
@@ -182,9 +195,14 @@ public class OperacionesFTP {
 		return isCarpeta;
 	}
 
-	private static String obtenerNombreArchivo(String rutaFTP) {
+	private String obtenerNombreArchivo(String rutaFTP) {
 
 		String[] segmentosRuta = rutaFTP.split("/");
 		return segmentosRuta[segmentosRuta.length - 1];
 	}
+	
+	public void recargarVentana() {
+		vtnFtp.actualizarArbol();
+	}
+
 }

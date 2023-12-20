@@ -5,20 +5,23 @@ import java.awt.event.ActionListener;
 
 import org.apache.commons.net.ftp.FTPClient;
 
+import conexion.ConexionFTP;
+import modelo.Modelo;
 import vista.VentanaFTP;
 
 public class BorrarArchivoFTP implements ActionListener {
 	VentanaFTP vtnFTP;
-	FTPClient cliente;
+	FTPClient ftpClient;
 	
-	public BorrarArchivoFTP(VentanaFTP vtnFTP, FTPClient cliente) {
+	public BorrarArchivoFTP(VentanaFTP vtnFTP, FTPClient ftpClient) {
 		this.vtnFTP=vtnFTP;
-		this.cliente=cliente;
+		this.ftpClient=ftpClient;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		OperacionesFTP.borrarArchivoFTP(vtnFTP.getRutaSeleccionada().getText(),cliente);
+		OperacionesFTP operacionesFTP = new OperacionesFTP(vtnFTP);
+		operacionesFTP.borrarArchivoFTP(vtnFTP.getRutaSeleccionada().getText(), ftpClient);
 
 	}
 

@@ -44,7 +44,7 @@ public class VentanaFTP {
 	private static DefaultTreeModel modeloTree;
 	private JTree tree;
 	private JLabel rutaSeleccionada;
-
+	private JScrollPane scroll;
 	/**
 	 * Create the application.
 	 */
@@ -145,9 +145,7 @@ public class VentanaFTP {
 		frame.getContentPane().add(rutaSeleccionada);
 	}
 
-	private JScrollPane crearRaiz(FTPClient cliente, Modelo modelo) {
-		JScrollPane scroll;
-
+	public JScrollPane crearRaiz(FTPClient cliente, Modelo modelo) {
 		root = new DefaultMutableTreeNode(modelo.getDirectorioInicial());
 		modeloTree = new DefaultTreeModel(root);
 		crear(root, cliente, modelo.getDirectorioInicial());
@@ -158,7 +156,7 @@ public class VentanaFTP {
 
 	}
 
-	private static void crear(DefaultMutableTreeNode nodo, FTPClient cliente, String directorioInicial) {
+	private void crear(DefaultMutableTreeNode nodo, FTPClient cliente, String directorioInicial) {
 		try {
 			// cambiamos de posicion el directorio
 			if (cliente.changeWorkingDirectory(directorioInicial)) {
@@ -187,6 +185,18 @@ public class VentanaFTP {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public void actualizarArbol() {
+	    DefaultMutableTreeNode root = new DefaultMutableTreeNode(modelo.getDirectorioInicial());
+	    DefaultTreeModel nuevoModelo = new DefaultTreeModel(root);
+	    crear(root, conexionFTP.getCliente(), modelo.getDirectorioInicial());
+
+	    // Actualiza el modelo del árbol
+	    tree.setModel(nuevoModelo);
+
+	    // Notifica al JTree para que vuelva a pintarse
+	    ((DefaultTreeModel) tree.getModel()).reload();
 	}
 	
 	
@@ -246,4 +256,15 @@ public class VentanaFTP {
 	public void setBtnCrearCarpeta(JButton btnCrearCarpeta) {
 		this.btnCrearCarpeta = btnCrearCarpeta;
 	}
+
+
+	public JScrollPane getScroll() {
+		return scroll;
+	}
+
+
+	public void setScroll(JScrollPane scroll) {
+		this.scroll = scroll;
+	}
+	
 }
