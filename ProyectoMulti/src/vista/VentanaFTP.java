@@ -83,7 +83,7 @@ public class VentanaFTP {
 		btnSubirArchivo.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnSubirArchivo.setBorderPainted(false);
 		btnSubirArchivo.setBackground(new Color(255, 255, 255));
-		btnSubirArchivo.setBounds(456, 86, 150, 30);
+		btnSubirArchivo.setBounds(456, 86, 200, 30);
 		frame.getContentPane().add(btnSubirArchivo);
 
 		btnDescargarArchivo = new JButton("Descargar archivo");
@@ -91,7 +91,7 @@ public class VentanaFTP {
 		btnDescargarArchivo.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnDescargarArchivo.setBorderPainted(false);
 		btnDescargarArchivo.setBackground(Color.WHITE);
-		btnDescargarArchivo.setBounds(456, 155, 150, 30);
+		btnDescargarArchivo.setBounds(456, 155, 200, 30);
 		frame.getContentPane().add(btnDescargarArchivo);
 
 		btnSalir = new JButton("Salir");
@@ -103,15 +103,15 @@ public class VentanaFTP {
 		btnSalir.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnSalir.setBorderPainted(false);
 		btnSalir.setBackground(Color.WHITE);
-		btnSalir.setBounds(456, 354, 150, 30);
+		btnSalir.setBounds(456, 354, 200, 30);
 		frame.getContentPane().add(btnSalir);
 
-		btnBorrarCarpeta = new JButton("Borrar carpeta");
+		btnBorrarCarpeta = new JButton("Borrar archivo");
 		btnBorrarCarpeta.setForeground(new Color(0, 64, 128));
 		btnBorrarCarpeta.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnBorrarCarpeta.setBorderPainted(false);
 		btnBorrarCarpeta.setBackground(Color.WHITE);
-		btnBorrarCarpeta.setBounds(456, 287, 150, 30);
+		btnBorrarCarpeta.setBounds(456, 287, 200, 30);
 		frame.getContentPane().add(btnBorrarCarpeta);
 
 		btnCrearCarpeta = new JButton("Crear carpeta");
@@ -123,7 +123,7 @@ public class VentanaFTP {
 		btnCrearCarpeta.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnCrearCarpeta.setBorderPainted(false);
 		btnCrearCarpeta.setBackground(Color.WHITE);
-		btnCrearCarpeta.setBounds(456, 220, 150, 30);
+		btnCrearCarpeta.setBounds(456, 220, 200, 30);
 		frame.getContentPane().add(btnCrearCarpeta);
 
 		JLabel lblNewLabel_2 = new JLabel("Carpeta seleccionada: ");
