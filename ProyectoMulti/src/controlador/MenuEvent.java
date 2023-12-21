@@ -46,6 +46,8 @@ public class MenuEvent implements ActionListener {
 		}else if(e.getSource() == menu.getBtnSalir()) {
 			menu.frame.dispose();
 			login.frame.setVisible(true);
+			login.getTxtrUsuario().setText("");
+			login.getPasswordField().setText("");
 		}
 	}
 	

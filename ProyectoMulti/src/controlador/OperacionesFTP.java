@@ -55,24 +55,30 @@ public class OperacionesFTP {
 		if (!isCarpeta(directorioFTP, cliente)) {
 			String directorioDondeGuardar = seleccionarDirectorioConJFileChooser();
 			cliente.changeWorkingDirectory(directorioFTP);
+			cliente.enterLocalPassiveMode();
 
 			String nombreArchivo = new File(directorioFTP).getName();
 
 			String localFilePath = directorioDondeGuardar + File.separator + nombreArchivo;
+			cliente.setFileType(FTP.BINARY_FILE_TYPE);
 
 			try (BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(localFilePath))) {
 
-				if (!cliente.retrieveFile(nombreArchivo, out)) {
+				if (cliente.retrieveFile(directorioFTP, out)) {
 					JOptionPane.showMessageDialog(null, "Se ha descargado correctamente");
+					
 				} else {
 					JOptionPane.showMessageDialog(null, "No se ha descargado correctamente");
 				}
+				out.close();
 			} catch (IOException e) {
 				
 			}
+			
 		} else {
 			JOptionPane.showMessageDialog(null, "No se pueden descargar carpetas");
 		}
+	
 		recargarVentana();
 	}
 
@@ -117,6 +123,7 @@ public class OperacionesFTP {
 				cliente.setFileType(FTP.BINARY_FILE_TYPE);
 
 				String cadenaSalida;
+
 				cliente.changeWorkingDirectory(directorio);
 				System.out.println(fichero.getName());
 				if (cliente.storeFile(fichero.getName(), fis)) {
