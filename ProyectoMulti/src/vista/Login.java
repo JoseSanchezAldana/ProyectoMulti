@@ -21,6 +21,7 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.border.CompoundBorder;
+import java.awt.Cursor;
 
 public class Login {
 
@@ -63,6 +64,7 @@ public class Login {
 		frame.getContentPane().add(txtrUsuario);
 		
 		btnLogin = new JButton("Login");
+		btnLogin.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnLogin.setHorizontalAlignment(SwingConstants.LEFT);
 		btnLogin.setIcon(new ImageIcon(Login.class.getResource("/img/login.png")));
 		btnLogin.setBorderPainted(false);
@@ -90,6 +92,7 @@ public class Login {
 		frame.getContentPane().add(lblNewLabel_2);
 		
 		passwordField = new JPasswordField();
+		passwordField.setCursor(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
 		passwordField.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		passwordField.setForeground(new Color(255, 255, 255));
 		passwordField.setOpaque(false);
@@ -100,6 +103,7 @@ public class Login {
 		frame.getContentPane().add(passwordField);
 		
 		btnSalir = new JButton("Salir");
+		btnSalir.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnSalir.setHorizontalAlignment(SwingConstants.LEFT);
 		btnSalir.setIcon(new ImageIcon(Login.class.getResource("/img/salida32.png")));
 		btnSalir.setBorderPainted(false);

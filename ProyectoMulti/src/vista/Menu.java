@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
+import java.awt.Cursor;
 
 public class Menu {
 
@@ -52,6 +53,7 @@ public class Menu {
 		frame.getContentPane().add(lblNewLabel);
 		
 		btnFTP = new JButton("Servidor FTP");
+		btnFTP.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnFTP.setHorizontalAlignment(SwingConstants.LEFT);
 		btnFTP.setFocusPainted(false);
 		btnFTP.setIcon(new ImageIcon(Menu.class.getResource("/img/iconftp.png")));
@@ -65,6 +67,7 @@ public class Menu {
 		frame.getContentPane().add(btnFTP);
 		
 		btnCorreoElectronico = new JButton("Correo electronico");
+		btnCorreoElectronico.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnCorreoElectronico.setHorizontalAlignment(SwingConstants.LEFT);
 		btnCorreoElectronico.setIcon(new ImageIcon(Menu.class.getResource("/img/iconemail.png")));
 		btnCorreoElectronico.setBackground(new Color(0, 64, 128));
@@ -77,6 +80,7 @@ public class Menu {
 		frame.getContentPane().add(btnCorreoElectronico);
 		
 		btnSalir = new JButton("Salir");
+		btnSalir.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnSalir.setHorizontalAlignment(SwingConstants.LEFT);
 		btnSalir.setIcon(new ImageIcon(Menu.class.getResource("/img/iconSalir.png")));
 		btnSalir.setBackground(new Color(0, 64, 128));

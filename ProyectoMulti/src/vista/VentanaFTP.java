@@ -32,6 +32,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import java.awt.Toolkit;
+import java.awt.Cursor;
 
 public class VentanaFTP {
 
@@ -88,6 +89,7 @@ public class VentanaFTP {
 		frame.getContentPane().add(lblNewLabel_1);
 
 		btnSubirArchivo = new JButton("Subir archivo");
+		btnSubirArchivo.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnSubirArchivo.setHorizontalAlignment(SwingConstants.LEFT);
 		//btnSubirArchivo.setIcon(new ImageIcon("C:\\Users\\FX506\\git\\repository2\\ProyectoMulti\\src\\img\\enviar.png"));
 		btnSubirArchivo.setForeground(new Color(255, 255, 255));
@@ -102,6 +104,7 @@ public class VentanaFTP {
 		frame.getContentPane().add(btnSubirArchivo);
 
 		btnDescargarArchivo = new JButton("Descargar archivo");
+		btnDescargarArchivo.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnDescargarArchivo.setHorizontalAlignment(SwingConstants.LEFT);
 		btnDescargarArchivo.setIcon(new ImageIcon(VentanaFTP.class.getResource("/img/descargar.png")));
 		btnDescargarArchivo.setForeground(new Color(255, 255, 255));
@@ -115,6 +118,7 @@ public class VentanaFTP {
 		frame.getContentPane().add(btnDescargarArchivo);
 
 		btnSalir = new JButton("Salir");
+		btnSalir.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnSalir.setHorizontalAlignment(SwingConstants.LEFT);
 		btnSalir.setIcon(new ImageIcon(VentanaFTP.class.getResource("/img/salida32.png")));
 		btnSalir.setFocusPainted(false);
@@ -132,6 +136,7 @@ public class VentanaFTP {
 		frame.getContentPane().add(btnSalir);
 
 		btnBorrarCarpeta = new JButton("Borrar archivo");
+		btnBorrarCarpeta.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnBorrarCarpeta.setIcon(new ImageIcon(VentanaFTP.class.getResource("/img/basura.png")));
 		btnBorrarCarpeta.setHorizontalAlignment(SwingConstants.LEFT);
 		btnBorrarCarpeta.setForeground(new Color(255, 255, 255));
@@ -145,6 +150,7 @@ public class VentanaFTP {
 		frame.getContentPane().add(btnBorrarCarpeta);
 
 		btnCrearCarpeta = new JButton("Crear carpeta");
+		btnCrearCarpeta.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnCrearCarpeta.setHorizontalAlignment(SwingConstants.LEFT);
 		btnCrearCarpeta.setIcon(new ImageIcon(VentanaFTP.class.getResource("/img/agregar-carpeta.png")));
 		btnCrearCarpeta.addActionListener(new ActionListener() {
