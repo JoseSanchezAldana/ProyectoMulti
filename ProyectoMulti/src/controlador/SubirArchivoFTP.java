@@ -23,9 +23,7 @@ public class SubirArchivoFTP implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
-		//cliente = ConexionFTP.getCliente();
+
 		
 		try {
 			OperacionesFTP operacionesFTP = new OperacionesFTP(vtnFTP);

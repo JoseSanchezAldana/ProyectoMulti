@@ -6,6 +6,8 @@ import javax.swing.JFrame;
 import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.Font;
+import java.awt.Toolkit;
+
 import javax.swing.JTextPane;
 import javax.swing.border.CompoundBorder;
 import javax.swing.JLabel;
@@ -30,6 +32,7 @@ public class Menu {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(VentanaFTP.class.getResource("/img/logoProyecto.png")));
 		frame.getContentPane().setBackground(new Color(0, 64, 128));
 		frame.setBackground(new Color(0, 64, 128));
 		frame.setBounds(100, 100, 500, 500);
@@ -45,7 +48,7 @@ public class Menu {
 		
 		btnFTP = new JButton("Servidor FTP");
 		btnFTP.setFocusPainted(false);
-		btnFTP.setIcon(new ImageIcon(getClass().getResource("/img/iconFTP.png")));
+		btnFTP.setIcon(new ImageIcon(Menu.class.getResource("/img/iconftp.png")));
 		btnFTP.setBackground(new Color(0, 64, 128));
 		btnFTP.setBorderPainted(false);
 		btnFTP.setFont(new Font("Tahoma", Font.BOLD, 24));
@@ -56,7 +59,7 @@ public class Menu {
 		frame.getContentPane().add(btnFTP);
 		
 		btnCorreoElectronico = new JButton("Correo electronico");
-		btnCorreoElectronico.setIcon(new ImageIcon(getClass().getResource("/img/iconEmail.png")));
+		btnCorreoElectronico.setIcon(new ImageIcon(Menu.class.getResource("/img/iconemail.png")));
 		btnCorreoElectronico.setBackground(new Color(0, 64, 128));
 		btnCorreoElectronico.setForeground(new Color(255, 255, 255));
 		btnCorreoElectronico.setFont(new Font("Tahoma", Font.BOLD, 24));
@@ -67,7 +70,7 @@ public class Menu {
 		frame.getContentPane().add(btnCorreoElectronico);
 		
 		btnSalir = new JButton("Salir");
-		btnSalir.setIcon(new ImageIcon(getClass().getResource("/img/iconSalir.png")));
+		btnSalir.setIcon(new ImageIcon(Menu.class.getResource("/img/iconSalir.png")));
 		btnSalir.setBackground(new Color(0, 64, 128));
 		btnSalir.setForeground(new Color(255, 255, 255));
 		btnSalir.setFont(new Font("Tahoma", Font.BOLD, 24));

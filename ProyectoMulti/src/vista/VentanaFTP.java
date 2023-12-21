@@ -23,12 +23,15 @@ import javax.swing.JPanel;
 import java.awt.Font;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.awt.event.ActionEvent;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.SwingConstants;
+import java.awt.Toolkit;
 
 public class VentanaFTP {
 
@@ -60,6 +63,7 @@ public class VentanaFTP {
 	 */
 	private void initialize(ConexionFTP conexionFTP, Modelo modelo) {
 		frame = new JFrame();
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(VentanaFTP.class.getResource("/img/logoProyecto.png")));
 		frame.getContentPane().setBackground(new Color(0, 64, 128));
 		frame.setBounds(100, 100, 800, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -67,69 +71,83 @@ public class VentanaFTP {
 		frame.getContentPane().setLayout(null);
 
 		JLabel lblNewLabel = new JLabel("Ip server: " + modelo.getServFTP());
+		lblNewLabel.setIcon(new ImageIcon(VentanaFTP.class.getResource("/img/ip.png")));
 		lblNewLabel.setForeground(new Color(255, 255, 255));
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblNewLabel.setBounds(86, 38, 287, 29);
+		lblNewLabel.setBounds(72, 38, 287, 29);
 		frame.getContentPane().add(lblNewLabel);
 
 		JLabel lblNewLabel_1 = new JLabel("Usuario: " + modelo.getUsuario());
+		lblNewLabel_1.setIcon(new ImageIcon(VentanaFTP.class.getResource("/img/usuario.png")));
 		lblNewLabel_1.setForeground(new Color(255, 255, 255));
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblNewLabel_1.setBounds(456, 43, 250, 19);
+		lblNewLabel_1.setBounds(456, 28, 250, 39);
 		frame.getContentPane().add(lblNewLabel_1);
 
 		btnSubirArchivo = new JButton("Subir archivo");
-		btnSubirArchivo.setForeground(new Color(0, 64, 128));
+		btnSubirArchivo.setHorizontalAlignment(SwingConstants.LEFT);
+		//btnSubirArchivo.setIcon(new ImageIcon("C:\\Users\\FX506\\git\\repository2\\ProyectoMulti\\src\\img\\enviar.png"));
+		btnSubirArchivo.setForeground(new Color(255, 255, 255));
 		btnSubirArchivo.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnSubirArchivo.setBorderPainted(false);
-		btnSubirArchivo.setBackground(new Color(255, 255, 255));
-		btnSubirArchivo.setBounds(456, 86, 200, 30);
+		btnSubirArchivo.setBackground(new Color(0, 64, 128));
+		btnSubirArchivo.setBounds(456, 93, 200, 30);
+		btnSubirArchivo.setIcon(new ImageIcon(VentanaFTP.class.getResource("/img/enviar.png")));
 		frame.getContentPane().add(btnSubirArchivo);
 
 		btnDescargarArchivo = new JButton("Descargar archivo");
-		btnDescargarArchivo.setForeground(new Color(0, 64, 128));
+		btnDescargarArchivo.setHorizontalAlignment(SwingConstants.LEFT);
+		btnDescargarArchivo.setIcon(new ImageIcon(VentanaFTP.class.getResource("/img/descargar.png")));
+		btnDescargarArchivo.setForeground(new Color(255, 255, 255));
 		btnDescargarArchivo.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnDescargarArchivo.setBorderPainted(false);
-		btnDescargarArchivo.setBackground(Color.WHITE);
-		btnDescargarArchivo.setBounds(456, 155, 200, 30);
+		btnDescargarArchivo.setBackground(new Color(0, 64, 128));
+		btnDescargarArchivo.setBounds(456, 150, 200, 30);
 		frame.getContentPane().add(btnDescargarArchivo);
 
 		btnSalir = new JButton("Salir");
+		btnSalir.setHorizontalAlignment(SwingConstants.LEFT);
+		btnSalir.setIcon(new ImageIcon(VentanaFTP.class.getResource("/img/salida32.png")));
 		btnSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnSalir.setForeground(new Color(0, 64, 128));
+		btnSalir.setForeground(new Color(255, 255, 255));
 		btnSalir.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnSalir.setBorderPainted(false);
-		btnSalir.setBackground(Color.WHITE);
+		btnSalir.setBackground(new Color(0, 64, 128));
 		btnSalir.setBounds(456, 354, 200, 30);
 		frame.getContentPane().add(btnSalir);
 
 		btnBorrarCarpeta = new JButton("Borrar archivo");
-		btnBorrarCarpeta.setForeground(new Color(0, 64, 128));
+		btnBorrarCarpeta.setIcon(new ImageIcon(VentanaFTP.class.getResource("/img/basura.png")));
+		btnBorrarCarpeta.setHorizontalAlignment(SwingConstants.LEFT);
+		btnBorrarCarpeta.setForeground(new Color(255, 255, 255));
 		btnBorrarCarpeta.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnBorrarCarpeta.setBorderPainted(false);
-		btnBorrarCarpeta.setBackground(Color.WHITE);
+		btnBorrarCarpeta.setBackground(new Color(0, 64, 128));
 		btnBorrarCarpeta.setBounds(456, 287, 200, 30);
 		frame.getContentPane().add(btnBorrarCarpeta);
 
 		btnCrearCarpeta = new JButton("Crear carpeta");
+		btnCrearCarpeta.setHorizontalAlignment(SwingConstants.LEFT);
+		btnCrearCarpeta.setIcon(new ImageIcon(VentanaFTP.class.getResource("/img/agregar-carpeta.png")));
 		btnCrearCarpeta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnCrearCarpeta.setForeground(new Color(0, 64, 128));
+		btnCrearCarpeta.setForeground(new Color(255, 255, 255));
 		btnCrearCarpeta.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnCrearCarpeta.setBorderPainted(false);
-		btnCrearCarpeta.setBackground(Color.WHITE);
+		btnCrearCarpeta.setBackground(new Color(0, 64, 128));
 		btnCrearCarpeta.setBounds(456, 220, 200, 30);
 		frame.getContentPane().add(btnCrearCarpeta);
 
 		JLabel lblNewLabel_2 = new JLabel("Carpeta seleccionada: ");
+		lblNewLabel_2.setIcon(new ImageIcon(VentanaFTP.class.getResource("/img/carpeta.png")));
 		lblNewLabel_2.setForeground(new Color(255, 255, 255));
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblNewLabel_2.setBounds(86, 469, 527, 19);
+		lblNewLabel_2.setBounds(72, 469, 527, 19);
 		frame.getContentPane().add(lblNewLabel_2);
 
 		JScrollPane scrollPane = crearRaiz(conexionFTP.getCliente(), modelo);
