@@ -42,6 +42,8 @@ public class MenuEvent implements ActionListener {
 		} else if(e.getSource() == menu.getBtnCorreoElectronico()){
 			VentanaEmail vtnEmail = new VentanaEmail();
 			vtnEmail.frame.setVisible(true);
+			vtnEmail.getBtnRedactar().addActionListener(new EnviaMailEvent(vtnEmail));
+			vtnEmail.getBtnSalir().addActionListener(new SalirEmail(vtnEmail, menu));
 			menu.frame.dispose();
 		}else if(e.getSource() == menu.getBtnSalir()) {
 			menu.frame.dispose();

@@ -123,10 +123,6 @@ public class VentanaFTP {
 		btnSalir.setIcon(new ImageIcon(VentanaFTP.class.getResource("/img/salida32.png")));
 		btnSalir.setFocusPainted(false);
 		btnSalir.setContentAreaFilled(false);
-		btnSalir.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		btnSalir.setForeground(new Color(255, 255, 255));
 		btnSalir.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnSalir.setBorderPainted(false);
@@ -188,14 +184,10 @@ public class VentanaFTP {
 		// Create a JLabel with the background image
         JLabel backgroundLabel = 	new JLabel(new ImageIcon(VentanaFTP.class.getResource("/img/fondo.jpg")));
         backgroundLabel.setBounds(-14, -17, 700, 500);
-        
-        
-                // Add the background label to the content pane
-                frame.getContentPane().add(backgroundLabel);
-                
-                JPanel panel = new JPanel();
-                panel.setBounds(44, 28, 10, 10);
-                panel_1.add(panel);
+        frame.getContentPane().add(backgroundLabel);
+        JPanel panel = new JPanel();
+        panel.setBounds(44, 28, 10, 10);
+        panel_1.add(panel);
 	}
 
 	public JScrollPane crearRaiz(FTPClient cliente, Modelo modelo) {
