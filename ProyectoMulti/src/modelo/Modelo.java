@@ -13,8 +13,15 @@ public class Modelo {
 	private String usuarioFTP = null;
 	private String passwordFTP = null;
 	private final String directorioInicial = "/";
+	private String passwordMail = null;
 	
 	
+	public String getPasswordMail() {
+		return passwordMail;
+	}
+	public void setPasswordMail(String passwordMail) {
+		this.passwordMail = passwordMail;
+	}
 	public String getDireccionBd() {
 		return direccionBd;
 	}

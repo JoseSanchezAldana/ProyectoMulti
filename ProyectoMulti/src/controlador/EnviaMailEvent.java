@@ -24,7 +24,7 @@ public class EnviaMailEvent implements ActionListener {
 		vtnRedactarMail.frame.setVisible(true);
 		vtnEmail.frame.dispose();
 		vtnRedactarMail.getBtnSalir().addActionListener(new SalirRedactarMailEvent(vtnRedactarMail, vtnEmail));
-		vtnRedactarMail.getBtnEnviar().addActionListener(new EnviarCorreo(vtnRedactarMail, modelo));
+		vtnRedactarMail.getBtnEnviar().addActionListener(new EnviarCorreo(vtnRedactarMail, vtnEmail, modelo));
 	}
 
 }

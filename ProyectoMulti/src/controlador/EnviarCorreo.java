@@ -9,18 +9,24 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 
 import modelo.Modelo;
+import vista.VentanaEmail;
 import vista.VentanaRedactarMail;
 
 public  class EnviarCorreo  implements ActionListener{
 	
-	private VentanaRedactarMail vtnMail;
+	private VentanaRedactarMail vtnRedactarMail;
 	private Modelo model;
+	private VentanaEmail vtnEmail;
 	
-	public EnviarCorreo(VentanaRedactarMail vtnMail, Modelo model){
-		this.vtnMail = vtnMail;
-		this.model = model;
+
+	public EnviarCorreo(VentanaRedactarMail vtnRedactarMail, VentanaEmail vtnEmail, Modelo modelo) {
+		this.model = modelo;
+		this.vtnEmail = vtnEmail;
+		this.vtnRedactarMail =vtnRedactarMail;
 	}
 
 	public void EnviarEmail(String SMTP_USERNAME, String SMTP_PASSWORD, String FROM, String FROMNAME, String TO,
@@ -70,8 +76,14 @@ public  class EnviarCorreo  implements ActionListener{
 			transport.connect(HOST, SMTP_USERNAME, SMTP_PASSWORD);
 			transport.sendMessage(msg, msg.getAllRecipients());
 			System.out.println("Mensaje enviado");
+			JOptionPane.showMessageDialog(null, "Mensaje enviado correctamente", "ENVIADO", JOptionPane.INFORMATION_MESSAGE);
+			vtnRedactarMail.frame.dispose();
+			vtnEmail.frame.setVisible(true);
+			
 		} catch (Exception ex) {
+			
 			System.out.println("El mensaje no se ha podido enviar.");
+			JOptionPane.showMessageDialog(null, "Error al enviar el mensaje", "ERROR", JOptionPane.INFORMATION_MESSAGE);
 
 		} finally {
 			transport.close();
@@ -82,21 +94,19 @@ public  class EnviarCorreo  implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		try {
 			
-			String CC = vtnMail.getTxtCC().getText();
-			
 			this.EnviarEmail(
 					this.model.getUsuario(),
-					"Multi123",
+					LoginEvent.decrypt(model.getPasword(), "afghklkhghkln"),
 					this.model.getUsuario(),
 					this.model.getUsuario(), //AQUI VA EL NOMBRE DEL USUARIO - NO EL CORREO -
-					vtnMail.getTxtPara().getText(),
-					CC,
-					vtnMail.getTxtCCO().getText(),
+					vtnRedactarMail.getTxtPara().getText(),
+					vtnRedactarMail.getTxtCC().getText(),
+					vtnRedactarMail.getTxtCCO().getText(),
 					"ConfigSet",
 					"smtp.gmail.com",
 					587,
-					vtnMail.getTxtAsunto().getText(),
-					vtnMail.getTxtMensaje().getText()
+					vtnRedactarMail.getTxtAsunto().getText(),
+					vtnRedactarMail.getTxtMensaje().getText()
 			);
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block

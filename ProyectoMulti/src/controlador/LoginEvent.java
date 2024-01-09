@@ -53,7 +53,7 @@ public class LoginEvent implements ActionListener {
             try {
             	String encryptedText = encrypt(login.getPasswordField().getText(), "afghklkhghkln");
                 System.out.println("Texto cifrado: " + encryptedText);
-                System.out.println("Texto descifrado" + decrypt(encryptedText, "afghklkhghkln"));
+                System.out.println("Texto descifrado" + decrypt(login.getPasswordField().getText(), "afghklkhghkln"));
 
                 if (modelo.getUsuario().equals(login.getTxtrUsuario().getText()) && modelo.getPasword().equals(encryptedText)) {
                 	login.frame.dispose();
@@ -92,10 +92,17 @@ public class LoginEvent implements ActionListener {
     }
 
 
-    public static String decrypt(String ciphertext, String key) {
-        byte[] decodedBytes = Base64.getDecoder().decode(ciphertext);
-        String decodedText = new String(decodedBytes);
+    public static String decrypt(String encryptedText, String key) {
+        byte[] decodedBytes = Base64.getDecoder().decode(encryptedText);
+        StringBuilder decryptedText = new StringBuilder();
 
-        return encrypt(decodedText, key);
+        for (int i = 0; i < decodedBytes.length; i++) {
+            char encryptedChar = (char) decodedBytes[i];
+            char keyChar = key.charAt(i % key.length());
+            char decryptedChar = (char) (encryptedChar ^ keyChar);
+            decryptedText.append(decryptedChar);
+        }
+
+        return decryptedText.toString();
     }
 }
