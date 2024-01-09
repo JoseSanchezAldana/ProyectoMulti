@@ -13,6 +13,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
+
+import modelo.Modelo;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -25,11 +28,14 @@ public class VentanaRedactarMail {
 	private JTextArea txtCC;
 	private JTextArea txtCCO;
 	private JTextArea txtAsunto;
+	private JTextArea txtMensaje;
+	private Modelo model;
 
 	/**
 	 * Create the application.
 	 */
-	public VentanaRedactarMail() {
+	public VentanaRedactarMail(Modelo model) {
+		this.model = model;
 		initialize();
 	}
 
@@ -37,7 +43,7 @@ public class VentanaRedactarMail {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
+		frame = new JFrame("Enviar correo desde: "+ model.getUsuario());
 		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(VentanaFTP.class.getResource("/img/logoProyecto.png")));
 		frame.getContentPane().setBackground(new Color(0, 64, 128));
 		frame.setBounds(100, 100, 700, 500);
@@ -99,7 +105,7 @@ public class VentanaRedactarMail {
 		txtCCO.setBounds(118, 159, 492, 30);
 		panel_1.add(txtCCO);
 		
-		JTextArea txtMensaje = new JTextArea();
+		txtMensaje = new JTextArea();
 		txtMensaje.setWrapStyleWord(true);
 		txtMensaje.setToolTipText("");
 		txtMensaje.setOpaque(false);
@@ -170,12 +176,12 @@ public class VentanaRedactarMail {
 		this.frame = frame;
 	}
 
-	public JTextArea getTxtDe() {
+	public JTextArea getTxtPara() {
 		return txtPara;
 	}
 
-	public void setTxtDe(JTextArea txtDe) {
-		this.txtPara = txtDe;
+	public void setTxtPara(JTextArea txtPara) {
+		this.txtPara = txtPara;
 	}
 
 	public JButton getBtnEnviar() {
@@ -216,5 +222,9 @@ public class VentanaRedactarMail {
 
 	public void setTxtAsunto(JTextArea txtAsunto) {
 		this.txtAsunto = txtAsunto;
+	}
+	
+	public JTextArea getTxtMensaje() {
+		return txtMensaje;
 	}
 }

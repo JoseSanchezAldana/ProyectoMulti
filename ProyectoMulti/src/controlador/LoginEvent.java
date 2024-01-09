@@ -53,6 +53,7 @@ public class LoginEvent implements ActionListener {
             try {
             	String encryptedText = encrypt(login.getPasswordField().getText(), "afghklkhghkln");
                 System.out.println("Texto cifrado: " + encryptedText);
+                System.out.println("Texto descifrado" + decrypt(encryptedText, "afghklkhghkln"));
 
                 if (modelo.getUsuario().equals(login.getTxtrUsuario().getText()) && modelo.getPasword().equals(encryptedText)) {
                 	login.frame.dispose();
