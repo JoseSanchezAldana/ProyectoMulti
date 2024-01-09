@@ -34,7 +34,7 @@ public class Menu {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
+		frame = new JFrame("Sesión iniciada con: ");
 		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(VentanaFTP.class.getResource("/img/logoProyecto.png")));
 		frame.getContentPane().setBackground(new Color(0, 64, 128));
 		frame.setBackground(new Color(0, 64, 128));

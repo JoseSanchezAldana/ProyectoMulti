@@ -16,16 +16,21 @@ import java.awt.Cursor;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+import modelo.Modelo;
+
 public class VentanaEmail {
 
 	public JFrame frame;
 	private JButton btnSalir;
 	private JButton btnRedactar;
+	private Modelo model;
 
 	/**
 	 * Create the application.
 	 */
-	public VentanaEmail() {
+	public VentanaEmail(Modelo model) {
+		
+		this.model = model;
 		initialize();
 	}
 
@@ -33,7 +38,7 @@ public class VentanaEmail {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
+		frame = new JFrame("Sesión iniciada con: "+ model.getUsuario());
 		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(VentanaFTP.class.getResource("/img/logoProyecto.png")));
 		frame.getContentPane().setBackground(new Color(0, 64, 128));
 		frame.setBounds(100, 100, 700, 500);

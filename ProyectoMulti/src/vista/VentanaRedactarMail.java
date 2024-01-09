@@ -19,7 +19,7 @@ import java.awt.event.ActionEvent;
 public class VentanaRedactarMail {
 
 	public JFrame frame;
-	private JTextArea txtDe;
+	private JTextArea txtPara;
 	private JButton btnEnviar;
 	private JButton btnSalir;
 	private JTextArea txtCC;
@@ -48,22 +48,22 @@ public class VentanaRedactarMail {
 		JPanel panel_1 = new JPanel(null);
 		frame.setContentPane(panel_1);
 		
-		JLabel labelDe = new JLabel("De:");
-		labelDe.setForeground(new Color(255, 255, 255));
-		labelDe.setFont(new Font("Tahoma", Font.BOLD, 15));
-		labelDe.setBounds(72, 51, 39, 40);
-		frame.getContentPane().add(labelDe);
+		JLabel labelPara = new JLabel("Para:");
+		labelPara.setForeground(new Color(255, 255, 255));
+		labelPara.setFont(new Font("Tahoma", Font.BOLD, 15));
+		labelPara.setBounds(72, 51, 39, 40);
+		frame.getContentPane().add(labelPara);
 		
-		txtDe = new JTextArea();
-		txtDe.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		txtDe.setForeground(new Color(255, 255, 255));
-		txtDe.setOpaque(false);
-		txtDe.setFont(new Font("Monospaced", Font.BOLD, 15));
-		txtDe.setBackground(new Color(255, 255, 255));
-		txtDe.setToolTipText("");
-		txtDe.setWrapStyleWord(true);
-		txtDe.setBounds(115, 59, 495, 30);
-		frame.getContentPane().add(txtDe);
+		txtPara = new JTextArea();
+		txtPara.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		txtPara.setForeground(new Color(255, 255, 255));
+		txtPara.setOpaque(false);
+		txtPara.setFont(new Font("Monospaced", Font.BOLD, 15));
+		txtPara.setBackground(new Color(255, 255, 255));
+		txtPara.setToolTipText("");
+		txtPara.setWrapStyleWord(true);
+		txtPara.setBounds(115, 59, 495, 30);
+		frame.getContentPane().add(txtPara);
 		
 		JLabel labelCC = new JLabel("CC:");
 		labelCC.setForeground(Color.WHITE);
@@ -171,11 +171,11 @@ public class VentanaRedactarMail {
 	}
 
 	public JTextArea getTxtDe() {
-		return txtDe;
+		return txtPara;
 	}
 
 	public void setTxtDe(JTextArea txtDe) {
-		this.txtDe = txtDe;
+		this.txtPara = txtDe;
 	}
 
 	public JButton getBtnEnviar() {

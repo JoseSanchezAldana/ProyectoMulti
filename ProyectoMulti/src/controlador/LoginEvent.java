@@ -62,6 +62,7 @@ public class LoginEvent implements ActionListener {
                     menu.getBtnCorreoElectronico().addActionListener(mEvent);
                     menu.getBtnFTP().addActionListener(mEvent);
                     menu.getBtnSalir().addActionListener(mEvent);
+                    menu.frame.setTitle("Sesión iniciada con: "+ modelo.getUsuario());
                     
                 } else {
                 	 JOptionPane.showMessageDialog(null, "USUARIO O CONTRASEÑA INCORRECTO", "ERROR", JOptionPane.INFORMATION_MESSAGE);

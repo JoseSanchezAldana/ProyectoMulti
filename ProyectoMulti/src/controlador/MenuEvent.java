@@ -40,7 +40,7 @@ public class MenuEvent implements ActionListener {
 				vtnFtp.getBtnSubirArchivo().addActionListener(new SubirArchivoFTP(vtnFtp, conexionFTP.getCliente()));
 			}
 		} else if(e.getSource() == menu.getBtnCorreoElectronico()){
-			VentanaEmail vtnEmail = new VentanaEmail();
+			VentanaEmail vtnEmail = new VentanaEmail(this.modelo);
 			vtnEmail.frame.setVisible(true);
 			vtnEmail.getBtnRedactar().addActionListener(new EnviaMailEvent(vtnEmail));
 			vtnEmail.getBtnSalir().addActionListener(new SalirEmail(vtnEmail, menu));
