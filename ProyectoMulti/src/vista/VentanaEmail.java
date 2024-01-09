@@ -17,6 +17,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import modelo.Modelo;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 
 public class VentanaEmail {
 
@@ -63,10 +65,6 @@ public class VentanaEmail {
 		btnSalir.setOpaque(false);
 		frame.getContentPane().add(btnSalir);
 		
-		JPanel panelBandeja = new JPanel();
-		panelBandeja.setBounds(307, 58, 345, 373);
-		panel_1.add(panelBandeja);
-		
 		btnRedactar = new JButton("Redactar");
 		btnRedactar.setIcon(new ImageIcon(VentanaEmail.class.getResource("/img/lapiz.png")));
 		btnRedactar.setOpaque(false);
@@ -79,6 +77,10 @@ public class VentanaEmail {
 		btnRedactar.setBackground(new Color(0, 64, 128));
 		btnRedactar.setBounds(44, 86, 200, 30);
 		panel_1.add(btnRedactar);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(281, 86, 354, 320);
+		panel_1.add(scrollPane);
 		
 		JLabel backgroundLabel = new JLabel(new ImageIcon(VentanaFTP.class.getResource("/img/fondo.jpg")));
 		backgroundLabel.setBounds(-14, -17, 700, 500);
