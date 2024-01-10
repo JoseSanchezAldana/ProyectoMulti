@@ -3,25 +3,24 @@ package modelo;
 public class Modelo {
 	
 	//Datos conexion base de datos
-	
 	private String direccionBd = "jdbc:mysql://localhost/localproyecto";
 	private String usuarioBd = "root";
 	private String passwordBd = "";
+	
+	//Datos conexion mail
+	private String CONFIGSET = "ConfigSet";
+	private String HOST = "smtp.gmail.com";
+	private int PORT = 587;
+	
+	//Key de encriptacion
+	private String key = "afghklkhghkln";
 	
 	//Datos conexion FTP
 	private String servFTP ="127.0.0.1";
 	private String usuarioFTP = null;
 	private String passwordFTP = null;
 	private final String directorioInicial = "/";
-	private String passwordMail = null;
-	
-	
-	public String getPasswordMail() {
-		return passwordMail;
-	}
-	public void setPasswordMail(String passwordMail) {
-		this.passwordMail = passwordMail;
-	}
+
 	public String getDireccionBd() {
 		return direccionBd;
 	}
@@ -60,6 +59,18 @@ public class Modelo {
 	}
 	public String getDirectorioInicial() {
 		return directorioInicial;
+	}
+	public String getCONFIGSET() {
+		return CONFIGSET;
+	}
+	public String getHOST() {
+		return HOST;
+	}
+	public int getPORT() {
+		return PORT;
+	}
+	public String getKey() {
+		return key;
 	}
 	
 	

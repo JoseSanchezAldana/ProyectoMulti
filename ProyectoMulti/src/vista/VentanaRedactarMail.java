@@ -1,6 +1,7 @@
 package vista;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Toolkit;
@@ -134,6 +135,7 @@ public class VentanaRedactarMail {
 		panel_1.add(txtAsunto);
 		
 		btnEnviar = new JButton("Enviar");
+		btnEnviar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnEnviar.setIcon(new ImageIcon(VentanaRedactarMail.class.getResource("/img/enviarMail.png")));
 		btnEnviar.setOpaque(false);
 		btnEnviar.setHorizontalAlignment(SwingConstants.LEFT);
@@ -147,6 +149,7 @@ public class VentanaRedactarMail {
 		panel_1.add(btnEnviar);
 		
 		btnSalir = new JButton("Salir");
+		btnSalir.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnSalir.setIcon(new ImageIcon(VentanaRedactarMail.class.getResource("/img/salida32.png")));
 		btnSalir.setOpaque(false);
 		btnSalir.setHorizontalAlignment(SwingConstants.LEFT);
@@ -165,6 +168,10 @@ public class VentanaRedactarMail {
 		JPanel panel = new JPanel();
 		panel.setBounds(44, 28, 10, 10);
 		panel_1.add(panel);
+		
+		
+		
+		
 		
 	}
 

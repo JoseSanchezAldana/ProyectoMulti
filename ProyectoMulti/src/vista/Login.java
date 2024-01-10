@@ -42,7 +42,7 @@ public class Login {
 	 * Initialize the contents of the frame.
 	 */
 	public void initialize() {
-		frame = new JFrame(); 
+		frame = new JFrame("PROYECTO MULTIDISCIPLINAR 23/24"); 
 		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(VentanaFTP.class.getResource("/img/logoProyecto.png")));
 		frame.setBounds(100, 100, 400, 500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -51,9 +51,9 @@ public class LoginEvent implements ActionListener {
             realizarConsulta(credenciales);
 
             try {
-            	String encryptedText = encrypt(login.getPasswordField().getText(), "afghklkhghkln");
+            	String encryptedText = encrypt(login.getPasswordField().getText(), this.modelo.getKey());
                 System.out.println("Texto cifrado: " + encryptedText);
-                System.out.println("Texto descifrado" + decrypt(login.getPasswordField().getText(), "afghklkhghkln"));
+                System.out.println("Texto descifrado: " + decrypt(encryptedText, this.modelo.getKey()));
 
                 if (modelo.getUsuario().equals(login.getTxtrUsuario().getText()) && modelo.getPasword().equals(encryptedText)) {
                 	login.frame.dispose();
@@ -92,17 +92,19 @@ public class LoginEvent implements ActionListener {
     }
 
 
-    public static String decrypt(String encryptedText, String key) {
-        byte[] decodedBytes = Base64.getDecoder().decode(encryptedText);
+    public static String decrypt(String ciphertext, String key) {
+        byte[] base64CipherText = Base64.getDecoder().decode(ciphertext);
         StringBuilder decryptedText = new StringBuilder();
 
-        for (int i = 0; i < decodedBytes.length; i++) {
-            char encryptedChar = (char) decodedBytes[i];
+        for (int i = 0; i < base64CipherText.length; i++) {
+            char cipherChar = (char) base64CipherText[i];
             char keyChar = key.charAt(i % key.length());
-            char decryptedChar = (char) (encryptedChar ^ keyChar);
+            char decryptedChar = (char) (cipherChar ^ keyChar);
             decryptedText.append(decryptedChar);
         }
-
         return decryptedText.toString();
     }
+    
+    
+
 }

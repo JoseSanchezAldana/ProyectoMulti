@@ -1,5 +1,6 @@
 package controlador;
 
+import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Properties;
@@ -30,12 +31,13 @@ public  class EnviarCorreo  implements ActionListener{
 	}
 
 	public void EnviarEmail(String SMTP_USERNAME, String SMTP_PASSWORD, String FROM, String FROMNAME, String TO,
-			String CC, String BCC, String CONFIGSET, String HOST, int PORT, String SUBJECT, String BODY)
+			String CC, String BCC, String SUBJECT, String BODY)
 			throws Exception {
 
+		
 		Properties props = System.getProperties();
 		props.put("mail.transport.protocol", "smtp");
-		props.put("mail.smtp.port", PORT);
+		props.put("mail.smtp.port", this.model.getPORT());
 		props.put("mail.smtp.starttls.enable", "true");
 		props.put("mail.smtp.auth", "true");
 		Session session = Session.getDefaultInstance(props);
@@ -67,13 +69,19 @@ public  class EnviarCorreo  implements ActionListener{
 		// MIMEMULTIPART PARA LOS ADJUNTOS
 
 		msg.setSubject(SUBJECT);
+		System.out.println("Asunto: " + SUBJECT);
 		msg.setContent(BODY, "text/html");
-		msg.setHeader("X-SES-CONFIGURATION-SET", CONFIGSET);
+		System.out.println("Contenido: " + BODY);
+		msg.setHeader("X-SES-CONFIGURATION-SET", this.model.getCONFIGSET());
 		Transport transport = session.getTransport();
 
 		try {
+			
+			//this.vtnRedactarMail.frame.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+			this.vtnRedactarMail.frame.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+			this.vtnRedactarMail.getBtnEnviar().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 			System.out.println("Enviando mensaje...");
-			transport.connect(HOST, SMTP_USERNAME, SMTP_PASSWORD);
+			transport.connect(this.model.getHOST(), SMTP_USERNAME, SMTP_PASSWORD);
 			transport.sendMessage(msg, msg.getAllRecipients());
 			System.out.println("Mensaje enviado");
 			JOptionPane.showMessageDialog(null, "Mensaje enviado correctamente", "ENVIADO", JOptionPane.INFORMATION_MESSAGE);
@@ -84,8 +92,12 @@ public  class EnviarCorreo  implements ActionListener{
 			
 			System.out.println("El mensaje no se ha podido enviar.");
 			JOptionPane.showMessageDialog(null, "Error al enviar el mensaje", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+			
+			
 
 		} finally {
+			this.vtnRedactarMail.frame.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+			this.vtnRedactarMail.getBtnEnviar().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 			transport.close();
 		}
 	}
@@ -93,21 +105,28 @@ public  class EnviarCorreo  implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		try {
+			//Comprobaciones
+			if(vtnRedactarMail.getTxtPara().getText().isEmpty()) {
+				JOptionPane.showMessageDialog(null, "Rellene la dirección de correo de destino", "FALTA DESTINO", JOptionPane.INFORMATION_MESSAGE);
+			}else {
+				this.EnviarEmail(
+						this.model.getUsuario(),
+						LoginEvent.decrypt(model.getPasword(), this.model.getKey()),					
+						this.model.getUsuario(),
+						
+						
+						this.model.getUsuario(), //AQUI VA EL NOMBRE DEL USUARIO - NO EL CORREO -
+						
+						
+						vtnRedactarMail.getTxtPara().getText(),
+						vtnRedactarMail.getTxtCC().getText(),
+						vtnRedactarMail.getTxtCCO().getText(),
+						vtnRedactarMail.getTxtAsunto().getText(),
+						vtnRedactarMail.getTxtMensaje().getText()
+				);
+			}
 			
-			this.EnviarEmail(
-					this.model.getUsuario(),
-					LoginEvent.decrypt(model.getPasword(), "afghklkhghkln"),
-					this.model.getUsuario(),
-					this.model.getUsuario(), //AQUI VA EL NOMBRE DEL USUARIO - NO EL CORREO -
-					vtnRedactarMail.getTxtPara().getText(),
-					vtnRedactarMail.getTxtCC().getText(),
-					vtnRedactarMail.getTxtCCO().getText(),
-					"ConfigSet",
-					"smtp.gmail.com",
-					587,
-					vtnRedactarMail.getTxtAsunto().getText(),
-					vtnRedactarMail.getTxtMensaje().getText()
-			);
+			
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
