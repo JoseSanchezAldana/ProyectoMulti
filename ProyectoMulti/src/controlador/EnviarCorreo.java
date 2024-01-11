@@ -41,6 +41,7 @@ public  class EnviarCorreo  implements ActionListener{
 		props.put("mail.smtp.starttls.enable", "true");
 		props.put("mail.smtp.auth", "true");
 		Session session = Session.getDefaultInstance(props);
+		session = Session.getDefaultInstance(props);
 		MimeMessage msg = new MimeMessage(session);
 		msg.setFrom(new InternetAddress(FROM, FROMNAME));
 

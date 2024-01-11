@@ -8,12 +8,16 @@ import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.JPanel;
 import javax.swing.ImageIcon;
@@ -28,7 +32,7 @@ public class Login {
 	public JFrame frame;
 	private JPasswordField passwordField;
 	private JButton btnLogin;
-	private JTextArea txtrUsuario;
+	private JTextField txtrUsuario;
 	private JButton btnSalir;
 
 	/**
@@ -52,14 +56,16 @@ public class Login {
         JPanel panel_1 = new JPanel(null);
         frame.setContentPane(panel_1);
 		
-		txtrUsuario = new JTextArea();
+		txtrUsuario = new JTextField();
 		txtrUsuario.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		txtrUsuario.setForeground(new Color(255, 255, 255));
 		txtrUsuario.setOpaque(false);
 		txtrUsuario.setFont(new Font("Monospaced", Font.BOLD, 15));
 		txtrUsuario.setBackground(new Color(255, 255, 255));
 		txtrUsuario.setToolTipText("");
-		txtrUsuario.setWrapStyleWord(true);
+		
+		//txtrUsuario.setWrapStyleWord(true);
+		
 		txtrUsuario.setBounds(72, 133, 250, 30);
 		frame.getContentPane().add(txtrUsuario);
 		
@@ -100,6 +106,16 @@ public class Login {
 		passwordField.setHorizontalAlignment(SwingConstants.LEFT);
 		passwordField.setBackground(new Color(255, 255, 255));
 		passwordField.setBounds(72, 221, 250, 30);
+	
+		passwordField.addKeyListener(new KeyAdapter() {
+		    @Override
+		    public void keyPressed(KeyEvent e) {
+		        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+		            btnLogin.doClick();
+		        }
+		    }
+		});
+		
 		frame.getContentPane().add(passwordField);
 		
 		btnSalir = new JButton("Salir");
@@ -117,13 +133,13 @@ public class Login {
 		btnSalir.setOpaque(false);
 		frame.getContentPane().add(btnSalir);
 		
-		        // Create a JLabel with the background image
-		        JLabel backgroundLabel = new JLabel(new ImageIcon(Login.class.getResource("/img/fondo.jpg")));
-		        backgroundLabel.setBounds(0, 0, 386, 463);
+        // Create a JLabel with the background image
+        JLabel backgroundLabel = new JLabel(new ImageIcon(Login.class.getResource("/img/fondo.jpg")));
+        backgroundLabel.setBounds(0, 0, 386, 463);
 		        
 		        
-		                // Add the background label to the content pane
-		                frame.getContentPane().add(backgroundLabel);
+        // Add the background label to the content pane
+        frame.getContentPane().add(backgroundLabel);
 	}
 
 	public JButton getBtnSalir() {
@@ -158,11 +174,11 @@ public class Login {
 		this.passwordField = passwordField;
 	}
 
-	public JTextArea getTxtrUsuario() {
+	public JTextField getTxtrUsuario() {
 		return txtrUsuario;
 	}
 
-	public void setTxtrUsuario(JTextArea txtrUsuario) {
+	public void setTxtrUsuario(JTextField txtrUsuario) {
 		this.txtrUsuario = txtrUsuario;
 	}
 }

@@ -43,10 +43,12 @@ public class MenuEvent implements ActionListener {
 		} else if(e.getSource() == menu.getBtnCorreoElectronico()){
 			menu.frame.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 			menu.getBtnCorreoElectronico().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-			VentanaEmail vtnEmail = new VentanaEmail(this.modelo);
+
+			VentanaEmail vtnEmail = new VentanaEmail(this.modelo);			
 			vtnEmail.frame.setVisible(true);
 			vtnEmail.getBtnRedactar().addActionListener(new EnviaMailEvent(vtnEmail, modelo));
 			vtnEmail.getBtnSalir().addActionListener(new SalirEmail(vtnEmail, menu));
+			
 			menu.getBtnCorreoElectronico().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			menu.frame.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 			menu.frame.dispose();

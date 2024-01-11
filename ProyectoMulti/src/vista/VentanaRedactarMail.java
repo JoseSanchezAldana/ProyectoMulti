@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 
@@ -23,12 +24,12 @@ import java.awt.event.ActionEvent;
 public class VentanaRedactarMail {
 
 	public JFrame frame;
-	private JTextArea txtPara;
+	private JTextField txtPara;
 	private JButton btnEnviar;
 	private JButton btnSalir;
-	private JTextArea txtCC;
-	private JTextArea txtCCO;
-	private JTextArea txtAsunto;
+	private JTextField txtCC;
+	private JTextField txtCCO;
+	private JTextField txtAsunto;
 	private JTextArea txtMensaje;
 	private Modelo model;
 
@@ -61,14 +62,14 @@ public class VentanaRedactarMail {
 		labelPara.setBounds(72, 51, 39, 40);
 		frame.getContentPane().add(labelPara);
 		
-		txtPara = new JTextArea();
+		txtPara = new JTextField();
 		txtPara.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		txtPara.setForeground(new Color(255, 255, 255));
 		txtPara.setOpaque(false);
 		txtPara.setFont(new Font("Monospaced", Font.BOLD, 15));
 		txtPara.setBackground(new Color(255, 255, 255));
 		txtPara.setToolTipText("");
-		txtPara.setWrapStyleWord(true);
+		//txtPara.setWrapStyleWord(true);
 		txtPara.setBounds(115, 59, 495, 30);
 		frame.getContentPane().add(txtPara);
 		
@@ -78,8 +79,8 @@ public class VentanaRedactarMail {
 		labelCC.setBounds(72, 101, 39, 40);
 		panel_1.add(labelCC);
 		
-		txtCC = new JTextArea();
-		txtCC.setWrapStyleWord(true);
+		txtCC = new JTextField();
+		//txtCC.setWrapStyleWord(true);
 		txtCC.setToolTipText("");
 		txtCC.setOpaque(false);
 		txtCC.setForeground(Color.WHITE);
@@ -95,8 +96,8 @@ public class VentanaRedactarMail {
 		labelCCO.setBounds(72, 151, 39, 40);
 		panel_1.add(labelCCO);
 		
-		txtCCO = new JTextArea();
-		txtCCO.setWrapStyleWord(true);
+		txtCCO = new JTextField();
+		//txtCCO.setWrapStyleWord(true);
 		txtCCO.setToolTipText("");
 		txtCCO.setOpaque(false);
 		txtCCO.setForeground(Color.WHITE);
@@ -123,8 +124,8 @@ public class VentanaRedactarMail {
 		labelAsunto.setBounds(72, 196, 70, 40);
 		panel_1.add(labelAsunto);
 		
-		txtAsunto = new JTextArea();
-		txtAsunto.setWrapStyleWord(true);
+		txtAsunto = new JTextField();
+		//txtAsunto.setWrapStyleWord(true);
 		txtAsunto.setToolTipText("");
 		txtAsunto.setOpaque(false);
 		txtAsunto.setForeground(Color.WHITE);
@@ -183,11 +184,11 @@ public class VentanaRedactarMail {
 		this.frame = frame;
 	}
 
-	public JTextArea getTxtPara() {
+	public JTextField getTxtPara() {
 		return txtPara;
 	}
 
-	public void setTxtPara(JTextArea txtPara) {
+	public void setTxtPara(JTextField txtPara) {
 		this.txtPara = txtPara;
 	}
 
@@ -207,27 +208,27 @@ public class VentanaRedactarMail {
 		this.btnSalir = btnSalir;
 	}
 
-	public JTextArea getTxtCC() {
+	public JTextField getTxtCC() {
 		return txtCC;
 	}
 
-	public void setTxtCC(JTextArea txtCC) {
+	public void setTxtCC(JTextField txtCC) {
 		this.txtCC = txtCC;
 	}
 
-	public JTextArea getTxtCCO() {
+	public JTextField getTxtCCO() {
 		return txtCCO;
 	}
 
-	public void setTxtCCO(JTextArea txtCCO) {
+	public void setTxtCCO(JTextField txtCCO) {
 		this.txtCCO = txtCCO;
 	}
 
-	public JTextArea getTxtAsunto() {
+	public JTextField getTxtAsunto() {
 		return txtAsunto;
 	}
 
-	public void setTxtAsunto(JTextArea txtAsunto) {
+	public void setTxtAsunto(JTextField txtAsunto) {
 		this.txtAsunto = txtAsunto;
 	}
 	

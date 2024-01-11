@@ -3,6 +3,8 @@ package controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JFrame;
+
 import modelo.Modelo;
 import vista.VentanaEmail;
 import vista.VentanaRedactarMail;
