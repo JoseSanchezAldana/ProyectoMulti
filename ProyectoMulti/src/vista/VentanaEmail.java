@@ -60,7 +60,7 @@ public class VentanaEmail {
 	private Modelo model;
 
 	/**
-	 * Create the application.
+	 * Crea la ventana.
 	 */
 	public VentanaEmail(Modelo model) {
 		
@@ -70,7 +70,7 @@ public class VentanaEmail {
 	}
 
 	/**
-	 * Initialize the contents of the frame.
+	 * Inicializa los componentes de la ventana.
 	 */
 	private void initialize() {
 		
@@ -253,7 +253,6 @@ public class VentanaEmail {
 			            		}
 								
 							} catch (IOException | MessagingException e1) {
-								// TODO Auto-generated catch block
 								e1.printStackTrace();
 							}
 			            }
@@ -329,7 +328,6 @@ public class VentanaEmail {
 				System.out.println("Cargando mensaje: "+ (x +1));
 				this.modeloTabla.addRow(new Object[]{ messages[x].getFrom()[0].toString() ,	subject });
 			} catch (MessagingException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

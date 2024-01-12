@@ -22,14 +22,14 @@ public class Menu {
 	private JButton btnSalir;
 
 	/**
-	 * Create the application.
+	 * Crea la ventana.
 	 */
 	public Menu() {
 		initialize();
 	}
 
 	/**
-	 * Initialize the contents of the frame.
+	 * Inicializa los componentes de la ventana.
 	 */
 	private void initialize() {
 		frame = new JFrame("Sesión iniciada con: ");
@@ -93,7 +93,6 @@ public class Menu {
 		JLabel backgroundLabel = 	new JLabel(new ImageIcon(VentanaFTP.class.getResource("/img/fondo.jpg")));
 		backgroundLabel.setBounds(-44, 0, 700, 500);
 		
-        // Add the background label to the content pane
         frame.getContentPane().add(backgroundLabel);
 	}
 

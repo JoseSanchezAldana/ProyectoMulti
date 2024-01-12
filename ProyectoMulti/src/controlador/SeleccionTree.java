@@ -27,7 +27,11 @@ public class SeleccionTree implements TreeSelectionListener {
 		
 	}
 	
-	
+	/**
+	 * Obtiene la ruta seleccionada del JTree
+	 * @param path
+	 * @return
+	 */
 	private static String obtenerRutaDesdeTreePath(TreePath path) {
 		StringBuilder ruta = new StringBuilder();
 		for (Object node : path.getPath()) {

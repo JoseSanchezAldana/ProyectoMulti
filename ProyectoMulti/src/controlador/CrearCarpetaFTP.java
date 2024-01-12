@@ -14,6 +14,9 @@ import conexion.ConexionFTP;
 import modelo.Modelo;
 import vista.VentanaFTP;
 
+/**
+ * Evento que realiza la operación de crear carpeta cuando se pulsa el botón correspondiente. 
+ */
 public class CrearCarpetaFTP implements ActionListener {
 	
 	VentanaFTP vtnFTP;

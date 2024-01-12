@@ -27,6 +27,10 @@ public class LoginEvent implements ActionListener {
         this.conexion = conexion;
         this.modelo= modelo;
     }
+    
+    /**
+     * Se realizan consultas en la base de datos para comprobar si existe el usuario que se introduce. 
+     */
 
     private void realizarConsulta(ArrayList<String> credenciales) {
         conexion.query("SELECT idUsuario, correo, password FROM usuarios WHERE correo = '" + login.getTxtrUsuario().getText() + "';");
@@ -80,6 +84,12 @@ public class LoginEvent implements ActionListener {
         
         
     }
+    /**
+     * Encripta un texto (Para contraseñas)
+     * @param plaintext
+     * @param key
+     * @return
+     */
 
     public static String encrypt(String plaintext, String key) {
         StringBuilder ciphertext = new StringBuilder();
@@ -93,7 +103,12 @@ public class LoginEvent implements ActionListener {
         return Base64.getEncoder().encodeToString(ciphertext.toString().getBytes());
     }
 
-
+/**
+ * Desencripta un texto (Para contraseñas)
+ * @param ciphertext
+ * @param key
+ * @return
+ */
     public static String decrypt(String ciphertext, String key) {
         byte[] base64CipherText = Base64.getDecoder().decode(ciphertext);
         StringBuilder decryptedText = new StringBuilder();

@@ -11,7 +11,9 @@ import conexion.Conexion;
 import conexion.ConexionFTP;
 import modelo.Modelo;
 import vista.VentanaFTP;
-
+/**
+ * Evento que realiza la operación de subir el archivo cuando se pulsa el botón correspondiente. 
+ */
 public class SubirArchivoFTP implements ActionListener {
 	
 	VentanaFTP vtnFTP;

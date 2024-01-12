@@ -6,13 +6,19 @@ import java.net.SocketException;
 import org.apache.commons.net.ftp.FTPClient;
 
 import modelo.Modelo;
-
+/**
+ * 
+ */
 public class ConexionFTP {
 //	conexion
 	private FTPClient cliente = new FTPClient();
 	private Modelo modelo;
 	private boolean login;
 	
+	/**
+	 * Se realizará la conexión que permitirar realizar las operaciones en el servidor FTP
+	 * @param modelo	Enviar datos que contiene el modelo
+	 */
 	public ConexionFTP(Modelo modelo) {
 		this.modelo = modelo;
 		String servFTP = modelo.getServFTP();

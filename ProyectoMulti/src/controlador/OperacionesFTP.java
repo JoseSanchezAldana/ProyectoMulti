@@ -20,7 +20,10 @@ import org.apache.commons.net.ftp.FTPFile;
 import conexion.ConexionFTP;
 import modelo.Modelo;
 import vista.VentanaFTP;
-
+/**
+ * Clase que contendrá cada uno de los métodos que realizan las diferentes acciones 
+ * que el FTP permita.  
+ */
 public class OperacionesFTP {
 
 	VentanaFTP vtnFtp;
@@ -28,9 +31,19 @@ public class OperacionesFTP {
 	Modelo modelo;
 	boolean ok;
 
+	/**
+	 * 
+	 * @param vtnFtp Se envía la vista para poder aplicarle las funciones
+	 */
 	public OperacionesFTP(VentanaFTP vtnFtp) {
 		this.vtnFtp = vtnFtp;
-	}	
+	}
+	
+	/**
+	 * Este método mostrará un JFileChooser al usuario que estará modificado únicamente para 
+	 * que solo se puedan seleccionar directorios y no ficheros. 
+	 * @return Una cadena de texto con la ruta del directorio que se haya seleccionado. 
+	 */
 
 	public String seleccionarDirectorioConJFileChooser() {
 		String dir="..\\Downloads";
@@ -51,6 +64,13 @@ public class OperacionesFTP {
 		} 
 		return dir;
 	}
+	/**
+	 * Método que descargará un fichero (solo ficheros, no carpetas) en un directorio específico del equipo del usuario.  
+	 * @param cliente Cliente que realizará la operación
+	 * @param directorioFTP Directorio del servidor FTP dónde se encuentra el fichero que el usuario desea descargar. 
+	 * @return True si se descargó el fichero satisfactoriamente, False en caso contrario
+	 * @throws IOException En caso de error de conexión 
+	 */
 
 	public boolean descargarFichero(FTPClient cliente, String directorioFTP) throws IOException {
 		if (!isCarpeta(directorioFTP, cliente)) {
@@ -86,6 +106,14 @@ public class OperacionesFTP {
 		recargarVentana();
 		return ok;
 	}
+	
+	/**
+	 * Método que permite crear una nueva carpeta en el servidor FTP 
+	 * @param cliente Cliente que realizará la operación
+	 * @param directorioFTP Directorio del servidor FTP dónde se quiere crear la carpeta. 
+	 * @return True si se creó el directorio satisfactoriamente, False en caso contrario. 
+	 * @throws IOException En caso de error de conexión 
+	 */
 
 	public boolean crearCarpeta(FTPClient cliente, String directorioFTP) throws IOException {
 		if (isCarpeta(directorioFTP, cliente) && !directorioFTP.isEmpty()) {
@@ -105,6 +133,14 @@ public class OperacionesFTP {
 		recargarVentana();
 		return ok;
 	}
+	/**
+	 * Método que permite guardar un fichero dentro de una carpeta del servidor FTP 
+	 * @param cliente Cliente que realizará la operación
+	 * @param directorioFTP Directorio del servidor FTP dónde se quiere subir el archivo. 
+	 * @return True si se subió el fichero satisfactoriamente, False en caso contrario. 
+	 * @throws IOException En caso de error de conexión 
+	 */
+
 
 	public boolean subirFichero(FTPClient cliente, String directorio) throws IOException {
 		boolean ok = false;
@@ -154,6 +190,12 @@ public class OperacionesFTP {
 		return ok;
 		
 	}
+	/**
+	 * Método que elimina un fichero del servidor FTP 
+	 * @param cliente Cliente que realizará la operación
+	 * @param directorioFTP Directorio del servidor FTP dónde se encuentra el archivo que se desea eliminar. 
+	 * @return True si se borró el fichero satisfactoriamente, False en caso contrario. 
+	 */
 
 	public boolean borrarArchivoFTP(String ruta, FTPClient cliente) throws HeadlessException {
 		String nombreArchivo = obtenerNombreArchivo(ruta);
@@ -194,6 +236,13 @@ public class OperacionesFTP {
 		recargarVentana();
 		return ok;
 	}
+	
+	/**
+	 * Método que permite comprobar si una ruta del FTP pertenece a una carpeta o a un directorio. 
+	 * @param ruta  Ruta del servidor que se desea comprobar
+	 * @param cliente Cliente que realiza la operación
+	 * @return True si es directorio, False si es fichero. 
+	 */
 
 	public boolean isCarpeta(String ruta, FTPClient cliente) {
 		boolean isCarpeta = false;
@@ -209,12 +258,22 @@ public class OperacionesFTP {
 
 		return isCarpeta;
 	}
+	
+	/**
+	 * Obtención del nombre de un archvo (o directorio) concreto. 
+	 * @param rutaFTP Ruta del archivo del que se quiere obtener el nombre
+	 * @return Una cadena de texto con el último segmento de la ruta enviada, la que corresponde al nombre
+	 */
 
 	private String obtenerNombreArchivo(String rutaFTP) {
 
 		String[] segmentosRuta = rutaFTP.split("/");
 		return segmentosRuta[segmentosRuta.length - 1];
 	}
+	
+	/**
+	 * Actualizza la ventana del FTP, refrescando el JTree que muestra los archivos y directorios del FTP y vaciando el texto que muestra la ruta selecionada. 
+	 */
 	
 	public void recargarVentana() {
 		vtnFtp.actualizarArbol();

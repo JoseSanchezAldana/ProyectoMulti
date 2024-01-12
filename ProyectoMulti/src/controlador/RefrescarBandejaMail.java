@@ -12,15 +12,26 @@ public class RefrescarBandejaMail extends Thread{
 	
 	private VentanaEmail vtnEmail;
 	private volatile boolean corriendo = true;
+	/**
+	 * Refresca la bandeja del email con los nuevos correos recibidos
+	 * @param vtnEmail Ventana a refrescar. 
+	 */
 	
 	public RefrescarBandejaMail(VentanaEmail vtnEmail) {
 		this.vtnEmail = vtnEmail;
 	}
+	
+	/**
+	 * Detiene la ejecución del hilo actual cuendo sea necesario
+	 */
 
 	public void pararHilo() {
 		this.corriendo = false;
 		System.out.println("Hilo eliminado.");
 	}
+	/**
+	 * Inicia la ejecución de un hijo para refrescar el email
+	 */
 	
 	@Override
 	public void run() {

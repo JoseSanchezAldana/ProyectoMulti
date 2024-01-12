@@ -10,6 +10,11 @@ public class SalirRedactarMailEvent implements ActionListener {
 	
 	private VentanaRedactarMail vtnRedactarMail;
 	private VentanaEmail vtnEmail;
+	/**
+	 * Salir de la ventana de redacción del email
+	 * @param vtnRedactarMail Ventana a cerrar
+	 * @param vtnEmail Ventana del email a la que volver
+	 */
 
 	public SalirRedactarMailEvent(VentanaRedactarMail vtnRedactarMail, VentanaEmail vtnEmail) {
 		this.vtnRedactarMail = vtnRedactarMail;

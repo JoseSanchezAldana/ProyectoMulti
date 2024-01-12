@@ -28,14 +28,14 @@ public class Login {
 	private JButton btnSalir;
 
 	/**
-	 * Create the application.
+	 * Crea la ventana.
 	 */
 	public Login() {
 		initialize();
 	}
 
 	/**
-	 * Initialize the contents of the frame.
+	 * Inicializa los componentes de la ventana.
 	 */
 	public void initialize() {
 		frame = new JFrame("PROYECTO MULTIDISCIPLINAR 23/24"); 
@@ -135,12 +135,10 @@ public class Login {
 		btnSalir.setOpaque(false);
 		frame.getContentPane().add(btnSalir);
 		
-        // Create a JLabel with the background image
         JLabel backgroundLabel = new JLabel(new ImageIcon(Login.class.getResource("/img/fondo.jpg")));
         backgroundLabel.setBounds(0, 0, 386, 463);
 		        
 		        
-        // Add the background label to the content pane
         frame.getContentPane().add(backgroundLabel);
 	}
 

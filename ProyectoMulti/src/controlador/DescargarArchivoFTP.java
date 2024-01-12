@@ -14,6 +14,9 @@ import conexion.ConexionFTP;
 import modelo.Modelo;
 import vista.VentanaFTP;
 
+/**
+ * Evento que realiza la operación de descargar el archivo cuando se pulsa el botón correspondiente. 
+ */
 public class DescargarArchivoFTP implements ActionListener {
 	
 	VentanaFTP vtnFTP;

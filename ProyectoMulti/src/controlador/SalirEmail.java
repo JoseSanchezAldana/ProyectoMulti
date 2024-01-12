@@ -11,6 +11,11 @@ public class SalirEmail implements ActionListener {
 	private VentanaEmail vtnEmail;
 	private Menu menu;
 
+	/**
+	 * Cierra la ventana del mail y vuelve al menú princiapl
+	 * @param vtnEmail Ventana a cerrar
+	 * @param menu Menu a abrir. 
+	 */
 	public SalirEmail(VentanaEmail vtnEmail, Menu menu) {
 		this.vtnEmail = vtnEmail;
 		this.menu = menu;

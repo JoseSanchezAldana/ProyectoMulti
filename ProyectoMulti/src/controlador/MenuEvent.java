@@ -25,6 +25,9 @@ public class MenuEvent implements ActionListener {
 		this.login = login;
 		this.conexion = conexion;
 	}
+	/**
+	 * Registro del evento que se produce en el menú, dependiendo del botón que se seleccione se abrirá la ventana de correo, la del FTP o se saldrá del menú y se volverá a la ventana de iniciar sesión
+	 */
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -72,6 +75,12 @@ public class MenuEvent implements ActionListener {
 			login.getPasswordField().setText("");
 		}
 	}
+	
+	/**
+	 * Comprueba si el usuario tiene o no una ruta seleccionada en el JTree
+	 * @param vtnFtp Ventana del FTP
+	 * @return True si se tiene una ruta seleccionada, false en caso contrario. 
+	 */
 	
 	public static boolean comprobarRuta (VentanaFTP vtnFtp) {
 		boolean estaVacio = false;

@@ -14,6 +14,11 @@ public class EnviaMailEvent implements ActionListener {
 	
 	private VentanaEmail vtnEmail;
 	private Modelo modelo;
+	/**
+	 * Abrir ventna del mail y registar los eventos en los borones para lograr añadir las funcionalidades
+	 * @param vtnEmail Ventana mail para abrir
+	 * @param model Datos del modelo 
+	 */
 
 	public EnviaMailEvent(VentanaEmail vtnEmail, Modelo model) {
 		this.vtnEmail = vtnEmail;

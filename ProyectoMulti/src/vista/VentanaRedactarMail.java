@@ -35,7 +35,7 @@ public class VentanaRedactarMail {
 	private Modelo model;
 
 	/**
-	 * Create the application.
+	 * Crea la ventana.
 	 */
 	public VentanaRedactarMail(Modelo model) {
 		this.model = model;
@@ -43,7 +43,7 @@ public class VentanaRedactarMail {
 	}
 
 	/**
-	 * Initialize the contents of the frame.
+	 * Inicializa los componentes de la ventana.
 	 */
 	private void initialize() {
 		frame = new JFrame("Enviar correo desde: "+ model.getUsuario());

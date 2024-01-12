@@ -11,6 +11,9 @@ import conexion.ConexionFTP;
 import modelo.Modelo;
 import vista.VentanaFTP;
 
+/**
+ * Evento que realiza la operación de borrar cuando se pulsa el botón correspondiente. 
+ */
 public class BorrarArchivoFTP implements ActionListener {
 	VentanaFTP vtnFTP;
 	FTPClient ftpClient;

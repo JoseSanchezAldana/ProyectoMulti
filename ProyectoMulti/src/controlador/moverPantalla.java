@@ -6,6 +6,10 @@ import java.awt.Toolkit;
 
 public abstract class moverPantalla {
 
+	/**
+	 * Coloca una ventana en el centro de la pantalla del usuario
+	 * @param frame Ventana que se quiere centrar
+	 */
 	public static void centrar(Frame frame) {
 
 		//Centrar pantalla

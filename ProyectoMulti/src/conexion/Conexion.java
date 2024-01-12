@@ -15,6 +15,9 @@ import javax.swing.JOptionPane;
 import modelo.Modelo;
 
 //Conexion
+/**
+ * Clase que contiene los métodos referidos a la conexión con la Base de datos
+ */
 public class Conexion {
 	
 	private java.sql.Statement s;
@@ -23,7 +26,11 @@ public class Conexion {
 	private Connection conexion;
 	private Modelo modelo;
 	
-	
+	/**
+	 * Iniciar conexión con la base de datos
+	 * @param modelo  Enviar datos que contiene el modelo
+	 * @throws ClassNotFoundException
+	 */
 	public Conexion(Modelo modelo) throws ClassNotFoundException {
 		
 		Class.forName("com.mysql.jdbc.Driver");
@@ -40,7 +47,12 @@ public class Conexion {
 		
 	}
 
-	
+	/**
+	 * Registrar las operaciones realizadas en el FTP
+	 * @param localDate   Fecha de operación
+	 * @param idOperacion Tipo de operación realizada
+	 * @param idUsuario	  Usuario que está realizando la tarea
+	 */
 	public void insertarDatos(LocalDate localDate, int idOperacion, int idUsuario) {
         try {
         	 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");

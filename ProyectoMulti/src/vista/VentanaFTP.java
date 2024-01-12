@@ -51,7 +51,7 @@ public class VentanaFTP {
 	private JLabel rutaSeleccionada;
 	private JScrollPane scroll;
 	/**
-	 * Create the application.
+	 * Crea la ventana.
 	 */
 	public VentanaFTP(ConexionFTP conexionFTP, Modelo modelo) {
 		this.conexionFTP = conexionFTP;
@@ -61,7 +61,7 @@ public class VentanaFTP {
 	
 
 	/**
-	 * Initialize the contents of the frame.
+	 * Inicializa los componentes de la ventana.
 	 */
 	private void initialize(ConexionFTP conexionFTP, Modelo modelo) {
 		frame = new JFrame();

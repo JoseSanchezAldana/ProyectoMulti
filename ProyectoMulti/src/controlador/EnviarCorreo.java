@@ -29,6 +29,19 @@ public  class EnviarCorreo  implements ActionListener{
 		this.vtnEmail = vtnEmail;
 		this.vtnRedactarMail =vtnRedactarMail;
 	}
+	/**
+	 *  A partir de los datos que se envían como parámetro, 
+	 * @param SMTP_USERNAME
+	 * @param SMTP_PASSWORD
+	 * @param FROM
+	 * @param FROMNAME
+	 * @param TO
+	 * @param CC
+	 * @param BCC
+	 * @param SUBJECT
+	 * @param BODY
+	 * @throws Exception
+	 */
 
 	public void EnviarEmail(String SMTP_USERNAME, String SMTP_PASSWORD, String FROM, String FROMNAME, String TO,
 			String CC, String BCC, String SUBJECT, String BODY)

@@ -9,7 +9,13 @@ import vista.VentanaFTP;
 public class SalirFTPEvent implements ActionListener{
 	
 	VentanaFTP vtnFtp;
-	Menu menu;
+	Menu menu; 
+	
+	/**
+	 * Cierra la ventana FTP y vuelve al menú princiapl
+	 * @param vtnFtp Ventana de FTP a cerrar
+	 * @param menu Ventana del Menu que se desea abrir
+	 */
 
 	public	SalirFTPEvent(VentanaFTP vtnFtp, Menu menu) {
 		this.vtnFtp = vtnFtp;
