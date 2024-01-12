@@ -10,6 +10,7 @@ import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Multipart;
 import javax.mail.Part;
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JEditorPane;
@@ -55,6 +56,13 @@ public class VentanaEmail {
 	private JButton btnSalir;
 	private JButton btnRedactar;
 	private JButton btnRefrescar;
+	
+	private ButtonGroup rgBandejas;
+	private JRadioButton rdRecibidos;	
+	private JRadioButton rdEnviados;
+	private JRadioButton rdBorradores;
+	private JRadioButton rdSpam;
+	
 	public DefaultTableModel modeloTabla;
 	
 	//private RefrescarBandejaMail runRefresco;
@@ -158,33 +166,44 @@ public class VentanaEmail {
 
 		panel_1.add(scrollPane);		
 		
-		JRadioButton rdRecibidos = new JRadioButton("Recibidos");
+		
+		rgBandejas = new ButtonGroup();
+		
+		rdRecibidos = new JRadioButton("Recibidos");
 		rdRecibidos.setForeground(new Color(255, 255, 255));
 		rdRecibidos.setFont(new Font("Tahoma", Font.BOLD, 13));
 		rdRecibidos.setBounds(94, 146, 167, 21);
 		rdRecibidos.setOpaque(false);
+		rdRecibidos.setSelected(true);		
 		panel_1.add(rdRecibidos);
 		
-		JRadioButton rdEnviados = new JRadioButton("Enviados");
+		rdEnviados = new JRadioButton("Enviados");
 		rdEnviados.setOpaque(false);
 		rdEnviados.setForeground(Color.WHITE);
 		rdEnviados.setFont(new Font("Tahoma", Font.BOLD, 13));
 		rdEnviados.setBounds(94, 201, 167, 21);
 		panel_1.add(rdEnviados);
 		
-		JRadioButton rdBorradores = new JRadioButton("Borradores");
+		rdBorradores = new JRadioButton("Borradores");
 		rdBorradores.setOpaque(false);
 		rdBorradores.setForeground(Color.WHITE);
 		rdBorradores.setFont(new Font("Tahoma", Font.BOLD, 13));
 		rdBorradores.setBounds(94, 251, 167, 21);
 		panel_1.add(rdBorradores);
 		
-		JRadioButton rdSpam = new JRadioButton("Spam");
+		rdSpam = new JRadioButton("Spam");
 		rdSpam.setOpaque(false);
 		rdSpam.setForeground(Color.WHITE);
 		rdSpam.setFont(new Font("Tahoma", Font.BOLD, 13));
 		rdSpam.setBounds(94, 304, 167, 21);
 		panel_1.add(rdSpam);
+		
+		
+		rgBandejas.add(rdRecibidos);
+		rgBandejas.add(rdEnviados);
+		rgBandejas.add(rdBorradores);
+		rgBandejas.add(rdSpam);
+		
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(VentanaEmail.class.getResource("/img/bandeja-de-entrada.png")));
@@ -220,51 +239,65 @@ public class VentanaEmail {
 
 	
 	//MENU CONTEXTUAL
-	private void crearMenuContextual(JTable table) {
-	    JPopupMenu menu = new JPopupMenu();
-	    
-	    JMenuItem item = new JMenuItem("Abrir");
-	    item.addActionListener(e -> {
-	        System.out.println(table.getSelectedRow()) ;
-	    });
+			private void crearMenuContextual(JTable table) {
+			    JPopupMenu menu = new JPopupMenu();
+			    
+			    JMenuItem item = new JMenuItem("Abrir");
+			    item.addActionListener(e -> {
+			        System.out.println(table.getSelectedRow()) ;
+			        if(table.getSelectedRow() != -1) {   			
+		    			
+		    			//abrirMensaje(listaMensajes[(table.getSelectedRow())]);
+		    			try {
+							abrirMensaje(messages[messages.length-1 - table.getSelectedRow()]);
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (MessagingException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+		    			
+		    		}
+			    });
 
-	    menu.add(item);
+			    menu.add(item);
 
-	    table.addMouseListener(new MouseAdapter() {
-	        public void mousePressed(MouseEvent e) {
-//	            if (e.isPopupTrigger()) {//BOTON DERECHO
-//	                menu.show(e.getComponent(), e.getX(), e.getY());
-//	            }
-	            if (e.getClickCount() == 2) {//DOBLE CLICK
-	                //menu.show(e.getComponent(), e.getX(), e.getY());
-	            	System.out.println(table.getSelectedRow());
-	            	try {
-	            		if(table.getSelectedRow() != -1) {
-	            			
-	            			
-	            			//abrirMensaje(listaMensajes[(table.getSelectedRow())]);
-	            			abrirMensaje(messages[messages.length-1 - table.getSelectedRow()]);
-	            			
-	            		}
-						
-					} catch (IOException | MessagingException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-	            }
-	        }
+			    table.addMouseListener(new MouseAdapter() {
+			        public void mousePressed(MouseEvent e) {
+//			            if (e.isPopupTrigger()) {//BOTON DERECHO
+//			                menu.show(e.getComponent(), e.getX(), e.getY());
+//			            }
+			            if (e.getClickCount() == 2) {//DOBLE CLICK
+			                //menu.show(e.getComponent(), e.getX(), e.getY());
+			            	System.out.println(table.getSelectedRow());
+			            	try {
+			            		if(table.getSelectedRow() != -1) {
+			            			
+			            			
+			            			//abrirMensaje(listaMensajes[(table.getSelectedRow())]);
+			            			abrirMensaje(messages[messages.length-1 - table.getSelectedRow()]);
+			            			
+			            		}
+								
+							} catch (IOException | MessagingException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+			            }
+			        }
 
-	        public void mouseReleased(MouseEvent e) {
-	            if (e.isPopupTrigger()) {//BOTON DERECHO
-	                menu.show(e.getComponent(), e.getX(), e.getY());
-	            }
-//	            if (e.getClickCount() == 2) {//DOBLE CLICK
-//	                //menu.show(e.getComponent(), e.getX(), e.getY());
-//	            	System.out.println(table.getSelectedRow()) ;
-//	            }
-	        }
-	    });
-	}
+			        public void mouseReleased(MouseEvent e) {
+			            if (e.isPopupTrigger()) {//BOTON DERECHO
+			                menu.show(e.getComponent(), e.getX(), e.getY());
+			            }
+//			            if (e.getClickCount() == 2) {//DOBLE CLICK
+//			                //menu.show(e.getComponent(), e.getX(), e.getY());
+//			            	System.out.println(table.getSelectedRow()) ;
+//			            }
+			        }
+			    });
+			}
 	
 	public void RunRefrescar() {
 		thRefresco.start();
@@ -278,11 +311,38 @@ public class VentanaEmail {
 		thRefresco.pararHilo();		
 	}
 	
+	
+	public String obtenerBandeja() {
+		
+		String bandeja = "";
+		
+		if(this.getRdRecibidos().isSelected()) {
+			bandeja = "INBOX";
+		}else if(this.getRdEnviados().isSelected()) {
+			bandeja = "[Gmail]/Enviados";
+		}else if(this.getRdBorradores().isSelected()) {
+			bandeja = "[Gmail]/Borradores";
+		}else if(this.getRdSpam().isSelected()) {
+			bandeja = "[Gmail]/Spam";
+		}	
+		
+		return bandeja;
+		
+	}
+	
+	
 	public void RefrescarCorreos() {
+		//"INBOX"
+        //"[Gmail]/Enviados"
+        //"[Gmail]/Borradores"
+        //"[Gmail]/Spam"
+		
+		System.out.println();
+		
 		frame.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 		getBtnRefrescar().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 		getBtnRefrescar().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-		this.messages = LeerBandejaMail.LeerBandeja(this.model.getUsuario(), LoginEvent.decrypt(this.model.getPasword(), this.model.getKey()), "INBOX");
+		this.messages = LeerBandejaMail.LeerBandeja(this.model.getUsuario(), LoginEvent.decrypt(this.model.getPasword(), this.model.getKey()), obtenerBandeja());
 		frame.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 		getBtnRefrescar().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 	}
@@ -347,6 +407,27 @@ public class VentanaEmail {
 	public void setBtnRedactar(JButton btnRedactar) {
 		this.btnRedactar = btnRedactar;
 	}
+	
+	public ButtonGroup getRgBandejas() {
+		return rgBandejas;
+	}
+
+	public JRadioButton getRdRecibidos() {
+		return rdRecibidos;
+	}
+
+	public JRadioButton getRdEnviados() {
+		return rdEnviados;
+	}
+
+	public JRadioButton getRdBorradores() {
+		return rdBorradores;
+	}
+
+	public JRadioButton getRdSpam() {
+		return rdSpam;
+	}
+
 	
 	
 	private static void abrirMensaje(Message msg) throws IOException, MessagingException {
