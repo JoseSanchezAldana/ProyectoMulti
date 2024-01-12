@@ -157,9 +157,6 @@ public class VentanaEmail {
 		modeloTabla.setColumnIdentifiers(encabezados);
 
 		panel_1.add(scrollPane);		
-		JPanel panel = new JPanel();
-		panel.setBounds(44, 28, 10, 10);
-		panel_1.add(panel);	
 		
 		JRadioButton rdRecibidos = new JRadioButton("Recibidos");
 		rdRecibidos.setForeground(new Color(255, 255, 255));
@@ -213,6 +210,9 @@ public class VentanaEmail {
 		JLabel backgroundLabel = new JLabel(new ImageIcon(VentanaFTP.class.getResource("/img/fondo.jpg")));
 		backgroundLabel.setBounds(-14, -17, 700, 500);
 		frame.getContentPane().add(backgroundLabel);
+		JPanel panel = new JPanel();
+		panel.setBounds(44, 28, 10, 10);
+		panel_1.add(panel);	
 		
 
 		RunRefrescar();
