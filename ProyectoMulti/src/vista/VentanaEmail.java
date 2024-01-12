@@ -47,6 +47,7 @@ import modelo.DatosPanelBandeja;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JRadioButton;
 
 public class VentanaEmail {
 
@@ -106,7 +107,7 @@ public class VentanaEmail {
 		btnSalir.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnSalir.setBorderPainted(false);
 		btnSalir.setBackground(new Color(0, 64, 128));
-		btnSalir.setBounds(44, 141, 105, 30);
+		btnSalir.setBounds(60, 357, 105, 30);
 		btnSalir.setOpaque(false);
 		frame.getContentPane().add(btnSalir);
 		
@@ -156,14 +157,62 @@ public class VentanaEmail {
 		modeloTabla.setColumnIdentifiers(encabezados);
 
 		panel_1.add(scrollPane);		
-				
+		JPanel panel = new JPanel();
+		panel.setBounds(44, 28, 10, 10);
+		panel_1.add(panel);	
+		
+		JRadioButton rdRecibidos = new JRadioButton("Recibidos");
+		rdRecibidos.setForeground(new Color(255, 255, 255));
+		rdRecibidos.setFont(new Font("Tahoma", Font.BOLD, 13));
+		rdRecibidos.setBounds(94, 146, 167, 21);
+		rdRecibidos.setOpaque(false);
+		panel_1.add(rdRecibidos);
+		
+		JRadioButton rdEnviados = new JRadioButton("Enviados");
+		rdEnviados.setOpaque(false);
+		rdEnviados.setForeground(Color.WHITE);
+		rdEnviados.setFont(new Font("Tahoma", Font.BOLD, 13));
+		rdEnviados.setBounds(94, 201, 167, 21);
+		panel_1.add(rdEnviados);
+		
+		JRadioButton rdBorradores = new JRadioButton("Borradores");
+		rdBorradores.setOpaque(false);
+		rdBorradores.setForeground(Color.WHITE);
+		rdBorradores.setFont(new Font("Tahoma", Font.BOLD, 13));
+		rdBorradores.setBounds(94, 251, 167, 21);
+		panel_1.add(rdBorradores);
+		
+		JRadioButton rdSpam = new JRadioButton("Spam");
+		rdSpam.setOpaque(false);
+		rdSpam.setForeground(Color.WHITE);
+		rdSpam.setFont(new Font("Tahoma", Font.BOLD, 13));
+		rdSpam.setBounds(94, 304, 167, 21);
+		panel_1.add(rdSpam);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(VentanaEmail.class.getResource("/img/bandeja-de-entrada.png")));
+		lblNewLabel.setBounds(60, 137, 45, 30);
+		panel_1.add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon(VentanaEmail.class.getResource("/img/enviados.png")));
+		lblNewLabel_1.setBounds(60, 185, 45, 48);
+		panel_1.add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_2 = new JLabel("New label");
+		lblNewLabel_2.setIcon(new ImageIcon(VentanaEmail.class.getResource("/img/borrador.png")));
+		lblNewLabel_2.setBounds(60, 241, 45, 43);
+		panel_1.add(lblNewLabel_2);
+		
+		JLabel lblNewLabel_3 = new JLabel("");
+		lblNewLabel_3.setIcon(new ImageIcon(VentanaEmail.class.getResource("/img/alerta-de-spam.png")));
+		lblNewLabel_3.setBounds(60, 292, 45, 43);
+		panel_1.add(lblNewLabel_3);
+		
 		
 		JLabel backgroundLabel = new JLabel(new ImageIcon(VentanaFTP.class.getResource("/img/fondo.jpg")));
 		backgroundLabel.setBounds(-14, -17, 700, 500);
 		frame.getContentPane().add(backgroundLabel);
-		JPanel panel = new JPanel();
-		panel.setBounds(44, 28, 10, 10);
-		panel_1.add(panel);	
 		
 
 		RunRefrescar();
@@ -406,9 +455,4 @@ public class VentanaEmail {
             fichero.write(bytes, 0, leidos);
         }
     }
-	
-	
-	
-	
-	
 }
