@@ -24,6 +24,8 @@ import javax.swing.text.html.HTMLEditorKit;
 
 import controlador.LeerBandejaMail;
 import controlador.LoginEvent;
+import controlador.RefrescarBandejaMail;
+import controlador.moverPantalla;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -52,11 +54,14 @@ public class VentanaEmail {
 	private JButton btnSalir;
 	private JButton btnRedactar;
 	private JButton btnRefrescar;
-	private Runnable runRefresco;
-	private Thread thRefresco;
+	public DefaultTableModel modeloTabla;
+	
+	//private RefrescarBandejaMail runRefresco;
+	private RefrescarBandejaMail thRefresco;
+	
 	
 	private String[][] listaMensajes;
-
+	private Message[] messages;
 
 	private Modelo model;
 
@@ -68,9 +73,6 @@ public class VentanaEmail {
 		this.model = model;
 		initialize();
 		
-		
-		
-		
 	}
 
 	/**
@@ -78,12 +80,9 @@ public class VentanaEmail {
 	 */
 	private void initialize() {
 		
-		runRefresco = new LeerBandejaMail(this, this.model);
-		thRefresco = new Thread(runRefresco);
-		
-		this.listaMensajes = LeerBandejaMail.LeerBandeja(this.model.getUsuario(), LoginEvent.decrypt(this.model.getPasword(), this.model.getKey()));
-		
-		
+		//runRefresco = new RefrescarBandejaMail(this);
+		thRefresco = new RefrescarBandejaMail(this);
+			
 		
 		frame = new JFrame("Sesión iniciada con: "+ model.getUsuario());
 		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(VentanaFTP.class.getResource("/img/logoProyecto.png")));
@@ -95,6 +94,7 @@ public class VentanaEmail {
 		ImageIcon backgroundImage = new ImageIcon(VentanaFTP.class.getResource("/img/logoProyecto.png"));
 		JPanel panel_1 = new JPanel(null);
 		frame.setContentPane(panel_1);
+		moverPantalla.centrar(frame);
         
         btnSalir = new JButton("Salir");
 		btnSalir.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -139,37 +139,24 @@ public class VentanaEmail {
 		panel_1.add(btnRefrescar);
 		
 		
-		
-		DefaultTableModel modeloTabla = new DefaultTableModel();
+		modeloTabla = new DefaultTableModel();
 		JTable table = new JTable(modeloTabla);
 		table.setModel(modeloTabla);
-		table.setAutoCreateRowSorter(true);
+		
+		//table.setAutoCreateRowSorter(true);
 		table.setRowSelectionAllowed(false);
 		//table.setEnabled(false);
+		table.setCellSelectionEnabled(true);
 		crearMenuContextual(table);
-		
-		
+				
 		JScrollPane scrollPane = new JScrollPane(table);
-		scrollPane.setBounds(281, 86, 354, 320);
-		
+		scrollPane.setBounds(281, 86, 354, 320);		
 		
 		String[] encabezados = {"De: ", "Asunto: "};
-
 		modeloTabla.setColumnIdentifiers(encabezados);
-				
-//		List<DatosPanelBandeja> datos = LeerBandejaMail.ObtenerTitulosMensajes(this.model.getUsuario(), LoginEvent.decrypt(this.model.getPasword(), this.model.getKey()), "INBOX");
-//		
-//		for (DatosPanelBandeja dato : datos) {
-//			modeloTabla.addRow(new Object[]{dato.getParade(), dato.getAsunto()});
-//		}
-		
-		for (int x = 0; x < listaMensajes.length; x++) {
-			modeloTabla.addRow(new Object[]{listaMensajes[x][0], listaMensajes[x][1]});;
-		}
-				
+
 		panel_1.add(scrollPane);		
-			
-		
+				
 		
 		JLabel backgroundLabel = new JLabel(new ImageIcon(VentanaFTP.class.getResource("/img/fondo.jpg")));
 		backgroundLabel.setBounds(-14, -17, 700, 500);
@@ -178,12 +165,10 @@ public class VentanaEmail {
 		panel.setBounds(44, 28, 10, 10);
 		panel_1.add(panel);	
 		
-		
+
+		RunRefrescar();
 	}
-	
-	//LLAMADA
-	//LeerBandejaMail.LeerBandeja(this.model.getUsuario(), LoginEvent.decrypt(this.model.getPasword(), this.model.getKey()));
-	
+
 	
 	//MENU CONTEXTUAL
 	private void crearMenuContextual(JTable table) {
@@ -206,7 +191,11 @@ public class VentanaEmail {
 	            	System.out.println(table.getSelectedRow());
 	            	try {
 	            		if(table.getSelectedRow() != -1) {
-	            			abrirMensaje(listaMensajes[(table.getSelectedRow())]);
+	            			
+	            			
+	            			//abrirMensaje(listaMensajes[(table.getSelectedRow())]);
+	            			abrirMensaje(messages[messages.length-1 - table.getSelectedRow()]);
+	            			
 	            		}
 						
 					} catch (IOException | MessagingException e1) {
@@ -228,12 +217,63 @@ public class VentanaEmail {
 	    });
 	}
 	
+	public void RunRefrescar() {
+		thRefresco.start();
+	}
 	
-	private void PrimerRefrescar() {
-
-		thRefresco.run();
+	public void DespertarRefrescar() {
+		thRefresco.interrupt();
+	}
+	
+	public void PararRefresco() {
+		thRefresco.pararHilo();		
+	}
+	
+	public void RefrescarCorreos() {
+		frame.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+		getBtnRefrescar().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+		getBtnRefrescar().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+		this.messages = LeerBandejaMail.LeerBandeja(this.model.getUsuario(), LoginEvent.decrypt(this.model.getPasword(), this.model.getKey()), "INBOX");
+		frame.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+		getBtnRefrescar().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+	}
+	
+	public void RefrescarTabla() {
+		frame.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+		getBtnRefrescar().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+		
+		//Limpìar tabla		
+		int totalFilas= this.modeloTabla.getRowCount();
+		for(int x = 0; x < totalFilas; x++) {
+			this.modeloTabla.removeRow(0);
+		}
+		
+		//Llenar tabla
+		for (int x = this.getMessages().length-1; x >= 0; x--) {	
+			String subject = "";
+			try {
+				if(messages[x].getSubject() != null) {
+					subject = messages[x].getSubject().toString();
+				}
+				System.out.println("Cargando mensaje: "+ (x +1));
+				this.modeloTabla.addRow(new Object[]{ messages[x].getFrom()[0].toString() ,	subject });
+			} catch (MessagingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		frame.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+		getBtnRefrescar().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 	}
 			
+
+	public Message[] getMessages() {
+		return messages;
+	}
+
+	public void setMessages(Message[] messages) {
+		this.messages = messages;
+	}
 
 	public JButton getBtnRefrescar() {
 		return btnRefrescar;
@@ -260,28 +300,27 @@ public class VentanaEmail {
 	}
 	
 	
-	private static void abrirMensaje(String[] msg) throws IOException, MessagingException {
+	private static void abrirMensaje(Message msg) throws IOException, MessagingException {
 		String html = "";
-		//String html = msg.getContent().toString();
-		//String html = "<html><body><h1>Tu correo electrónico</h1><p>Tu contraseña</p></body></html>";
-		if(msg[2].indexOf('<') != -1) {
-			html = msg[2].substring(msg[2].indexOf('<'));
-		}else {
-			html = msg[2];
-		}
-		
-		System.out.println(html);
 		// Crea un JFrame para visualizar el código HTML
-        JFrame frame = new JFrame("Asunto: "+msg[1] +" - De: "+ msg[0]);
+        JFrame frame = new JFrame("Asunto: "+msg.getSubject() +" - De: "+ msg.getFrom()[0]);
         //JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(600, 400);
+        frame.setSize(600, 900);
 
         // Crea un JEditorPane para visualizar el código HTML y configura el editor kit
         JEditorPane editorPane = new JEditorPane();
         editorPane.setEditorKit(new HTMLEditorKit());
         editorPane.setContentType("text/html");
+        StringBuffer sBuffer = new StringBuffer();
+        getMessageContent(msg, sBuffer);
+        html = sBuffer.toString();
+        if(html.indexOf("<html") != -1) {
+        	html = html.substring(html.indexOf("<html"));
+        }
+        
         editorPane.setText(html);
+        editorPane.setEditable(false);
 
         // Añade el JEditorPane al JFrame
         frame.getContentPane().add(new JScrollPane(editorPane), BorderLayout.CENTER);
@@ -290,30 +329,6 @@ public class VentanaEmail {
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setVisible(true);
 	}
-	
-	
-	private static void getMessageContent(Part part, StringBuffer content) throws MessagingException, IOException {
-        if (part.isMimeType("text/*")) {
-            content.append(part.getContent());
-            
-        } else if (part.isMimeType("multipart/*")) {
-            Multipart multipart = (Multipart) part.getContent();
-            int partCount = multipart.getCount();
-            for (int i = 0; i < partCount; i++) {
-                BodyPart bodyPart = multipart.getBodyPart(i);
-                getMessageContent(bodyPart, content);
-            }
-        }else if(part.isMimeType("image/*")) {
-        	JFrame v = new JFrame("Adjunto");
-            ImageIcon icono = new ImageIcon(
-                    ImageIO.read(part.getInputStream()));
-            JLabel l = new JLabel(icono);
-            v.getContentPane().add(l);
-            v.pack();
-            v.setVisible(true);
-        }
-    }
-	
 	
 	/**
      * Metodo recursivo.
@@ -326,57 +341,22 @@ public class VentanaEmail {
      *
      * @param unaParte Parte del mensaje a analizar.
      */
-    private static void analizaParteDeMensaje(Part unaParte)
-    {
-        try
-        {
-          // Si es multipart, se analiza cada una de sus partes recursivamente.
-            if (unaParte.isMimeType("multipart/*"))
-            {
-                Multipart multi;
-                multi = (Multipart) unaParte.getContent();
-
-                for (int j = 0; j < multi.getCount(); j++)
-                {
-                    analizaParteDeMensaje(multi.getBodyPart(j));
-                }
+	private static void getMessageContent(Part part, StringBuffer content) throws MessagingException, IOException {
+        if (part.isMimeType("text/*")) {
+            content.append(part.getContent());
+            
+        } else if (part.isMimeType("multipart/*")) {
+            Multipart multipart = (Multipart) part.getContent();
+            int partCount = multipart.getCount();
+            for (int i = 0; i < partCount; i++) {
+                BodyPart bodyPart = multipart.getBodyPart(i);
+                getMessageContent(bodyPart, content);
             }
-            else
-            {
-              // Si es texto, se escribe el texto.
-                if (unaParte.isMimeType("text/*"))
-                {
-                    System.out.println("Texto " + unaParte.getContentType());
-                    System.out.println(unaParte.getContent());
-                    System.out.println("---------------------------------");
-                }
-                else
-                {
-                  // Si es imagen, se guarda en fichero y se visualiza en JFrame
-                    if (unaParte.isMimeType("image/*"))
-                    {
-                        System.out.println(
-                            "Imagen " + unaParte.getContentType());
-                        System.out.println("Fichero=" + unaParte.getFileName());
-                        System.out.println("---------------------------------");
-
-                        salvaImagenEnFichero(unaParte);
-                        visualizaImagenEnJFrame(unaParte);
-                    }
-                    else
-                    {
-                      // Si no es ninguna de las anteriores, se escribe en pantalla
-                      // el tipo.
-                        System.out.println(
-                            "Recibido " + unaParte.getContentType());
-                        System.out.println("---------------------------------");
-                    }
-                }
-            }
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
+        }else if(part.isMimeType("image/*")) {
+        	visualizaImagenEnJFrame(part);
+        	
+        }else if(part.isMimeType("aplication/*") || part.isMimeType("audio/*") || part.isMimeType("video/*")) {
+        	salvaImagenEnFichero(part);
         }
     }
 
@@ -392,7 +372,7 @@ public class VentanaEmail {
     private static void visualizaImagenEnJFrame(Part unaParte)
         throws IOException, MessagingException
     {
-        JFrame v = new JFrame();
+        JFrame v = new JFrame("Imagen adjunta");
         ImageIcon icono = new ImageIcon(
                 ImageIO.read(unaParte.getInputStream()));
         JLabel l = new JLabel(icono);
@@ -426,17 +406,6 @@ public class VentanaEmail {
             fichero.write(bytes, 0, leidos);
         }
     }
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	

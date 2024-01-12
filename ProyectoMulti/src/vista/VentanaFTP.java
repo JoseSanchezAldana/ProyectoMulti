@@ -15,6 +15,7 @@ import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 
 import conexion.ConexionFTP;
+import controlador.moverPantalla;
 import modelo.Modelo;
 
 import javax.swing.JLabel;
@@ -73,6 +74,7 @@ public class VentanaFTP {
 		ImageIcon backgroundImage = new ImageIcon(VentanaFTP.class.getResource("/img/logoProyecto.png"));
 		JPanel panel_1 = new JPanel(null);
 		frame.setContentPane(panel_1);
+		moverPantalla.centrar(frame);
 
 		JLabel lblNewLabel = new JLabel("Ip server: " + modelo.getServFTP());
 		lblNewLabel.setIcon(new ImageIcon(VentanaFTP.class.getResource("/img/ip.png")));

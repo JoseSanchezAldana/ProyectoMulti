@@ -10,6 +10,9 @@ import java.awt.Toolkit;
 
 import javax.swing.JTextPane;
 import javax.swing.border.CompoundBorder;
+
+import controlador.moverPantalla;
+
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.ImageIcon;
@@ -44,6 +47,7 @@ public class Menu {
 		frame.getContentPane().setLayout(null);
 		JPanel panel_1 = new JPanel(null);
 		frame.setContentPane(panel_1);
+		moverPantalla.centrar(frame);
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(Menu.class.getResource("/img/menu.png")));

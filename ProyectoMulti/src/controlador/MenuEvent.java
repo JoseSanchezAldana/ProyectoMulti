@@ -50,7 +50,16 @@ public class MenuEvent implements ActionListener {
 			VentanaEmail vtnEmail = new VentanaEmail(this.modelo);			
 			vtnEmail.frame.setVisible(true);
 			vtnEmail.getBtnRedactar().addActionListener(new EnviaMailEvent(vtnEmail, modelo));
+			
+			vtnEmail.getBtnSalir().addActionListener(er ->{
+				vtnEmail.PararRefresco();
+			});
+			
 			vtnEmail.getBtnSalir().addActionListener(new SalirEmail(vtnEmail, menu));
+			
+			vtnEmail.getBtnRefrescar().addActionListener(ex -> {
+				vtnEmail.DespertarRefrescar();
+			});
 			
 			menu.getBtnCorreoElectronico().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			menu.frame.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
