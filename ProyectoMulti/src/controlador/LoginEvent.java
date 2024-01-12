@@ -39,13 +39,14 @@ public class LoginEvent implements ActionListener {
      */
 
     private void realizarConsulta(ArrayList<String> credenciales) {
-        conexion.query("SELECT idUsuario, correo, password, nombre FROM usuarios WHERE correo = '" + login.getTxtrUsuario().getText() + "';");
+        conexion.query("SELECT idUsuario, correo, password, nombre, idRol FROM usuarios WHERE correo = '" + login.getTxtrUsuario().getText() + "';");
         try {
             if (conexion.getRs().next()) {
             	this.modelo.setIdUsuarioBd(conexion.getRs().getInt(1));
                 modelo.setUsuario(conexion.getRs().getString(2));
                 modelo.setPasword(conexion.getRs().getString(3));
                 modelo.setNombre(conexion.getRs().getString(4));
+                modelo.setIdRol(conexion.getRs().getInt(5));
                 System.out.println("USUARIObd: " + modelo.getUsuario() + "\nCONTRASEÑAbd: " + modelo.getPasword());
             } else {
                 System.out.println("No se encontraron resultados en la consulta.");

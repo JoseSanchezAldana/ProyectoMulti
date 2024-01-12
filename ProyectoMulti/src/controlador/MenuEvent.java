@@ -10,6 +10,8 @@ import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JOptionPane;
+
 import conexion.Conexion;
 import conexion.ConexionFTP;
 import modelo.Modelo;
@@ -51,6 +53,8 @@ public class MenuEvent implements ActionListener {
 				vtnFtp.getBtnCrearCarpeta().addActionListener(new CrearCarpetaFTP(vtnFtp, conexionFTP.getCliente(), conexion, modelo));
 				vtnFtp.getBtnDescargarArchivo().addActionListener(new DescargarArchivoFTP(vtnFtp, conexionFTP.getCliente(), conexion, modelo));
 				vtnFtp.getBtnSubirArchivo().addActionListener(new SubirArchivoFTP(vtnFtp, conexionFTP.getCliente(), conexion, modelo));
+			}else {
+				JOptionPane.showMessageDialog(null, "USUARIO NO DADO DE ALTA EN EL SERVICIO FTP", "ERROR CONECTAR FTP", JOptionPane.INFORMATION_MESSAGE);
 			}
 		} else if(e.getSource() == menu.getBtnCorreoElectronico()){
 			menu.frame.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));

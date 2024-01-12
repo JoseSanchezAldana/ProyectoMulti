@@ -14,6 +14,7 @@ public class Modelo {
 	private String passwordBd = "";
 	private int idUsuarioBd = 0;
 	private String nombre;
+	private int idRol = 0;
 	
 	//Datos conexion mail
 	private String CONFIGSET = "ConfigSet";
@@ -115,6 +116,12 @@ public class Modelo {
 	}
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+	public int getIdRol() {
+		return idRol;
+	}
+	public void setIdRol(int idRol) {
+		this.idRol = idRol;
 	}
 	
 	
