@@ -1,3 +1,9 @@
+/*
+ * @proyect ProyectoMultidisciplinar_23/24
+ * @author Grupo_4
+ * @version 1.0
+ */
+
 package vista;
 
 import java.awt.EventQueue;
