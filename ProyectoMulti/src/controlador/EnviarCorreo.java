@@ -132,12 +132,8 @@ public  class EnviarCorreo  implements ActionListener{
 				this.EnviarEmail(
 						this.model.getUsuario(),
 						LoginEvent.decrypt(model.getPasword(), this.model.getKey()),					
-						this.model.getUsuario(),
-						
-						
-						this.model.getUsuario(), //AQUI VA EL NOMBRE DEL USUARIO - NO EL CORREO -
-						
-						
+						this.model.getUsuario(),						
+						this.model.getNombre(),
 						vtnRedactarMail.getTxtPara().getText(),
 						vtnRedactarMail.getTxtCC().getText(),
 						vtnRedactarMail.getTxtCCO().getText(),

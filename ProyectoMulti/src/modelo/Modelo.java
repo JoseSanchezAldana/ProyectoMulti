@@ -13,6 +13,7 @@ public class Modelo {
 	private String usuarioBd = "root";
 	private String passwordBd = "";
 	private int idUsuarioBd = 0;
+	private String nombre;
 	
 	//Datos conexion mail
 	private String CONFIGSET = "ConfigSet";
@@ -108,6 +109,12 @@ public class Modelo {
 	}
 	public String getKey() {
 		return key;
+	}
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 	
 	
