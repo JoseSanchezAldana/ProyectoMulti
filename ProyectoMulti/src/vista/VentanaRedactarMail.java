@@ -16,6 +16,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 
+import controlador.moverPantalla;
 import modelo.Modelo;
 
 import java.awt.event.ActionListener;
@@ -55,6 +56,7 @@ public class VentanaRedactarMail {
 		ImageIcon backgroundImage = new ImageIcon(VentanaFTP.class.getResource("/img/logoProyecto.png"));
 		JPanel panel_1 = new JPanel(null);
 		frame.setContentPane(panel_1);
+		moverPantalla.centrar(frame);
 		
 		JLabel labelPara = new JLabel("Para:");
 		labelPara.setForeground(new Color(255, 255, 255));
@@ -170,9 +172,7 @@ public class VentanaRedactarMail {
 		panel.setBounds(44, 28, 10, 10);
 		panel_1.add(panel);
 		
-		
-		
-		
+
 		
 	}
 

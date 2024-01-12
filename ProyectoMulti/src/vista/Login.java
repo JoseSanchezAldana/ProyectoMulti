@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Frame;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Toolkit;
@@ -24,8 +25,12 @@ import javax.swing.ImageIcon;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.TitledBorder;
+
+import controlador.moverPantalla;
+
 import javax.swing.border.CompoundBorder;
 import java.awt.Cursor;
+import java.awt.Dimension;
 
 public class Login {
 
@@ -54,7 +59,8 @@ public class Login {
 		frame.getContentPane().setLayout(null);
         ImageIcon backgroundImage = new ImageIcon(VentanaFTP.class.getResource("/img/logoProyecto.png"));
         JPanel panel_1 = new JPanel(null);
-        frame.setContentPane(panel_1);
+        frame.setContentPane(panel_1);        
+        moverPantalla.centrar(frame);
 		
 		txtrUsuario = new JTextField();
 		txtrUsuario.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -63,6 +69,12 @@ public class Login {
 		txtrUsuario.setFont(new Font("Monospaced", Font.BOLD, 15));
 		txtrUsuario.setBackground(new Color(255, 255, 255));
 		txtrUsuario.setToolTipText("");
+		
+		//BORRAR ANTES DE ENTREGAR
+		//BORRAR ANTES DE ENTREGAR
+		txtrUsuario.setText("nestoribanezm.sanjosemlg@fundacionloyola.net");
+		//BORRAR ANTES DE ENTREGAR
+		//BORRAR ANTES DE ENTREGAR
 		
 		//txtrUsuario.setWrapStyleWord(true);
 		
@@ -107,6 +119,12 @@ public class Login {
 		passwordField.setBackground(new Color(255, 255, 255));
 		passwordField.setBounds(72, 221, 250, 30);
 	
+		//BORRAR ANTES DE ENTREGAR
+		//BORRAR ANTES DE ENTREGAR
+		passwordField.setText("Multi123");
+		//BORRAR ANTES DE ENTREGAR
+		//BORRAR ANTES DE ENTREGAR
+		
 		passwordField.addKeyListener(new KeyAdapter() {
 		    @Override
 		    public void keyPressed(KeyEvent e) {
@@ -181,4 +199,5 @@ public class Login {
 	public void setTxtrUsuario(JTextField txtrUsuario) {
 		this.txtrUsuario = txtrUsuario;
 	}
+	
 }

@@ -6,6 +6,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.swing.JOptionPane;
+
 import modelo.Modelo;
 
 //Conexion
@@ -28,6 +30,7 @@ public class Conexion {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Fallo al conectar con el servidor.", "FALLO CONECTIVIDAD", JOptionPane.INFORMATION_MESSAGE);
 		}
 		
 	}
