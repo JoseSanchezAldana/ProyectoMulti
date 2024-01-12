@@ -71,7 +71,6 @@ public class VentanaFTP {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
 		frame.getContentPane().setLayout(null);
-		ImageIcon backgroundImage = new ImageIcon(VentanaFTP.class.getResource("/img/logoProyecto.png"));
 		JPanel panel_1 = new JPanel(null);
 		frame.setContentPane(panel_1);
 		moverPantalla.centrar(frame);
@@ -93,7 +92,6 @@ public class VentanaFTP {
 		btnSubirArchivo = new JButton("Subir archivo");
 		btnSubirArchivo.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnSubirArchivo.setHorizontalAlignment(SwingConstants.LEFT);
-		//btnSubirArchivo.setIcon(new ImageIcon("C:\\Users\\FX506\\git\\repository2\\ProyectoMulti\\src\\img\\enviar.png"));
 		btnSubirArchivo.setForeground(new Color(255, 255, 255));
 		btnSubirArchivo.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnSubirArchivo.setBorderPainted(false);
@@ -183,6 +181,7 @@ public class VentanaFTP {
 		rutaSeleccionada.setFont(new Font("Tahoma", Font.BOLD, 18));
 		rutaSeleccionada.setBounds(162, 417, 499, 19);
 		frame.getContentPane().add(rutaSeleccionada);
+		
 		// Create a JLabel with the background image
         JLabel backgroundLabel = 	new JLabel(new ImageIcon(VentanaFTP.class.getResource("/img/fondo.jpg")));
         backgroundLabel.setBounds(-14, -17, 700, 500);

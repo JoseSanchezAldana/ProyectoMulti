@@ -53,7 +53,6 @@ public class VentanaRedactarMail {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
 		frame.getContentPane().setLayout(null);
-		ImageIcon backgroundImage = new ImageIcon(VentanaFTP.class.getResource("/img/logoProyecto.png"));
 		JPanel panel_1 = new JPanel(null);
 		frame.setContentPane(panel_1);
 		moverPantalla.centrar(frame);
@@ -71,7 +70,6 @@ public class VentanaRedactarMail {
 		txtPara.setFont(new Font("Monospaced", Font.BOLD, 15));
 		txtPara.setBackground(new Color(255, 255, 255));
 		txtPara.setToolTipText("");
-		//txtPara.setWrapStyleWord(true);
 		txtPara.setBounds(115, 59, 495, 30);
 		frame.getContentPane().add(txtPara);
 		
@@ -82,7 +80,6 @@ public class VentanaRedactarMail {
 		panel_1.add(labelCC);
 		
 		txtCC = new JTextField();
-		//txtCC.setWrapStyleWord(true);
 		txtCC.setToolTipText("");
 		txtCC.setOpaque(false);
 		txtCC.setForeground(Color.WHITE);
@@ -99,7 +96,6 @@ public class VentanaRedactarMail {
 		panel_1.add(labelCCO);
 		
 		txtCCO = new JTextField();
-		//txtCCO.setWrapStyleWord(true);
 		txtCCO.setToolTipText("");
 		txtCCO.setOpaque(false);
 		txtCCO.setForeground(Color.WHITE);
@@ -127,7 +123,6 @@ public class VentanaRedactarMail {
 		panel_1.add(labelAsunto);
 		
 		txtAsunto = new JTextField();
-		//txtAsunto.setWrapStyleWord(true);
 		txtAsunto.setToolTipText("");
 		txtAsunto.setOpaque(false);
 		txtAsunto.setForeground(Color.WHITE);
