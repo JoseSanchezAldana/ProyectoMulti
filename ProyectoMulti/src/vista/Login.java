@@ -61,13 +61,6 @@ public class Login {
 		txtrUsuario.setFont(new Font("Monospaced", Font.BOLD, 15));
 		txtrUsuario.setBackground(new Color(255, 255, 255));
 		txtrUsuario.setToolTipText("");
-		
-		//BORRAR ANTES DE ENTREGAR
-		//BORRAR ANTES DE ENTREGAR
-		txtrUsuario.setText("nestoribanezm.sanjosemlg@fundacionloyola.net");
-		//BORRAR ANTES DE ENTREGAR
-		//BORRAR ANTES DE ENTREGAR
-		
 		txtrUsuario.setBounds(72, 133, 250, 30);
 		frame.getContentPane().add(txtrUsuario);
 		
@@ -108,12 +101,7 @@ public class Login {
 		passwordField.setHorizontalAlignment(SwingConstants.LEFT);
 		passwordField.setBackground(new Color(255, 255, 255));
 		passwordField.setBounds(72, 221, 250, 30);
-	
-		//BORRAR ANTES DE ENTREGAR
-		//BORRAR ANTES DE ENTREGAR
-		passwordField.setText("Multi123");
-		//BORRAR ANTES DE ENTREGAR
-		//BORRAR ANTES DE ENTREGAR
+
 		
 		passwordField.addKeyListener(new KeyAdapter() {
 		    @Override
