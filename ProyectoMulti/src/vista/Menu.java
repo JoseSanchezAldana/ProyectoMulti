@@ -1,15 +1,10 @@
 package vista;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.Toolkit;
-
-import javax.swing.JTextPane;
-import javax.swing.border.CompoundBorder;
 
 import controlador.moverPantalla;
 
@@ -98,9 +93,8 @@ public class Menu {
 		JLabel backgroundLabel = 	new JLabel(new ImageIcon(VentanaFTP.class.getResource("/img/fondo.jpg")));
 		backgroundLabel.setBounds(-44, 0, 700, 500);
 		
-		
-		        // Add the background label to the content pane
-		        frame.getContentPane().add(backgroundLabel);
+        // Add the background label to the content pane
+        frame.getContentPane().add(backgroundLabel);
 	}
 
 	public JFrame getFrame() {

@@ -1,36 +1,23 @@
 package vista;
 
 import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.Frame;
-import java.awt.GradientPaint;
-import java.awt.Graphics;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.JPanel;
 import javax.swing.ImageIcon;
 import javax.swing.border.BevelBorder;
-import javax.swing.border.SoftBevelBorder;
-import javax.swing.border.TitledBorder;
-
 import controlador.moverPantalla;
 
 import javax.swing.border.CompoundBorder;
 import java.awt.Cursor;
-import java.awt.Dimension;
 
 public class Login {
 
@@ -57,7 +44,6 @@ public class Login {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
 		frame.getContentPane().setLayout(null);
-        ImageIcon backgroundImage = new ImageIcon(VentanaFTP.class.getResource("/img/logoProyecto.png"));
         JPanel panel_1 = new JPanel(null);
         frame.setContentPane(panel_1);        
         moverPantalla.centrar(frame);
@@ -75,8 +61,6 @@ public class Login {
 		txtrUsuario.setText("nestoribanezm.sanjosemlg@fundacionloyola.net");
 		//BORRAR ANTES DE ENTREGAR
 		//BORRAR ANTES DE ENTREGAR
-		
-		//txtrUsuario.setWrapStyleWord(true);
 		
 		txtrUsuario.setBounds(72, 133, 250, 30);
 		frame.getContentPane().add(txtrUsuario);

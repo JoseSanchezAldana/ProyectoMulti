@@ -1,6 +1,5 @@
 package vista;
 
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Toolkit;
 
@@ -31,21 +30,10 @@ import controlador.moverPantalla;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.awt.event.ActionEvent;
-
 import modelo.Modelo;
-import modelo.DatosPanelBandeja;
-
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JRadioButton;
@@ -65,11 +53,8 @@ public class VentanaEmail {
 	
 	public DefaultTableModel modeloTabla;
 	
-	//private RefrescarBandejaMail runRefresco;
 	private RefrescarBandejaMail thRefresco;
 	
-	
-	private String[][] listaMensajes;
 	private Message[] messages;
 
 	private Modelo model;
@@ -100,7 +85,6 @@ public class VentanaEmail {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
 		frame.getContentPane().setLayout(null);
-		ImageIcon backgroundImage = new ImageIcon(VentanaFTP.class.getResource("/img/logoProyecto.png"));
 		JPanel panel_1 = new JPanel(null);
 		frame.setContentPane(panel_1);
 		moverPantalla.centrar(frame);
@@ -152,9 +136,7 @@ public class VentanaEmail {
 		JTable table = new JTable(modeloTabla);
 		table.setModel(modeloTabla);
 		
-		//table.setAutoCreateRowSorter(true);
 		table.setRowSelectionAllowed(false);
-		//table.setEnabled(false);
 		table.setCellSelectionEnabled(true);
 		crearMenuContextual(table);
 				
@@ -246,8 +228,6 @@ public class VentanaEmail {
 			    item.addActionListener(e -> {
 			        System.out.println(table.getSelectedRow()) ;
 			        if(table.getSelectedRow() != -1) {   			
-		    			
-		    			//abrirMensaje(listaMensajes[(table.getSelectedRow())]);
 		    			try {
 							abrirMensaje(messages[messages.length-1 - table.getSelectedRow()]);
 						} catch (IOException e1) {
@@ -265,19 +245,11 @@ public class VentanaEmail {
 
 			    table.addMouseListener(new MouseAdapter() {
 			        public void mousePressed(MouseEvent e) {
-//			            if (e.isPopupTrigger()) {//BOTON DERECHO
-//			                menu.show(e.getComponent(), e.getX(), e.getY());
-//			            }
 			            if (e.getClickCount() == 2) {//DOBLE CLICK
-			                //menu.show(e.getComponent(), e.getX(), e.getY());
 			            	System.out.println(table.getSelectedRow());
 			            	try {
 			            		if(table.getSelectedRow() != -1) {
-			            			
-			            			
-			            			//abrirMensaje(listaMensajes[(table.getSelectedRow())]);
-			            			abrirMensaje(messages[messages.length-1 - table.getSelectedRow()]);
-			            			
+			            			abrirMensaje(messages[messages.length-1 - table.getSelectedRow()]);			            			
 			            		}
 								
 							} catch (IOException | MessagingException e1) {
@@ -291,10 +263,6 @@ public class VentanaEmail {
 			            if (e.isPopupTrigger()) {//BOTON DERECHO
 			                menu.show(e.getComponent(), e.getX(), e.getY());
 			            }
-//			            if (e.getClickCount() == 2) {//DOBLE CLICK
-//			                //menu.show(e.getComponent(), e.getX(), e.getY());
-//			            	System.out.println(table.getSelectedRow()) ;
-//			            }
 			        }
 			    });
 			}
@@ -332,13 +300,7 @@ public class VentanaEmail {
 	
 	
 	public void RefrescarCorreos() {
-		//"INBOX"
-        //"[Gmail]/Enviados"
-        //"[Gmail]/Borradores"
-        //"[Gmail]/Spam"
-		
-		System.out.println();
-		
+
 		frame.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 		getBtnRefrescar().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 		getBtnRefrescar().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -485,9 +447,9 @@ public class VentanaEmail {
         }else if(part.isMimeType("image/*")) {
         	visualizaImagenEnJFrame(part);
         	
-        }else if(part.isMimeType("aplication/*") || part.isMimeType("audio/*") || part.isMimeType("video/*")) {
+        }/*else if(part.isMimeType("aplication/*") || part.isMimeType("audio/*") || part.isMimeType("video/*")) {
         	salvaImagenEnFichero(part);
-        }
+        }*/
     }
 
     /**
@@ -511,29 +473,4 @@ public class VentanaEmail {
         v.setVisible(true);
     }
 
-    /**
-     * Supone que unaParte corresponde a una imagen de un fichero y que
-     * getFileName() esta relleno.
-     * Salva la imagen en d:\getFileName().
-     *
-     * @param unaParte Parte de un correo correspondiente a una imagen.
-     *
-     * @throws FileNotFoundException 
-     * @throws MessagingException 
-     * @throws IOException 
-     */
-    private static void salvaImagenEnFichero(Part unaParte)
-        throws FileNotFoundException, MessagingException, IOException
-    {
-        FileOutputStream fichero = new FileOutputStream(
-                "d:/" + unaParte.getFileName());
-        InputStream imagen = unaParte.getInputStream();
-        byte[] bytes = new byte[1000];
-        int leidos = 0;
-
-        while ((leidos = imagen.read(bytes)) > 0)
-        {
-            fichero.write(bytes, 0, leidos);
-        }
-    }
 }
