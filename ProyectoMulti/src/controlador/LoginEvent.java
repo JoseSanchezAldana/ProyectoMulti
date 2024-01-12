@@ -2,6 +2,7 @@ package controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Base64;
 
@@ -18,7 +19,7 @@ import vista.Menu;
 public class LoginEvent implements ActionListener {
 
     private Login login;
-    private Conexion conexion;
+    public Conexion conexion;
     private Modelo modelo;
 
     public LoginEvent(Login login, Conexion conexion,Modelo modelo) {
@@ -28,11 +29,12 @@ public class LoginEvent implements ActionListener {
     }
 
     private void realizarConsulta(ArrayList<String> credenciales) {
-        conexion.query("SELECT Usuario, password FROM usuarios WHERE Usuario = '" + login.getTxtrUsuario().getText() + "';");
+        conexion.query("SELECT idUsuario, correo, password FROM usuarios WHERE correo = '" + login.getTxtrUsuario().getText() + "';");
         try {
             if (conexion.getRs().next()) {
-                modelo.setUsuario(conexion.getRs().getString(1));
-                modelo.setPasword(conexion.getRs().getString(2));
+            	this.modelo.setIdUsuarioBd(conexion.getRs().getInt(1));
+                modelo.setUsuario(conexion.getRs().getString(2));
+                modelo.setPasword(conexion.getRs().getString(3));
                 System.out.println("USUARIObd: " + modelo.getUsuario() + "\nCONTRASEÑAbd: " + modelo.getPasword());
             } else {
                 System.out.println("No se encontraron resultados en la consulta.");
@@ -54,12 +56,12 @@ public class LoginEvent implements ActionListener {
             	String encryptedText = encrypt(login.getPasswordField().getText(), this.modelo.getKey());
                 System.out.println("Texto cifrado: " + encryptedText);
                 System.out.println("Texto descifrado: " + decrypt(encryptedText, this.modelo.getKey()));
-
                 if (modelo.getUsuario().equals(login.getTxtrUsuario().getText()) && modelo.getPasword().equals(encryptedText)) {
+                	this.conexion.insertarDatos(LocalDate.now(), 1, modelo.getIdUsuarioBd());
                 	login.frame.dispose();
                     menu.frame.setVisible(true);
                     System.out.println("Login correcto");
-                    MenuEvent mEvent = new MenuEvent(menu, modelo, login);
+                    MenuEvent mEvent = new MenuEvent(menu, modelo, login, conexion);
                     menu.getBtnCorreoElectronico().addActionListener(mEvent);
                     menu.getBtnFTP().addActionListener(mEvent);
                     menu.getBtnSalir().addActionListener(mEvent);

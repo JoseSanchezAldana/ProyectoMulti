@@ -3,8 +3,12 @@ package conexion;
 import java.beans.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 import modelo.Modelo;
 
@@ -13,6 +17,7 @@ public class Conexion {
 	
 	private java.sql.Statement s;
 	private ResultSet rs;
+	private PreparedStatement ps;
 	private Connection conexion;
 	private Modelo modelo;
 	
@@ -31,6 +36,24 @@ public class Conexion {
 		}
 		
 	}
+
+	
+	public void insertarDatos(LocalDate localDate, int idOperacion, int idUsuario) {
+        try {
+        	 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			String fechaActualString = localDate.format(formatter);
+            String consulta = "INSERT INTO log (fecha, idOperacion, idUsuario) VALUES (?, ?, ?)";
+            ps = conexion.prepareStatement(consulta);
+            ps.setString(1, fechaActualString);
+            ps.setInt(2, idOperacion);
+            ps.setInt(3, idUsuario);
+            
+            // Ejecutar la inserción
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 	
 	
 

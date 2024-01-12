@@ -26,6 +26,7 @@ public class OperacionesFTP {
 	VentanaFTP vtnFtp;
 	FTPClient cliente;
 	Modelo modelo;
+	boolean ok;
 
 	public OperacionesFTP(VentanaFTP vtnFtp) {
 		this.vtnFtp = vtnFtp;
@@ -51,7 +52,7 @@ public class OperacionesFTP {
 		return dir;
 	}
 
-	public void descargarFichero(FTPClient cliente, String directorioFTP) throws IOException {
+	public boolean descargarFichero(FTPClient cliente, String directorioFTP) throws IOException {
 		if (!isCarpeta(directorioFTP, cliente)) {
 			String directorioDondeGuardar = seleccionarDirectorioConJFileChooser();
 			cliente.changeWorkingDirectory(directorioFTP);
@@ -66,9 +67,11 @@ public class OperacionesFTP {
 
 				if (cliente.retrieveFile(directorioFTP, out)) {
 					JOptionPane.showMessageDialog(null, "Se ha descargado correctamente");
+					ok = true;
 					
 				} else {
 					JOptionPane.showMessageDialog(null, "No se ha descargado correctamente");
+					ok = false;
 				}
 				out.close();
 			} catch (IOException e) {
@@ -77,31 +80,37 @@ public class OperacionesFTP {
 			
 		} else {
 			JOptionPane.showMessageDialog(null, "No se pueden descargar carpetas");
+			ok = false;
 		}
 	
 		recargarVentana();
+		return ok;
 	}
 
-	public void crearCarpeta(FTPClient cliente, String directorioFTP) throws IOException {
+	public boolean crearCarpeta(FTPClient cliente, String directorioFTP) throws IOException {
 		if (isCarpeta(directorioFTP, cliente) && !directorioFTP.isEmpty()) {
 			String nombreCarpeta = JOptionPane.showInputDialog("Introduzca el nombre de la carpeta");
 			cliente.changeWorkingDirectory(directorioFTP);
 			if (cliente.makeDirectory(nombreCarpeta)) {
 				JOptionPane.showMessageDialog(null, "Se ha creado la carpeta ".concat(nombreCarpeta));
+				ok = true;
 			} else {
 				JOptionPane.showMessageDialog(null, "NO se ha creado la carpeta ".concat(nombreCarpeta));
+				ok = false;
 			}
 		} else {
 			JOptionPane.showMessageDialog(null, "Solo puedes crear carpetas dentro de directorios");
+			ok = false;
 		}
 		recargarVentana();
+		return ok;
 	}
 
-	public void subirFichero(FTPClient cliente, String directorio) throws IOException {
+	public boolean subirFichero(FTPClient cliente, String directorio) throws IOException {
+		boolean ok = false;
 		if (isCarpeta(directorio, cliente) && !directorio.isEmpty()) {
 			File fichero;
 			FileInputStream fis = null;
-			boolean ok = false;
 
 			JFileChooser fileChooser = new JFileChooser();
 			fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
@@ -129,25 +138,28 @@ public class OperacionesFTP {
 				if (cliente.storeFile(fichero.getName(), fis)) {
 					cadenaSalida = fichero.getName().concat(" >>> Subido Correctamente al server");
 					JOptionPane.showMessageDialog(null, cadenaSalida);
-
 					ok = true;
+					
 				} else {
 					cadenaSalida = fichero.getName().concat(" >>> NO Subido Correctamente al server");
 					JOptionPane.showMessageDialog(null, cadenaSalida);
+					ok = false;
 				}
 			}
 		} else {
 			JOptionPane.showMessageDialog(null, "Debe de ser una carpeta");
+			ok = false;
 		}
 		recargarVentana();
+		return ok;
+		
 	}
 
-	public void borrarArchivoFTP(String ruta, FTPClient cliente) throws HeadlessException {
-
-		// String nombreArchivo = extraerNombreArchivo(ruta, cliente);
+	public boolean borrarArchivoFTP(String ruta, FTPClient cliente) throws HeadlessException {
 		String nombreArchivo = obtenerNombreArchivo(ruta);
 		if (nombreArchivo.equals("")) {
 			JOptionPane.showMessageDialog(null, ">>>>>>No ha seleccionado ninguna ruta");
+			ok = false;
 		} else {
 			int seleccion = JOptionPane.showConfirmDialog(null, "¿Desea borrar el archivo " + nombreArchivo + "?");
 			if (seleccion == JOptionPane.OK_OPTION) {
@@ -158,17 +170,20 @@ public class OperacionesFTP {
 						if (archivosEnDirectorio.length == 0) {
 							if (cliente.removeDirectory(ruta)) {
 								JOptionPane.showMessageDialog(null, nombreArchivo + " =>Eliminado correctamente...");
+								ok = true;
 							} else {
 								JOptionPane.showMessageDialog(null,
 										nombreArchivo + " =>No se ha podido borrar por algun error");
+								ok = false;
 							}
 						} else {
-							JOptionPane.showMessageDialog(null,
-									nombreArchivo + " =>Debe estar vacio para poder borrarse");
+							JOptionPane.showMessageDialog(null, nombreArchivo + " =>Debe estar vacio para poder borrarse");
+							ok = false;
 						}
 					} else {
 						if (cliente.deleteFile(ruta)) {
 							JOptionPane.showMessageDialog(null, nombreArchivo + " =>Eliminado correctamente...");
+							ok = true;
 						}
 					}
 
@@ -177,6 +192,7 @@ public class OperacionesFTP {
 			}
 		}
 		recargarVentana();
+		return ok;
 	}
 
 	public boolean isCarpeta(String ruta, FTPClient cliente) {

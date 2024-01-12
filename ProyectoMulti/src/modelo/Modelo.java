@@ -3,15 +3,46 @@ package modelo;
 public class Modelo {
 	
 	//Datos conexion base de datos
-	private String direccionBd = "jdbc:mysql://localhost/localproyecto";
+	private String direccionBd = "jdbc:mysql://localhost/proyectomulti";
 	private String usuarioBd = "root";
 	private String passwordBd = "";
+	private int idUsuarioBd = 0;
 	
 	//Datos conexion mail
 	private String CONFIGSET = "ConfigSet";
 	private String HOST = "smtp.gmail.com";
 	private int PORT = 587;
 	
+	public int getIdUsuarioBd() {
+		return idUsuarioBd;
+	}
+	public void setIdUsuarioBd(int idUsuarioBd) {
+		this.idUsuarioBd = idUsuarioBd;
+	}
+	public String getUsuarioFTP() {
+		return usuarioFTP;
+	}
+	public void setUsuarioFTP(String usuarioFTP) {
+		this.usuarioFTP = usuarioFTP;
+	}
+	public String getPasswordFTP() {
+		return passwordFTP;
+	}
+	public void setPasswordFTP(String passwordFTP) {
+		this.passwordFTP = passwordFTP;
+	}
+	public void setCONFIGSET(String cONFIGSET) {
+		CONFIGSET = cONFIGSET;
+	}
+	public void setHOST(String hOST) {
+		HOST = hOST;
+	}
+	public void setPORT(int pORT) {
+		PORT = pORT;
+	}
+	public void setKey(String key) {
+		this.key = key;
+	}
 	//Key de encriptacion
 	private String key = "afghklkhghkln";
 	
